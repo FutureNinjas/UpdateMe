@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Temp
 {
-    public class Course
+    public class Assignment
     {
-
         public int Id
         {
             get => default(int);
@@ -16,7 +15,7 @@ namespace Temp
             }
         }
 
-        public int DateCreated
+        public int CourseId
         {
             get => default(int);
             set
@@ -24,7 +23,7 @@ namespace Temp
             }
         }
 
-        public int Description
+        public int UserId
         {
             get => default(int);
             set
@@ -32,23 +31,7 @@ namespace Temp
             }
         }
 
-        public int Name
-        {
-            get => default(int);
-            set
-            {
-            }
-        }
-
-        public int PassScore
-        {
-            get => default(int);
-            set
-            {
-            }
-        }
-
-        public int Slides
+        public int AssignmentDate
         {
             get => default(int);
             set
@@ -64,7 +47,7 @@ namespace Temp
             }
         }
 
-        public int Mandatory
+        public int IsMandatory
         {
             get => default(int);
             set
@@ -72,15 +55,7 @@ namespace Temp
             }
         }
 
-        public Question Question
-        {
-            get => default(Question);
-            set
-            {
-            }
-        }
-
-        public int Questions
+        public int Status
         {
             get => default(int);
             set
@@ -88,14 +63,28 @@ namespace Temp
             }
         }
 
-        public void GetQuestions()
+        public Course Course
         {
-            throw new System.NotImplementedException();
+            get => default(Course);
+            set
+            {
+            }
         }
 
-        public void GetSlides()
+        public User User
         {
-            throw new System.NotImplementedException();
+            get => default(User);
+            set
+            {
+            }
+        }
+
+        public int CompletionDate
+        {
+            get => default(int);
+            set
+            {
+            }
         }
     }
 }

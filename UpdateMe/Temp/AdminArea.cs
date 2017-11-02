@@ -7,6 +7,22 @@ namespace Temp
 {
     public class AdminArea
     {
+        public Assignment Assignment
+        {
+            get => default(Assignment);
+            set
+            {
+            }
+        }
+
+        public Course Course
+        {
+            get => default(Course);
+            set
+            {
+            }
+        }
+
         public void UploadCourse()
         {
             throw new System.NotImplementedException();

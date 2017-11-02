@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Temp
 {
-    public class User
+    public class Question
     {
         public int Id
         {
@@ -15,7 +15,7 @@ namespace Temp
             }
         }
 
-        public int Name
+        public int Question
         {
             get => default(int);
             set
@@ -23,7 +23,7 @@ namespace Temp
             }
         }
 
-        public int Department
+        public int Answers
         {
             get => default(int);
             set
@@ -31,7 +31,7 @@ namespace Temp
             }
         }
 
-        public int Position
+        public int CorrectAnswerId
         {
             get => default(int);
             set
@@ -39,7 +39,7 @@ namespace Temp
             }
         }
 
-        public int Assignments
+        public int CourseId
         {
             get => default(int);
             set
@@ -47,17 +47,9 @@ namespace Temp
             }
         }
 
-        public int IsAdmin
+        public Answer Answer
         {
-            get => default(int);
-            set
-            {
-            }
-        }
-
-        public Assignment Assignment
-        {
-            get => default(Assignment);
+            get => default(Answer);
             set
             {
             }
