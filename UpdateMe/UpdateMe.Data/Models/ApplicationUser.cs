@@ -32,7 +32,7 @@ namespace UpdateMe.Data.Models
         [MaxLength(20)]
         public string Department { get; set; }
 
-        [Required]
+        
         public bool IsAdmin { get; set; }
 
         //public virtual ICollection<Assignement> Assignements { get; set; }
