@@ -19,21 +19,21 @@ namespace UpdateMe.Data.Models
 
 
         //[Required]
-        //[MaxLength(20)]
-        //public string FirstName { get; set; }
+        [MaxLength(20)]
+        public string FirstName { get; set; }
 
         //[Required]
-        //[MaxLength(20)]
-        //public string LastName { get; set; }
+        [MaxLength(20)]
+        public string LastName { get; set; }
 
-        //[MaxLength(20)]
-        //public string Position { get; set; }
+        [MaxLength(20)]
+        public string Position { get; set; }
 
-        //[MaxLength(20)]
-        //public string Department { get; set; }
+        [MaxLength(20)]
+        public string Department { get; set; }
 
-        //[Required]
-        //public bool IsAdmin { get; set; }
+        [Required]
+        public bool IsAdmin { get; set; }
 
         //public virtual ICollection<Assignement> Assignements { get; set; }
 

@@ -73,6 +73,14 @@
     <Compile Include="Migrations\201711061334435_User updated.Designer.cs">
       <DependentUpon>201711061334435_User updated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711061412398_User fields.cs" />
+    <Compile Include="Migrations\201711061412398_User fields.Designer.cs">
+      <DependentUpon>201711061412398_User fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711061417189_TempDB.cs" />
+    <Compile Include="Migrations\201711061417189_TempDB.Designer.cs">
+      <DependentUpon>201711061417189_TempDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +96,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711061334435_User updated.resx">
       <DependentUpon>201711061334435_User updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061412398_User fields.resx">
+      <DependentUpon>201711061412398_User fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061417189_TempDB.resx">
+      <DependentUpon>201711061417189_TempDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
