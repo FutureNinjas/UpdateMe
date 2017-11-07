@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201711061639566_CourseToAssignments.Designer.cs">
       <DependentUpon>201711061639566_CourseToAssignments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711062245062_RequiredFirstNameAndLastName.cs" />
+    <Compile Include="Migrations\201711062245062_RequiredFirstNameAndLastName.Designer.cs">
+      <DependentUpon>201711062245062_RequiredFirstNameAndLastName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -114,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711061639566_CourseToAssignments.resx">
       <DependentUpon>201711061639566_CourseToAssignments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711062245062_RequiredFirstNameAndLastName.resx">
+      <DependentUpon>201711062245062_RequiredFirstNameAndLastName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

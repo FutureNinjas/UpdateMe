@@ -18,11 +18,11 @@ namespace UpdateMe.Data.Models
         }
 
 
-        //[Required]
+        [Required]
         [MaxLength(20)]
         public string FirstName { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(20)]
         public string LastName { get; set; }
 

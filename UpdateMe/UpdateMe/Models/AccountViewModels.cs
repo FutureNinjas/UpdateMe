@@ -65,6 +65,14 @@ namespace UpdateMe.Models
     public class RegisterViewModel
     {
         [Required]
+        [MaxLength(20)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string LastName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
