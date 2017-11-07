@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bytes2you.Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a7d501dd757e0442, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bytes2you.Validation.2.0.0.0\lib\portable-win+net40+sl40+wp+Xbox40\Bytes2you.Validation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -291,6 +294,10 @@
     <ProjectReference Include="..\UpdateMe.Data\UpdateMe.Data.csproj">
       <Project>{346d8e39-8331-44b6-a113-08cbef6e8a51}</Project>
       <Name>UpdateMe.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UpdateMe.Services\UpdateMe.Services.csproj">
+      <Project>{899beaa9-0961-45bc-9e34-2a7d29cbfe09}</Project>
+      <Name>UpdateMe.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

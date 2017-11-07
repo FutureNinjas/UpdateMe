@@ -15,10 +15,11 @@ namespace UpdateMe.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(50, MinimumLength = 2)]
         public string Name { get; set; }
 
-        [StringLength(300)]
+        //TODO: [Required]
+        [StringLength(300, MinimumLength = 10)]
         public string  Description { get; set; }
 
         [Range(1, 100)] //range is double

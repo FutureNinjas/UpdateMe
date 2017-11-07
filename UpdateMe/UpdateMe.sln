@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateMe", "UpdateMe\UpdateMe.csproj", "{206D2FF4-125D-4132-BB6D-B96E17BCD939}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateMe.Data", "UpdateMe.Data\UpdateMe.Data.csproj", "{346D8E39-8331-44B6-A113-08CBEF6E8A51}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{9ACA7A07-3A67-4A18-82A4-2A7E3A96FD3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateMe.Services", "UpdateMe.Services\UpdateMe.Services.csproj", "{899BEAA9-0961-45BC-9E34-2A7D29CBFE09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +31,17 @@ Global
 		{346D8E39-8331-44B6-A113-08CBEF6E8A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{346D8E39-8331-44B6-A113-08CBEF6E8A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{346D8E39-8331-44B6-A113-08CBEF6E8A51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{899BEAA9-0961-45BC-9E34-2A7D29CBFE09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{899BEAA9-0961-45BC-9E34-2A7D29CBFE09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{899BEAA9-0961-45BC-9E34-2A7D29CBFE09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{899BEAA9-0961-45BC-9E34-2A7D29CBFE09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{346D8E39-8331-44B6-A113-08CBEF6E8A51} = {9ACA7A07-3A67-4A18-82A4-2A7E3A96FD3A}
+		{899BEAA9-0961-45BC-9E34-2A7D29CBFE09} = {9ACA7A07-3A67-4A18-82A4-2A7E3A96FD3A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C8FF1BC5-B0AF-4617-9C38-A7004890E571}
