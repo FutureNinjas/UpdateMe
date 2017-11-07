@@ -6,7 +6,8 @@ namespace UpdateMe.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(UpdateMe.Data.UpdateMeDbContext context)

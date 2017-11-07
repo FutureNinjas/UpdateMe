@@ -13,13 +13,13 @@ namespace UpdateMe.Data.Models
         {
             this.Assignements = new HashSet<Assignment>();
         }
-        
-        //[Required]
-        [MaxLength(10)]
+
+        [Required]
+        [MaxLength(20)]
         public string FirstName { get; set; }
 
-        //[Required]
-        [MaxLength(10)]
+        [Required]
+        [MaxLength(20)]
         public string LastName { get; set; }
 
         [MaxLength(20)]
