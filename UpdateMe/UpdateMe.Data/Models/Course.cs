@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace UpdateMe.Data.Models
 {
     public class Course
     {
-        private ICollection<Slide> slides;
         private ICollection<Question> questions;
          
         public Course()
         {
-            this.slides = new HashSet<Slide>();
             this.questions = new HashSet<Question>();
         }
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(50)]
         public string Name { get; set; }
 
+        [StringLength(300)]
         public string  Description { get; set; }
 
+        [Range(1, 100)] //range is double
         public int PassScore { get; set; }
         
         public DateTime DateCreated { get; set; }
@@ -34,17 +37,17 @@ namespace UpdateMe.Data.Models
         //        this.slides = value;
         //    }
         //}
-        //public virtual ICollection<Question> Questions
-        //{
-        //    get
-        //    {
-        //        return this.questions;
-        //    }
-        //    set
-        //    {
-        //        this.questions = value;
-        //    }
-        //}
+        public virtual ICollection<Question> Questions
+        {
+            get
+            {
+                return this.questions;
+            }
+            set
+            {
+                this.questions = value;
+            }
+        }
 
     }
 }

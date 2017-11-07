@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace UpdateMe.Data.Models
@@ -14,16 +11,15 @@ namespace UpdateMe.Data.Models
     {
         public ApplicationUser()
         {
-            //this.Assignements = new HashSet<Assignement>();
+            this.Assignements = new HashSet<Assignment>();
         }
-
-
+        
         //[Required]
-        [MaxLength(20)]
+        [MaxLength(10)]
         public string FirstName { get; set; }
 
         //[Required]
-        [MaxLength(20)]
+        [MaxLength(10)]
         public string LastName { get; set; }
 
         [MaxLength(20)]
@@ -31,11 +27,10 @@ namespace UpdateMe.Data.Models
 
         [MaxLength(20)]
         public string Department { get; set; }
-
-        
+                
         public bool IsAdmin { get; set; }
 
-        //public virtual ICollection<Assignement> Assignements { get; set; }
+        public virtual ICollection<Assignment> Assignements { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
