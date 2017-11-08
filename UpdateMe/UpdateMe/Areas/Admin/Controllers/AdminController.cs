@@ -4,18 +4,22 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using UpdateMe.Areas.Admin.Models;
 using UpdateMe.Data;
+using UpdateMe.Services.Contracts;
 
 namespace UpdateMe.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationUserManager userManager;
         private readonly UpdateMeDbContext dbContext;
+        private readonly ICourseServices courseService;
 
-        public AdminController(ApplicationUserManager userManager, UpdateMeDbContext dbContext)
+        public AdminController(ApplicationUserManager userManager, UpdateMeDbContext dbContext, ICourseServices courseService)
         {
             this.userManager = userManager ?? throw new ArgumentNullException("userManager");
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext");
+            this.courseService = courseService ?? throw new ArgumentNullException("courseService");
         }
 
         public ActionResult Index()
@@ -69,14 +73,17 @@ namespace UpdateMe.Areas.Admin.Controllers
         {
                     var courses = dbContext
             .Courses
-            .Select(c => new CourseViewModel
-            {
-                Name = c.Name,
-                Description = c.Description
-            })
+            .Select(CourseViewModel.Create)
             .ToList();
 
             return this.View(courses);
+        }
+
+        public ActionResult DeleteCourse(int id)
+        {
+            this.courseService.DeleteCourse(id);
+
+            return this.RedirectToAction("ListAllCourses");
         }
     }
 }

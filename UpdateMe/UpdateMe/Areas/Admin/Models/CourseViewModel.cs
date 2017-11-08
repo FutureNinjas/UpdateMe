@@ -16,6 +16,8 @@ namespace UpdateMe.Areas.Admin.Models
 
         public string Description { get; set; }
 
+        public int PassScore { get; set; }
+
         public static Expression<Func<Course, CourseViewModel>> Create
         {
             get
@@ -24,7 +26,8 @@ namespace UpdateMe.Areas.Admin.Models
                 {
                     Id = c.Id, 
                     Name = c.Name, 
-                    Description = c.Description
+                    Description = c.Description,
+                    PassScore = c.PassScore
                 };
             }
         }

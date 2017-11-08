@@ -44,6 +44,7 @@ namespace UpdateMe.Services
             Guard.WhenArgument(course, "course").IsNull().Throw();
 
             this.dbContext.Courses.Remove(course);
+            this.dbContext.SaveChanges();
         }
         //TODO: EditCourse
         public void EditCourse(int courseId)

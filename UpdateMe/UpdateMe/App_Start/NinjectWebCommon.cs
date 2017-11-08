@@ -12,6 +12,8 @@ namespace UpdateMe.App_Start
     using Ninject.Web.Common;
     using Microsoft.AspNet.Identity.Owin;
     using UpdateMe.Data;
+    using Services;
+    using Services.Contracts;
 
     public static class NinjectWebCommon
     {
@@ -76,6 +78,7 @@ namespace UpdateMe.App_Start
                 .GetUserManager<UpdateMeDbContext>());
 
             //Services
+            kernel.Bind<ICourseServices>().To<CourseServices>();
         }
     }
 }

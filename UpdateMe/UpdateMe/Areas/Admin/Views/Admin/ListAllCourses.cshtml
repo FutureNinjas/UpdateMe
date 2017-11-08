@@ -1,13 +1,42 @@
 ﻿@model IEnumerable<UpdateMe.Areas.Admin.Models.CourseViewModel>
 
-<h1>List of All Courses</h1>
-@foreach (var course in @Model)
-{
-    <div>
-        Course Name: @course.Name
-    </div>
-    <div>
-        Course Description: @course.Description
-    </div>
+@{
+    ViewBag.Title = "Courses";
 
+}
+
+<h2>Courses</h2>
+<p>
+    @Html.ActionLink("Upload Course", "UploadCourse", "Admin", null, new { @class = "btn btn-primary" })
+</p>
+
+<table id="courses" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Courses</th>
+            <th>Description</th>
+            <th>Pass Score</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in @Model)
+        {
+            <tr>
+                <td>@course.Name</td>
+                <td>@course.Description</td>
+                <td>@course.PassScore</td>
+                <td>@Html.ActionLink("Delete", "DeleteCourse", new { id = course.Id }) </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(function () {
+            $("#courses").DataTable();
+        });
+    </script>
 }

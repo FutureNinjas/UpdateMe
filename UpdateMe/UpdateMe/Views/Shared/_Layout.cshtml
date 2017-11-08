@@ -17,18 +17,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("UpdateMe", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>    @*трябва да изчистим area-та като имаме линк от area към друга area*@
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("My Courses", "UserCourses", "Courses", new { area = "" }, null)</li>
+                    }
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</li>
                     @if (this.User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Admin", "Index", "Admin", new { area = "Admin" }, null)</li> @*iskame prez ActionLink da hodim do area*@
+                        <li>@Html.ActionLink("Admin", "Index", "Admin", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Users", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Courses", "ListAllCourses", "Admin", new { area = "Admin" }, null)</li>
                     }
                 </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -41,8 +48,7 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
 </body>
 </html>
