@@ -9,6 +9,14 @@ namespace UpdateMe.Services.Contracts
 {
     public interface IAssignmentServices
     {
-        IEnumerable<Assignment> ListAllAssignmentsFromUser(string userName);
+        void CreateAssignment(DateTime dueDate, bool isMandatory, int courseId, string applicationUserId);
+
+        void UpdateAssignment(Assignment assignment);
+
+        IEnumerable<Assignment> FindAssignment(string courseName, string userName);
+
+        IEnumerable<Assignment> ListAllAssignmentsFromUser(string userId);
+
+        void DeleteAssignment(Assignment assignment);
     }
 }

@@ -7,7 +7,7 @@ namespace UpdateMe.Data.Models
     public class Course
     {
         private ICollection<Question> questions;
-         
+
         public Course()
         {
             this.questions = new HashSet<Question>();
@@ -18,13 +18,13 @@ namespace UpdateMe.Data.Models
         [StringLength(50, MinimumLength = 2)]
         public string Name { get; set; }
 
-        //TODO: [Required]
+        [Required]
         [StringLength(300, MinimumLength = 10)]
-        public string  Description { get; set; }
+        public string Description { get; set; }
 
         [Range(1, 100)] //range is double
         public int PassScore { get; set; }
-        
+
         public DateTime DateCreated { get; set; }
 
         //public virtual ICollection<Slide> Slides
@@ -49,6 +49,5 @@ namespace UpdateMe.Data.Models
                 this.questions = value;
             }
         }
-
     }
 }

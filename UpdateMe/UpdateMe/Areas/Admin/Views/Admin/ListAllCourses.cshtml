@@ -1,0 +1,13 @@
+﻿@model IEnumerable<UpdateMe.Areas.Admin.Models.CourseViewModel>
+
+<h1>List of All Courses</h1>
+@foreach (var course in @Model)
+{
+    <div>
+        Course Name: @course.Name
+    </div>
+    <div>
+        Course Description: @course.Description
+    </div>
+
+}

@@ -59,8 +59,10 @@
     <Compile Include="AssignmentServices.cs" />
     <Compile Include="Contracts\IAssignmentServices.cs" />
     <Compile Include="Contracts\ICourseServices.cs" />
+    <Compile Include="Contracts\IUserServices.cs" />
     <Compile Include="CourseServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UpdateMe.Data\UpdateMe.Data.csproj">

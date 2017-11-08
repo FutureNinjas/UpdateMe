@@ -89,6 +89,10 @@
     <Compile Include="Migrations\201711071106299_Answers.Designer.cs">
       <DependentUpon>201711071106299_Answers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711081009399_AssignmentToUser.cs" />
+    <Compile Include="Migrations\201711081009399_AssignmentToUser.Designer.cs">
+      <DependentUpon>201711081009399_AssignmentToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -121,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711071106299_Answers.resx">
       <DependentUpon>201711071106299_Answers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081009399_AssignmentToUser.resx">
+      <DependentUpon>201711081009399_AssignmentToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
