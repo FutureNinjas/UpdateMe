@@ -56,9 +56,9 @@ namespace UpdateMe
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1477951082323822",
+               appSecret: "33ce375ab7501030b6a38e2908f95f2e");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
