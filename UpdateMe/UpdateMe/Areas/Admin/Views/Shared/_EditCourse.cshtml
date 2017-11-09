@@ -1,0 +1,28 @@
+﻿
+@model UpdateMe.Areas.Admin.Models.CourseViewModel
+
+<h3>Edit course:</h3>
+@using (Html.BeginForm("EditCourse", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @*generira nqkakuv hidden input koito ima random string, koito se submitva s formichkata
+        i na servera shte se ochakva tochno tozi string i ako go nqma na servera, nqma da sraboti. Trqbva na edit metoda da se sloji atributa za validaciq*@
+    //ideqta e tova da ni pazi ot XSS ataka, t.e. nqkoi da se opita da pravi post zaqvka bez tozi vuprosen string
+    @Html.HiddenFor(m => m.Id)
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.EditorFor(m => m.Name)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.PassScore)
+        @Html.EditorFor(m => m.PassScore)
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}
+

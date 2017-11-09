@@ -71,24 +71,39 @@ namespace UpdateMe.Areas.Admin.Controllers
 
         public ActionResult ListAllCourses()
         {
-                    var courses = dbContext
-            .Courses
-            .Select(CourseViewModel.Create)
-            .ToList();
+            var courses = dbContext
+    .Courses
+    .Select(CourseViewModel.Create)
+    .ToList();
 
             return this.View(courses);
         }
 
-        //public async Task<ActionResult> EditCourse(int id)
-        //{
-        //    var course = await this.dbContext.Courses.FirstOrDefaultAsync(c=>c.Id==id);
+        //TODO: Make async if needed
+        [HttpGet]
+        public ActionResult EditCourse(int id)
+        {
+            var course = this.dbContext.Courses.Find(id);
 
-        //    var courseViewModel = CourseViewModel.Create.Compile()(course);
+            var courseViewModel = CourseViewModel.Create.Compile()(course);
 
+            return this.PartialView("_EditCourse", courseViewModel);
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCourse(CourseViewModel courseViewModel)
+        {
+            var course = dbContext.Courses.Find(courseViewModel.Id);
 
-        //    return this.PartialView("_EditCourse", CourseViewModel);
-        //}
+            course.Name = courseViewModel.Name;
+            course.Description = courseViewModel.Description;
+            course.PassScore = courseViewModel.PassScore;
+
+            this.dbContext.SaveChanges();
+
+            return this.RedirectToAction("ListAllCourses");
+        }
 
         public ActionResult DeleteCourse(int id)
         {
