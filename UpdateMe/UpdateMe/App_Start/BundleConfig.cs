@@ -12,6 +12,7 @@ namespace UpdateMe
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/respond.js",
+                        "~/Scripts/bootbox.js",
                         "~/Scripts/datatables/jquery.datatables.js",
                         "~/Scripts/datatables/datatables.bootstrap.js"
                         ));
@@ -30,7 +31,7 @@ namespace UpdateMe
             
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-lumen.css",
                       "~/content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css"));
         }

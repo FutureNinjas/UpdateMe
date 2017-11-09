@@ -27,18 +27,40 @@
                 <td>@course.Name</td>
                 <td>@course.Description</td>
                 <td>@course.PassScore</td>
-                <td>@Html.ActionLink("Edit", "EditCourse", new { id = course.Id }) </td>
-                <td>@Html.ActionLink("Delete", "DeleteCourse", new { id = course.Id }) </td>
+                <td class="test">@Html.ActionLink("Edit", "EditCourse", new { id = course.Id }) </td>
+                <td>
+                    <a id="@course.Id" class="delete" href="#">Delete</a>
+                    @using (Html.BeginForm("DeleteCourse", "Admin",
+                    new { id = course.Id },
+                    FormMethod.Post,
+                    new { id = "form-" + course.Id }))
+                    {
+                    }
+                </td>
+
             </tr>
         }
     </tbody>
 </table>
 
+
+
 @section scripts
 {
     <script>
+
         $(function () {
             $("#courses").DataTable();
+
+            $('a.delete').on('click', function () {
+                let buttonId = $(this).attr('id')
+                bootbox.confirm("Are you sure you want to delete this course?", (result) => {
+                    if (result) {
+                        let formIdSelector = '#form-' + buttonId
+                        $(formIdSelector).submit()
+                    }
+                });
+            })
         });
     </script>
 }
