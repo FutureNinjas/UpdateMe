@@ -21,9 +21,6 @@ namespace UpdateMe.Services
 
         public void CreateCourse(string name, string description, int passScore, ICollection<Question> questions)
         {
-            //TODO: ASK BIG VIK
-            //            Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
-
             Course course = new Course()
             {
                 Name = name,

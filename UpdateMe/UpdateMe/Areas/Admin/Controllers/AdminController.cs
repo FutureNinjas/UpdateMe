@@ -79,6 +79,17 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.View(courses);
         }
 
+        //public async Task<ActionResult> EditCourse(int id)
+        //{
+        //    var course = await this.dbContext.Courses.FirstOrDefaultAsync(c=>c.Id==id);
+
+        //    var courseViewModel = CourseViewModel.Create.Compile()(course);
+
+
+
+        //    return this.PartialView("_EditCourse", CourseViewModel);
+        //}
+
         public ActionResult DeleteCourse(int id)
         {
             this.courseService.DeleteCourse(id);
