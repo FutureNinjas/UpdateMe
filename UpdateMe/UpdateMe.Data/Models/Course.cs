@@ -27,6 +27,7 @@ namespace UpdateMe.Data.Models
 
         public DateTime DateCreated { get; set; }
 
+        //TODO: add slides
         //public virtual ICollection<Slide> Slides
         //{
         //    get

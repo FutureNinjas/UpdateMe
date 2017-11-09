@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using UpdateMe.Data.Migrations;
 using UpdateMe.Data.Models;
 
 namespace UpdateMe.Data
@@ -9,6 +10,8 @@ namespace UpdateMe.Data
         public UpdateMeDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            var strategy = new MigrateDatabaseToLatestVersion<UpdateMeDbContext, Configuration>();
+            Database.SetInitializer(strategy);
         }
 
         public virtual IDbSet<Course> Courses { get; set; }

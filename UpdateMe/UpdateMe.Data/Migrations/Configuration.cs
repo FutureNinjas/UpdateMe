@@ -6,7 +6,7 @@ namespace UpdateMe.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            //AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
         }
 
