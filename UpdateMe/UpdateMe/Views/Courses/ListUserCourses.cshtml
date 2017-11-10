@@ -1,0 +1,11 @@
+﻿@model  IEnumerable<UpdateMe.Models.AssignmentViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>dsagaga</h2>
+@foreach(var a in @Model)
+{
+    <div>@a.DueDate</div>
+}
+<h2>@Model.Count()</h2>

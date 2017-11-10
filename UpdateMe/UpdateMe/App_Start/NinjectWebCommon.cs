@@ -79,6 +79,7 @@ namespace UpdateMe.App_Start
 
             //Services
             kernel.Bind<ICourseServices>().To<CourseServices>();
+            kernel.Bind<IAssignmentServices>().To<AssignmentServices>();
         }
     }
 }

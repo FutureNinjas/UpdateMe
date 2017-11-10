@@ -27,7 +27,7 @@
                 <td>@course.Name</td>
                 <td>@course.Description</td>
                 <td>@course.PassScore</td>
-                <td class="test">@Html.ActionLink("Edit", "EditCourse", new { id = course.Id }) </td>
+                <td>@Html.ActionLink("Edit", "EditCourse", new { id = course.Id }) </td>
                 <td>
                     <a id="@course.Id" class="delete" href="#">Delete</a>
                     @using (Html.BeginForm("DeleteCourse", "Admin",
