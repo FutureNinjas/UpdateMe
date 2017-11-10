@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using UpdateMe.Areas.Admin.Models;
 using UpdateMe.Data.Models;
 
 namespace UpdateMe.Models
@@ -21,6 +22,10 @@ namespace UpdateMe.Models
 
         public int CourseId { get; set; }
 
+        public string CourseName { get; set; }
+
+        public int PassScore { get; set; }
+
         public string ApplicationUserId { get; set; }
 
         public static Expression<Func<Assignment, AssignmentViewModel>> Create
@@ -35,7 +40,9 @@ namespace UpdateMe.Models
                     AssignmentStatus = a.AssignmentStatus,
                     IsMandatory = a.IsMandatory,
                     CourseId = a.CourseId,
-                    ApplicationUserId = a.ApplicationUserId
+                    ApplicationUserId = a.ApplicationUserId,
+                    CourseName = a.Course.Name,
+                    PassScore = a.Course.PassScore
 
                 };
             }

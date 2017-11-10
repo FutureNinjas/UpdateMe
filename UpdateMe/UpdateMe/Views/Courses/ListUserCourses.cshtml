@@ -1,5 +1,5 @@
 ﻿@model  IEnumerable<UpdateMe.Models.AssignmentViewModel>
-@{
+@*@{
     ViewBag.Title = "Index";
 }
 
@@ -8,4 +8,61 @@
 {
     <div>@a.DueDate</div>
 }
-<h2>@Model.Count()</h2>
+<h2>@Model.Count()</h2>*@
+
+<table id="courses" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Pass Score</th>
+            <th>DueDate</th>
+            <th>Is Mandatory</th>
+            <th>Assignment Status</th>
+            <th>Completion Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in @Model)
+        {
+            <tr>
+                <td>@course.CourseName</td>
+                <td>@course.PassScore</td>
+                <td>@course.DueDate</td>
+                <td>@course.IsMandatory</td>
+                <td>@course.AssignmentStatus</td>
+                <td>@course.CompletionDate</td>
+                @*<td>@Html.ActionLink("Edit", "EditCourse", new { id = course.Id }) </td>
+                <td>
+                    <a id="@course.Id" class="delete" href="#">Delete</a>
+                    @using (Html.BeginForm("DeleteCourse", "Admin",
+                new { id = course.Id },
+                FormMethod.Post,
+                new { id = "form-" + course.Id }))
+                    {
+                    }
+                </td>*@
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+
+        $(function () {
+            $("#courses").DataTable();
+
+            //$('a.delete').on('click', function () {
+            //    let buttonId = $(this).attr('id')
+            //    bootbox.confirm("Are you sure you want to delete this course?", (result) => {
+            //        if (result) {
+            //            let formIdSelector = '#form-' + buttonId
+            //            $(formIdSelector).submit()
+            //        }
+            //    });
+            //})
+        });
+    </script>
+}
