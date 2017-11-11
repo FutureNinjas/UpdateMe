@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using UpdateMe.Areas.Admin.Models;
 using UpdateMe.Data;
+using UpdateMe.Data.Models;
 using UpdateMe.Services.Contracts;
 
 namespace UpdateMe.Areas.Admin.Controllers
@@ -40,7 +41,7 @@ namespace UpdateMe.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> EditUser(string username)
         {
-            var user = await this.userManager.FindByNameAsync(username); 
+            var user = await this.userManager.FindByNameAsync(username);
             var userViewModel = UserViewModel.Create.Compile()(user);
             userViewModel.IsAdmin = await this.userManager.IsInRoleAsync(user.Id, "Admin");
 
@@ -69,9 +70,9 @@ namespace UpdateMe.Areas.Admin.Controllers
         public ActionResult ListAllCourses()
         {
             var courses = dbContext
-    .Courses
-    .Select(CourseViewModel.Create)
-    .ToList();
+               .Courses
+               .Select(CourseViewModel.Create)
+               .ToList();
 
             return this.View(courses);
         }
@@ -91,13 +92,9 @@ namespace UpdateMe.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditCourse(CourseViewModel courseViewModel)
         {
-            var course = dbContext.Courses.Find(courseViewModel.Id);
+            var course = this.dbContext.Courses.Find(courseViewModel.Id);
 
-            course.Name = courseViewModel.Name;
-            course.Description = courseViewModel.Description;
-            course.PassScore = courseViewModel.PassScore;
-
-            this.dbContext.SaveChanges();
+            courseService.EditCourse(course.Id, courseViewModel);
 
             return this.RedirectToAction("ListAllCourses");
         }

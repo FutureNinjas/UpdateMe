@@ -99,6 +99,7 @@
     <Compile Include="Models\AssignmentStatus.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\DataModels\CourseModel.cs" />
+    <Compile Include="Models\DataModels\CourseViewModel.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateMeDbContext.cs" />

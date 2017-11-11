@@ -47,9 +47,15 @@ namespace UpdateMe.Services
             this.dbContext.SaveChanges();
         }
         //TODO: EditCourse
-        public void EditCourse(int courseId)
+        public void EditCourse(int id, CourseViewModel courseViewModel)
         {
-            throw new NotImplementedException();
+            var course = dbContext.Courses.Find(id);
+
+            course.Name = courseViewModel.Name;
+            course.Description = courseViewModel.Description;
+            course.PassScore = courseViewModel.PassScore;
+
+            this.dbContext.SaveChanges();
         }
 
         public void JsonHandler(HttpPostedFileBase file)

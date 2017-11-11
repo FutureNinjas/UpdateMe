@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Web;
 using UpdateMe.Data.Models;
 
-namespace UpdateMe.Areas.Admin.Models
+namespace UpdateMe.Data.Models
 {
     public class CourseViewModel
     {

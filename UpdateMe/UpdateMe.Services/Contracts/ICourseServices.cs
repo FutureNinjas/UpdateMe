@@ -11,7 +11,7 @@ namespace UpdateMe.Services.Contracts
 
         CourseModel ReviewCourse(int courseId);
 
-        void EditCourse(int courseId);
+        void EditCourse(int id, CourseViewModel courseViewModel);
 
         void DeleteCourse(int courseId);
 
