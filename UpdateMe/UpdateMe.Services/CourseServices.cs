@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Bytes2you.Validation;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
 using UpdateMe.Data;
 using UpdateMe.Data.Models;
 using UpdateMe.Services.Contracts;
-using System.Linq;
-using Bytes2you.Validation;
 
 namespace UpdateMe.Services
 {
@@ -19,14 +22,14 @@ namespace UpdateMe.Services
             this.dbContext = dbContext;
         }
 
-        public void CreateCourse(string name, string description, int passScore, ICollection<Question> questions)
+        public void CreateCourse(string name, string description, int passScore, DateTime DateCreated)
         {
             Course course = new Course()
             {
                 Name = name,
                 Description = description,
                 PassScore = passScore,
-                Questions = questions
+                DateCreated = DateCreated
             };
 
             this.dbContext.Courses.Add(course);
@@ -47,6 +50,27 @@ namespace UpdateMe.Services
         public void EditCourse(int courseId)
         {
             throw new NotImplementedException();
+        }
+
+        public void JsonHandler(HttpPostedFileBase file)
+        {
+            try
+            {
+                using (StreamReader reader = new StreamReader(file.InputStream))//research
+                {
+                    string readFile = reader.ReadToEnd();
+
+                    Course course = JsonConvert.DeserializeObject<Course>(readFile);
+
+                    this.dbContext.Courses.Add(course);
+
+                    this.dbContext.SaveChanges();
+                }
+            }
+            catch (FileNotFoundException)
+            {
+
+            }
         }
 
         public IEnumerable<CourseModel> ListAllCourses()
