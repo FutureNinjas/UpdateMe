@@ -12,6 +12,7 @@ using UpdateMe.Services;
 
 namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
 {
+    [Ignore]
     [TestClass]
     public class EditCourse_Should
     {
@@ -26,7 +27,7 @@ namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
             string descriptionMock = "MockValidateStringTestDescription";
             int passScoreMock = 1;
             var contextMock = new Mock<UpdateMeDbContext>();
-            var course = new Course() { Id = 1 , Name = name, Description = description, PassScore = passScore };
+            var course = new Course() { Id = 1, Name = name, Description = description, PassScore = passScore };
             var courseViewModel = new CourseViewModel() { Id = 1, Name = nameMock, Description = descriptionMock, PassScore = passScoreMock };
 
             List<Course> courses = new List<Course>();
