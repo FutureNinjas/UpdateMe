@@ -24,7 +24,7 @@ namespace UpdateMe.Controllers
             this.dbContext = dbContext;
             this.assignmentServices = assignmentServices;
         }
-        [Authorize]
+        
         public  ActionResult ListUserCourses()
         {
             //1. var userAssignments = ListAllAssignmentsFromUser(string id)

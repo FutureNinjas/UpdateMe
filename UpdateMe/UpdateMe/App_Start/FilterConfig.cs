@@ -9,6 +9,7 @@ namespace UpdateMe
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new RequireHttpsAttribute());
+            filters.Add(new AuthorizeAttribute());
         }
     }
 }
