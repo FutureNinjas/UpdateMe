@@ -16,33 +16,38 @@ namespace UpdateMe.Controllers
         // GET: MyCourses
         private readonly ApplicationUserManager userManager;
         private readonly UpdateMeDbContext dbContext;
-        private readonly IAssignmentService assignmentServices;
+        private readonly IAssignmentService assignmentService;
+        private readonly ICourseService courseService;
 
-        public CoursesController(ApplicationUserManager userManager, UpdateMeDbContext dbContext, IAssignmentService assignmentServices)
+        public CoursesController(
+            ApplicationUserManager userManager, 
+            UpdateMeDbContext dbContext, 
+            IAssignmentService assignmentService,
+            ICourseService courseService)
         {
             this.userManager = userManager;
             this.dbContext = dbContext;
-            this.assignmentServices = assignmentServices;
+            this.assignmentService = assignmentService;
+            this.courseService = courseService;
         }
         
         public  ActionResult ListUserCourses()
-        {
-            //1. var userAssignments = ListAllAssignmentsFromUser(string id)
-            //2.
-
+        {        
+            
             var currentUserId = this.User.Identity.GetUserId();
 
-            var allAssignments = assignmentServices.ListAllAssignmentsFromUser(currentUserId);
+            var allAssignments = assignmentService.ListAllAssignmentsFromUser(currentUserId);
 
             var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
-
-            //foreach(var a in allAssignments)
-            //{
-            //    var courseViewModel = AssignmentViewModel.Create.Compile()(a);
-            //}
-
-
+            
             return View(assignmentViewModels);
+        }
+
+        public ActionResult ReviewCourse(int id)
+        {
+            var courseModel = courseService.ReviewCourse(id);
+
+            return this.View(courseModel);
         }
     }
 }

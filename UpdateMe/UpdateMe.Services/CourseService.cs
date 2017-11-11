@@ -97,16 +97,16 @@ namespace UpdateMe.Services
         public CourseModel ReviewCourse(int courseId)
         {
             var course = this.dbContext
-                .Courses
+                .Assignments
                 .Where(c => c.Id == courseId)
                 .FirstOrDefault(c => c.Id == courseId);
 
             return new CourseModel()
             {
-                Name = course.Name,
-                Description = course.Description,
-                PassScore = course.PassScore,
-                DateCreated = course.DateCreated
+                Name = course.Course.Name,
+                Description = course.Course.Description,
+                PassScore = course.Course.PassScore,
+                DateCreated = course.Course.DateCreated
             };
         }
     }
