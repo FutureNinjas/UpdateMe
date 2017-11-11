@@ -5,7 +5,7 @@ using UpdateMe.Data.Models;
 
 namespace UpdateMe.Services.Contracts
 {
-    public interface ICourseServices
+    public interface ICourseService
     {
         void CreateCourse(string name, string description, int passScore, DateTime DateCreated);
 

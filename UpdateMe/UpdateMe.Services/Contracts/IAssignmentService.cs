@@ -7,7 +7,7 @@ using UpdateMe.Data.Models;
 
 namespace UpdateMe.Services.Contracts
 {
-    public interface IAssignmentServices
+    public interface IAssignmentService
     {
         void CreateAssignment(DateTime dueDate, bool isMandatory, int courseId, string applicationUserId);
 

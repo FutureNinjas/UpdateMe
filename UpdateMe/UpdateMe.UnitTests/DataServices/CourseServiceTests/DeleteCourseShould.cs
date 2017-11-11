@@ -42,7 +42,7 @@ namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
 
             dbContextMock.SetupGet(m => m.Courses).Returns(coursesSetMock.Object);
 
-            CourseServices service = new CourseServices(dbContextMock.Object);
+            CourseService service = new CourseService(dbContextMock.Object);
 
             //Act
             service.DeleteCourse(id);

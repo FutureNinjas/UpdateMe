@@ -15,9 +15,9 @@ namespace UpdateMe.Areas.Admin.Controllers
     {
         private readonly ApplicationUserManager userManager;
         private readonly UpdateMeDbContext dbContext;
-        private readonly ICourseServices courseService;
+        private readonly ICourseService courseService;
 
-        public AdminController(ApplicationUserManager userManager, UpdateMeDbContext dbContext, ICourseServices courseService)
+        public AdminController(ApplicationUserManager userManager, UpdateMeDbContext dbContext, ICourseService courseService)
         {
             this.userManager = userManager ?? throw new ArgumentNullException("userManager");
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext");

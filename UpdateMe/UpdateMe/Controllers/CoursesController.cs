@@ -16,9 +16,9 @@ namespace UpdateMe.Controllers
         // GET: MyCourses
         private readonly ApplicationUserManager userManager;
         private readonly UpdateMeDbContext dbContext;
-        private readonly IAssignmentServices assignmentServices;
+        private readonly IAssignmentService assignmentServices;
 
-        public CoursesController(ApplicationUserManager userManager, UpdateMeDbContext dbContext, IAssignmentServices assignmentServices)
+        public CoursesController(ApplicationUserManager userManager, UpdateMeDbContext dbContext, IAssignmentService assignmentServices)
         {
             this.userManager = userManager;
             this.dbContext = dbContext;

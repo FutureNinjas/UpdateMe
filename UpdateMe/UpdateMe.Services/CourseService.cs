@@ -11,11 +11,11 @@ using UpdateMe.Services.Contracts;
 
 namespace UpdateMe.Services
 {
-    public class CourseServices : ICourseServices
+    public class CourseService : ICourseService
     {
         private readonly UpdateMeDbContext dbContext;
 
-        public CourseServices(UpdateMeDbContext dbContext)
+        public CourseService(UpdateMeDbContext dbContext)
         {
             Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
 

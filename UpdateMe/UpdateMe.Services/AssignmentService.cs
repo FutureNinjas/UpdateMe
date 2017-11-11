@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace UpdateMe.Services
 {
-    public class AssignmentServices : IAssignmentServices
+    public class AssignmentService : IAssignmentService
     {
         private readonly UpdateMeDbContext dbContext;
 
-        public AssignmentServices(UpdateMeDbContext dbContext)
+        public AssignmentService(UpdateMeDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

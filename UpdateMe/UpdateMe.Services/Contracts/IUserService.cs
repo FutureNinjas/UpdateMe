@@ -7,7 +7,7 @@ using UpdateMe.Data.Models;
 
 namespace UpdateMe.Services.Contracts
 {
-    public interface IUserServices
+    public interface IUserService
     {
         IEnumerable<ApplicationUser> FindUserByUserName(string userName);
 

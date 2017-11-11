@@ -7,7 +7,7 @@ using UpdateMe.Services.Contracts;
 
 namespace UpdateMe.Services
 {
-    public class UserServices
+    public class UserService
     {
 
     }

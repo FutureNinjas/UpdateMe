@@ -35,7 +35,7 @@ namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
 
             var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
             contextMock.SetupGet(m => m.Courses).Returns(coursesSetMock.Object);
-            var courseService = new CourseServices(contextMock.Object);
+            var courseService = new CourseService(contextMock.Object);
 
             //Act
 

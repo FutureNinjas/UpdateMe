@@ -78,8 +78,8 @@ namespace UpdateMe.App_Start
                 .GetUserManager<UpdateMeDbContext>());
 
             //Services
-            kernel.Bind<ICourseServices>().To<CourseServices>();
-            kernel.Bind<IAssignmentServices>().To<AssignmentServices>();
+            kernel.Bind<ICourseService>().To<CourseService>();
+            kernel.Bind<IAssignmentService>().To<AssignmentService>();
         }
     }
 }
