@@ -16,7 +16,6 @@ namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
     public class EditCourse_Should
     {
         [TestMethod]
-
         public void EditCourseProperties_WhenParametersAreValid()
         {
             //Arrange
