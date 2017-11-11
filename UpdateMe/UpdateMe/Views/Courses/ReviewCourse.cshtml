@@ -1,0 +1,20 @@
+﻿@model UpdateMe.Data.Models.CourseModel
+@{
+    ViewBag.Title = "ReviewCourse";
+}
+<table id="courses" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Pass Score</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>@Model.Name</td>
+                <td>@Model.PassScore</td>
+                <td>@Model.Description</td>
+            </tr>
+    </tbody>
+</table>
