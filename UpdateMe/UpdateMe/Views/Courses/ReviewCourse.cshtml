@@ -18,16 +18,10 @@
         </tr>
     </tbody>
 </table>
-@{
-    var slides = Model.Slides;
-
-
-    //var imgSrc = String.Format("data:image/gif;base64,{0}", slides[0].Base64Img);
-}
 
 @foreach (var item in @Model.Slides)
 {
-    var imgSrc = String.Format("data:image/gif;base64,{0}", item.Base64Img);
-    <img src="@imgSrc" />
+    @*var imgSrc = String.Format("data:image/gif;base64,{0}", item
+    <img src="@imgSrc" />*@
 
 }
