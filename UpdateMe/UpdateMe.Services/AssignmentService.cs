@@ -4,6 +4,7 @@ using UpdateMe.Data;
 using UpdateMe.Data.Models;
 using UpdateMe.Services.Contracts;
 using System.Linq;
+using UpdateMe.Data.Models.DataModels;
 
 namespace UpdateMe.Services
 {
@@ -16,14 +17,15 @@ namespace UpdateMe.Services
             this.dbContext = dbContext;
         }
 
-        public void CreateAssignment(DateTime dueDate, bool isMandatory, int courseId, string applicationUserId)
+        public void CreateAssignment(int id, DateTime dueDate, bool isMandatory, int courseId, string applicationUserId)
         {
             Assignment assignment = new Assignment()
             {
+                Id = id,
                 DueDate = dueDate,
                 IsMandatory = isMandatory,
                 CourseId = courseId,
-                ApplicationUserId = applicationUserId
+                ApplicationUserId = applicationUserId,
             };
 
             dbContext.Assignments.Add(assignment);
@@ -52,9 +54,22 @@ namespace UpdateMe.Services
                 .ToList();
         }
 
-        public void UpdateAssignment(Assignment assignment)
+        public AssignmentViewModel UpdateAssignment(Assignment assignment)
         {
-            throw new NotImplementedException();
+            var updatedAssignment = this.dbContext.Assignments.FirstOrDefault(a => a.Id == assignment.Id);
+
+            return new AssignmentViewModel()
+            {
+                Id = updatedAssignment.Id,
+                CourseId = updatedAssignment.CourseId,
+                ApplicationUser = updatedAssignment.ApplicationUser,
+                ApplicationUserId = updatedAssignment.ApplicationUserId,
+                IsMandatory = updatedAssignment.IsMandatory,
+                AssignmentStatus = updatedAssignment.AssignmentStatus,
+                //AssignmentDate = updatedAssignment.AssignmentDate,
+                //DueDate = updatedAssignment.DueDate,
+                //CompletionDate = updatedAssignment.CompletionDate                
+            };
         }
     }
 }

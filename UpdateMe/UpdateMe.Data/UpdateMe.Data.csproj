@@ -93,11 +93,16 @@
     <Compile Include="Migrations\201711081009399_AssignmentToUser.Designer.cs">
       <DependentUpon>201711081009399_AssignmentToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711120819210_Nullable Assignment dates.cs" />
+    <Compile Include="Migrations\201711120819210_Nullable Assignment dates.Designer.cs">
+      <DependentUpon>201711120819210_Nullable Assignment dates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\AssignmentStatus.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\DataModels\AssignmentViewModel.cs" />
     <Compile Include="Models\DataModels\CourseModel.cs" />
     <Compile Include="Models\DataModels\CourseViewModel.cs" />
     <Compile Include="Models\Question.cs" />
@@ -129,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711081009399_AssignmentToUser.resx">
       <DependentUpon>201711081009399_AssignmentToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711120819210_Nullable Assignment dates.resx">
+      <DependentUpon>201711120819210_Nullable Assignment dates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

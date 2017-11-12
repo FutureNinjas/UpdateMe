@@ -6,11 +6,11 @@ namespace UpdateMe.Data.Models
     {
         public int Id { get; set; }
 
-        public DateTime AssignmentDate { get; set; }
+        public DateTime? AssignmentDate { get; set; }
 
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
 
-        public DateTime CompletionDate { get; set; }
+        public DateTime? CompletionDate { get; set; }
 
         public AssignmentStatus AssignmentStatus { get; set; }
 

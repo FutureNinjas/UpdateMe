@@ -1,0 +1,32 @@
+﻿@model UpdateMe.Data.Models.DataModels.AssignmentViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Assign a course to @Model.ApplicationUser.FirstName</h2>
+
+@using (Html.BeginForm("AssignCourse", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(u => u.Id)
+        <div>
+            @Html.LabelFor(u => u.CourseId)
+            @Html.EditorFor(u => u.CourseId)
+        </div>
+        <div>
+            @Html.LabelFor(u => u.IsMandatory)
+            @Html.EditorFor(u => u.IsMandatory)
+        </div>
+        <div>
+            @Html.LabelFor(u => u.DueDate)
+            @Html.EditorFor(u => u.DueDate)
+        </div>
+        <div>
+            <input type="submit" value="Assign" />
+        </div>
+
+
+    }
+
+

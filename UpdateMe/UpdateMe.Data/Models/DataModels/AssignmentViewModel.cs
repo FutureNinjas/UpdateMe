@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
-using UpdateMe.Areas.Admin.Models;
-using UpdateMe.Data.Models;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace UpdateMe.Models
+namespace UpdateMe.Data.Models.DataModels
 {
     public class AssignmentViewModel
     {
         public int Id { get; set; }
+
+        public DateTime AssignmentDate { get; set; }
 
         public DateTime DueDate { get; set; }
 
@@ -22,11 +23,10 @@ namespace UpdateMe.Models
 
         public int CourseId { get; set; }
 
-        public string CourseName { get; set; }
-
-        public int PassScore { get; set; }
-
         public string ApplicationUserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
+
 
         public static Expression<Func<Assignment, AssignmentViewModel>> Create
         {
@@ -35,15 +35,13 @@ namespace UpdateMe.Models
                 return a => new AssignmentViewModel()
                 {
                     Id = a.Id,
+                    //AssignmentDate = a.AssignmentDate,
                     //DueDate = a.DueDate,
                     //CompletionDate = a.CompletionDate,
                     AssignmentStatus = a.AssignmentStatus,
-                    IsMandatory = a.IsMandatory,
-                    CourseId = a.CourseId,
                     ApplicationUserId = a.ApplicationUserId,
-                    CourseName = a.Course.Name,
-                    PassScore = a.Course.PassScore
-
+                    ApplicationUser = a.ApplicationUser,
+                    CourseId = a.CourseId
                 };
             }
         }
