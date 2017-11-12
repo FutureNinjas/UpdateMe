@@ -105,6 +105,10 @@
     <Compile Include="Migrations\201711121445089_Slides Added.Designer.cs">
       <DependentUpon>201711121445089_Slides Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711121653404_Slides.cs" />
+    <Compile Include="Migrations\201711121653404_Slides.Designer.cs">
+      <DependentUpon>201711121653404_Slides.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -114,6 +118,7 @@
     <Compile Include="Models\DataModels\CourseModel.cs" />
     <Compile Include="Models\DataModels\CourseViewModel.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\Slide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateMeDbContext.cs" />
   </ItemGroup>
@@ -148,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711121445089_Slides Added.resx">
       <DependentUpon>201711121445089_Slides Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711121653404_Slides.resx">
+      <DependentUpon>201711121653404_Slides.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

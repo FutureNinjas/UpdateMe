@@ -16,6 +16,8 @@ namespace UpdateMe.Data
 
         public virtual IDbSet<Assignment> Assignments { get; set; }
 
+        public virtual IDbSet<Slide> Slides { get; set; }
+
         public static UpdateMeDbContext Create()
         {
             return new UpdateMeDbContext();

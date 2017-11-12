@@ -16,6 +16,6 @@ namespace UpdateMe.Data.Models
         
         public DateTime DateCreated { get; set; }
 
-        public string Slides { get; set; }
+        public ICollection<Slide> Slides { get; set; }
     }
 }

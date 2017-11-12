@@ -6,12 +6,16 @@ namespace UpdateMe.Data.Models
 {
     public class Course
     {
+        private ICollection<Slide> slides;
         private ICollection<Question> questions;
 
         public Course()
         {
             this.questions = new HashSet<Question>();
+
+            this.slides = new HashSet<Slide>();
         }
+
         public int Id { get; set; }
 
         [Required]
@@ -27,8 +31,18 @@ namespace UpdateMe.Data.Models
 
         public DateTime DateCreated { get; set; }
 
-        public String Slides { get; set; } // base64 string joined
-       
+        public virtual ICollection<Slide> Slides
+        {
+            get
+            {
+                return this.slides;
+            }
+            set
+            {
+                this.slides = value;
+            }
+        }
+
         public virtual ICollection<Question> Questions
         {
             get
