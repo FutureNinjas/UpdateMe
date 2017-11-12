@@ -97,6 +97,10 @@
     <Compile Include="Migrations\201711120819210_Nullable Assignment dates.Designer.cs">
       <DependentUpon>201711120819210_Nullable Assignment dates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711121445089_Slides Added.cs" />
+    <Compile Include="Migrations\201711121445089_Slides Added.Designer.cs">
+      <DependentUpon>201711121445089_Slides Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -137,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711120819210_Nullable Assignment dates.resx">
       <DependentUpon>201711120819210_Nullable Assignment dates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711121445089_Slides Added.resx">
+      <DependentUpon>201711121445089_Slides Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
