@@ -386,6 +386,10 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\Images\028d451065601bcd5319d007eaccc8bb-650-80.jpg" />
+    <Content Include="fonts\Images\download %281%29.jpg" />
+    <Content Include="fonts\Images\download.jpg" />
+    <Content Include="fonts\Images\images.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootbox.js" />
@@ -499,6 +503,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Slider.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
