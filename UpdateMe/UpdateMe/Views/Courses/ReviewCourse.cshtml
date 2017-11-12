@@ -19,7 +19,15 @@
     </tbody>
 </table>
 @{
-    var imgSrc = String.Format("data:image/gif;base64,{0}", Model.Slides);
+    var slides = Model.Slides;
+
+
+    //var imgSrc = String.Format("data:image/gif;base64,{0}", slides[0].Base64Img);
 }
 
-<img src="@imgSrc" />
+@foreach (var item in @Model.Slides)
+{
+    var imgSrc = String.Format("data:image/gif;base64,{0}", item.Base64Img);
+    <img src="@imgSrc" />
+
+}
