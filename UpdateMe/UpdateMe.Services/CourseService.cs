@@ -47,9 +47,9 @@ namespace UpdateMe.Services
             this.dbContext.SaveChanges();
         }
         //TODO: EditCourse
-        public void EditCourse(int id, CourseViewModel courseViewModel)
+        public void EditCourse(int courseId, CourseViewModel courseViewModel)
         {
-            var course = dbContext.Courses.Find(id);
+            var course = dbContext.Courses.FirstOrDefault(c => c.Id == courseId);
 
             course.Name = courseViewModel.Name;
             course.Description = courseViewModel.Description;
