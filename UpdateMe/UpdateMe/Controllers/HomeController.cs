@@ -8,7 +8,6 @@ using System.Web.UI;
 namespace UpdateMe.Controllers
 {
     [AllowAnonymous]
-    [OutputCache(Duration = 360, Location = OutputCacheLocation.Server)]
     public class HomeController : Controller
     {
         

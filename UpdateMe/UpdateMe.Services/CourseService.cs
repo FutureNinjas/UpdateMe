@@ -68,6 +68,8 @@ namespace UpdateMe.Services
 
                     Course course = JsonConvert.DeserializeObject<Course>(readFile);
 
+                    course.DateCreated = DateTime.Now;
+
                     this.dbContext.Courses.Add(course);
 
                     this.dbContext.SaveChanges();
