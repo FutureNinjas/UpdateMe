@@ -49,5 +49,15 @@ namespace UpdateMe.Controllers
 
             return this.View(courseModel);
         }
+
+        //public ActionResult ImgSrc(int id)
+        //{
+
+
+        //    var courseModel = courseService.ReviewCourse(id);
+
+        //    return this.View(courseModel);
+        //}
+
     }
 }
