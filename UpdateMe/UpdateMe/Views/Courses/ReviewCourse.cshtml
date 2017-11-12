@@ -11,10 +11,15 @@
         </tr>
     </thead>
     <tbody>
-            <tr>
-                <td>@Model.Name</td>
-                <td>@Model.PassScore</td>
-                <td>@Model.Description</td>
-            </tr>
+        <tr>
+            <td>@Model.Name</td>
+            <td>@Model.PassScore</td>
+            <td>@Model.Description</td>
+        </tr>
     </tbody>
 </table>
+@{
+    var imgSrc = String.Format("data:image/gif;base64,{0}", Model.Slides);
+}
+
+<img src="@imgSrc" />

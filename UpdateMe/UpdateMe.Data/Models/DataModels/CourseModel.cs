@@ -15,5 +15,7 @@ namespace UpdateMe.Data.Models
         public int PassScore { get; set; }
         
         public DateTime DateCreated { get; set; }
+
+        public string Slides { get; set; }
     }
 }

@@ -46,7 +46,7 @@ namespace UpdateMe.Services
             this.dbContext.Courses.Remove(course);
             this.dbContext.SaveChanges();
         }
-        //TODO: EditCourse
+     
         public void EditCourse(int courseId, CourseViewModel courseViewModel)
         {
             var course = dbContext.Courses.FirstOrDefault(c => c.Id == courseId);
@@ -98,17 +98,18 @@ namespace UpdateMe.Services
 
         public CourseModel ReviewCourse(int courseId)
         {
-            var course = this.dbContext
+            var assignment = this.dbContext
                 .Assignments
                 .Where(c => c.Id == courseId)
                 .FirstOrDefault(c => c.Id == courseId);
 
             return new CourseModel()
             {
-                Name = course.Course.Name,
-                Description = course.Course.Description,
-                PassScore = course.Course.PassScore,
-                DateCreated = course.Course.DateCreated
+                Name = assignment.Course.Name,
+                Description = assignment.Course.Description,
+                PassScore = assignment.Course.PassScore,
+                DateCreated = assignment.Course.DateCreated,
+                Slides = assignment.Course.Slides
             };
         }
     }
