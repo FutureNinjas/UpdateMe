@@ -7,7 +7,7 @@ namespace UpdateMe.Services.Contracts
 {
     public interface IAssignmentService
     {
-        void CreateAssignment(int id, DateTime dueDate, bool isMandatory, int courseId, string applicationUserId);
+        void CreateAssignment(DateTime dueDate, bool isMandatory, int courseId, ICollection<ApplicationUser> applicationUsers);
 
         AssignmentViewModel UpdateAssignment(Assignment assignment);
 

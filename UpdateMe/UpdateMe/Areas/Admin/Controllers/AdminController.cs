@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
@@ -119,42 +120,83 @@ namespace UpdateMe.Areas.Admin.Controllers
             return RedirectToAction("ListAllCourses");
         }
 
-        public ActionResult ListUsers()
+        public ActionResult ListUsersAndCoursesForAssignment()
         {
             var usersViewModel = this.dbContext
                .Users
-               .Select(UserViewModel.Create)
+               .Select(UserViewModelTwo.Create)
                .ToList();
 
-            return this.View(usersViewModel);
+            var coursesViewModel = this.dbContext
+                .Courses
+                .Select(CourseViewModel.Create)
+                .ToList();
+
+            var assignmentFormViewModel = AssignmentFormViewModel.CreateAssignmentFormViewModel(coursesViewModel, usersViewModel);
+
+
+            //da vzemem kursovete
+            //da dobavim 
+            return this.View(assignmentFormViewModel);
         }   //used to list users in nav bar/ assign course
 
+        //TODO: implement get request first
         [HttpGet]
-        public ActionResult AssignCourse(string userId)
+        public ActionResult AssignCourse(ICollection<UserViewModel> userViewModels)//predi trieneto
         {
-            //select a user for an assignment
-            var user = this.userManager.Users.FirstOrDefault(u => u.Id == userId);  // pass user object directly
+            var ids = userViewModels.Select(x => x.Id).ToList();
+            var users = dbContext.Users.Where(user => ids.Contains(user.Id)).ToList();  
+
+            ICollection<ApplicationUser> applicationUsers = new List<ApplicationUser>();
+
+            foreach(var user in users)
+            {
+                applicationUsers.Add(user);
+            }
+
+            ICollection<AssignmentViewModel> assignmentViewModels = new List<AssignmentViewModel>();
+
             //create an assignment
-            Assignment assignment = new Assignment();
-            assignment.ApplicationUser = user;  //model binding
+            foreach (var user in applicationUsers)
+            {
+                Assignment assignment = new Assignment();
+                this.dbContext.Assignments.Add(assignment);
 
-            //assignment.ApplicationUserId = userId; //delete this line
+                assignment.ApplicationUser = user;  //model binding
+                var assignmentViewModel = AssignmentViewModel.Create.Compile()(assignment);
+                assignmentViewModels.Add(assignmentViewModel);
+            }
+            
+            this.dbContext.SaveChanges();
 
-            var assignmentViewModel = AssignmentViewModel.Create.Compile()(assignment);
-
-            this.dbContext.Assignments.Add(assignment);
-
-            //this.dbContext.SaveChanges();
-
-            return this.PartialView("_AssignCourse", assignmentViewModel);
+            return this.PartialView("_AssignCourse", assignmentViewModels);
         }
 
         [HttpPost]
-        public ActionResult AssignCourse(AssignmentViewModel assignmentViewModel)
+        public ActionResult AssignCourse(List<AssignmentFormViewModel> assignmentFormViewModel)
         {
-            var user = this.dbContext.Users.FirstOrDefault(a => a.Id == assignmentViewModel.ApplicationUserId);
+            var assignedUsers = assignmentFormViewModel[0]
+                .UserViewModelsTwo
+                .Where(u => u.IsChecked == true)
+                .Select(u => this.dbContext.Users.Where(au => au.Id == u.Id).ToList())
+                .ToList();
 
-            assignmentService.CreateAssignment(1, SqlDateTime.MinValue.Value, true, 21, assignmentViewModel.ApplicationUserId);
+            
+            var assignedCourses = assignmentFormViewModel[0]
+                .CourseViewModels
+                .Where(c => c.IsChecked == true)
+                .Select(c => this.dbContext.Courses.Where(dbc => dbc.Id == c.Id).ToList())
+                .ToList();
+
+            for (int i = 0; i < assignedUsers.Count(); i++)
+            {
+                for (int j = 0; j < assignedCourses.Count(); j++)
+                {
+                    assignmentService.CreateAssignment(SqlDateTime.MinValue.Value, true, 21, assignedUsers[i]);
+                }
+                
+            }
+
 
             return this.RedirectToAction("ListAllCourses");
         }

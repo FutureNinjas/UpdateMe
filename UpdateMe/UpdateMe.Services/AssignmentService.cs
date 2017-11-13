@@ -17,18 +17,21 @@ namespace UpdateMe.Services
             this.dbContext = dbContext;
         }
 
-        public void CreateAssignment(int id, DateTime dueDate, bool isMandatory, int courseId, string applicationUserId)
+        public void CreateAssignment(DateTime dueDate, bool isMandatory, int courseId, ICollection<ApplicationUser> applicationUsers)
         {
-            Assignment assignment = new Assignment()
+            foreach(var user in applicationUsers)
             {
-                Id = id,
-                DueDate = dueDate,
-                IsMandatory = isMandatory,
-                CourseId = courseId,
-                ApplicationUserId = applicationUserId,
-            };
+                Assignment assignment = new Assignment()
+                {
+                    DueDate = dueDate,
+                    IsMandatory = isMandatory,
+                    CourseId = courseId,
+                    ApplicationUser = user
+                };
 
-            dbContext.Assignments.Add(assignment);
+                dbContext.Assignments.Add(assignment);
+            }
+            
             dbContext.SaveChanges();
         }
 

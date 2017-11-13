@@ -3,6 +3,7 @@
 <h2>AllUsers</h2>
 @foreach (var user in Model)    //za da ne foreach-vame v bazata direktno (tova e N+ 1 problema) trqbwa da si imame .ToList()
 {                               //trqbwa da izdurpame ot bazata kakvoto ni trqbwa (no tova e na nivo klasove i kontroler) NE TRQBWA da e vuv foreach tuka
+    //TODO: Add Assignments next to edit button
     <div>
         @user.Username
         @*ще ползваме Ajax action link - т.е. ще използваме асинхронно*@
