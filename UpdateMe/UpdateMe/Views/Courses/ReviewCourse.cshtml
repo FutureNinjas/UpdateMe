@@ -1,37 +1,69 @@
 ﻿@model UpdateMe.Data.Models.CourseModel
 @{
     ViewBag.Title = "ReviewCourse";
-}
-@{
-    //TODO: change assignment status
-}
-
-<table id="courses" class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Course Name</th>
-            <th>Pass Score</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>@Model.Name</td>
-            <td>@Model.PassScore</td>
-            <td>@Model.Description</td>
-        </tr>
-    </tbody>
-</table>
-@{
-    var slides = Model.Slides;
-
-
-    //var imgSrc = String.Format("data:image/gif;base64,{0}", slides[0].Base64Img);
+    var arr = new string[@Model.Slides.Count()];
+    var counter = 1;
 }
 
-@foreach (var item in @Model.Slides)
-{
-    var imgSrc = String.Format("data:image/gif;base64,{0}", item.Base64Img);
-    <img src="@imgSrc" />
+
+<div class="slideshow-container">
+
+    @foreach (var item in @Model.Slides)
+    {
+
+        var imgSrc = String.Format("data:image/gif;base64,{0}", item.Base64Img);
+
+        <div class="mySlides">
+            <div class="numbertext">@counter / @Model.Slides.Count()</div>
+            <img src="@imgSrc" style="width:100%" />
+        </div>
+
+        counter++;
+    }
+    
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br>
+
+
+<div style="text-align:center">
+    @for (int i = 1; i <= Model.Slides.Count(); i++)
+    {
+        <span class="dot" onclick="currentSlide(i)"></span>
+    }
+</div>
+
+@Styles.Render("~/Slider/css")
+@section scripts {
+
+    <script>
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = slides.length }
+            if (n < 1) { slideIndex = 1 }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
 
 }

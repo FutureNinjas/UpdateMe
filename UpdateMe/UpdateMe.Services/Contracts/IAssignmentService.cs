@@ -11,7 +11,7 @@ namespace UpdateMe.Services.Contracts
 
         AssignmentViewModel UpdateAssignment(Assignment assignment);
 
-        IEnumerable<Assignment> FindAssignment(string courseName, string userName);
+        //IEnumerable<Assignment> FindAssignment(string courseName, string userName);
 
         IEnumerable<Assignment> ListAllAssignmentsFromUser(string userId);
 

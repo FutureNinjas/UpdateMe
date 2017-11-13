@@ -7,7 +7,6 @@ namespace UpdateMe.Services.Contracts
 {
     public interface ICourseService
     {
-        void CreateCourse(string name, string description, int passScore, DateTime DateCreated);
 
         CourseModel ReviewCourse(int courseId);
 

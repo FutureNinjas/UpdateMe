@@ -34,6 +34,9 @@ namespace UpdateMe
                       "~/Content/bootstrap-lumen.css",
                       "~/content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Slider/css").Include(
+                      "~/Content/Slider.css"));
         }
     }
 }
