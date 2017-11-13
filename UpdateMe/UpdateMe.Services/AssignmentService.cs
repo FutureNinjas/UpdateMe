@@ -38,13 +38,13 @@ namespace UpdateMe.Services
             dbContext.SaveChanges();
         }
 
-        public IEnumerable<Assignment> FindAssignment(string courseName, string userName)
-        {
-            return dbContext
-                .Assignments
-                .Where(a => a.Course.Name == courseName && a.ApplicationUser.UserName == userName)
-                .ToList();
-        }
+        //public IEnumerable<Assignment> FindAssignment(string courseName, string userName)
+        //{
+        //    return dbContext
+        //        .Assignments
+        //        .Where(a => a.Course.Name == courseName && a.ApplicationUser.UserName == userName)
+        //        .ToList();
+        //}
 
         public IEnumerable<Assignment> ListAllAssignmentsFromUser(string userId)
         {

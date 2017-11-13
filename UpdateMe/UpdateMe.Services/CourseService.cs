@@ -22,20 +22,6 @@ namespace UpdateMe.Services
             this.dbContext = dbContext;
         }
 
-        public void CreateCourse(string name, string description, int passScore, DateTime DateCreated)
-        {
-            Course course = new Course()
-            {
-                Name = name,
-                Description = description,
-                PassScore = passScore,
-                DateCreated = DateCreated
-            };
-
-            this.dbContext.Courses.Add(course);
-
-            this.dbContext.SaveChanges();
-        }
 
         public void DeleteCourse(int courseId)
         {
