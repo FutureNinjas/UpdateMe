@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 
 namespace UpdateMe.Data.Models.DataModels
 {
@@ -10,10 +8,6 @@ namespace UpdateMe.Data.Models.DataModels
 
         public List<UserViewModelTwo> UserViewModelsTwo { get; set; }
 
-        //public Course course { get; set; }
-
-        //public ApplicationUser user { get; set; }
-
         public static AssignmentFormViewModel CreateAssignmentFormViewModel(List<CourseViewModel> listCourses, List<UserViewModelTwo> listUsers)
         {
             return new AssignmentFormViewModel()
@@ -22,18 +16,6 @@ namespace UpdateMe.Data.Models.DataModels
                 UserViewModelsTwo = listUsers
             };
         }
-
-        //public static Expression<Func<Course, ApplicationUser, AssignmentFormViewModel>> Create
-        //{
-        //    get
-        //    {
-        //        return (c, u) => new AssignmentFormViewModel()
-        //        {
-        //            course = c,
-        //            user = u
-        //        };
-        //    }
-        //}
 
     }
 }

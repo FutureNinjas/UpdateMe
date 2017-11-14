@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UpdateMe.Data.Models.DataModels
 {
@@ -34,6 +30,7 @@ namespace UpdateMe.Data.Models.DataModels
             {
                 return a => new AssignmentViewModel()
                 {
+                    //TODO: Check it
                     Id = a.Id,
                     //AssignmentDate = a.AssignmentDate,
                     //DueDate = a.DueDate,

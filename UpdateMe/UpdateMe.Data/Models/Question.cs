@@ -31,8 +31,8 @@ namespace UpdateMe.Data.Models
 
         public int CorrectAnswerIndex { get; set; }
 
-        public int CourseId { get; set; }           //navigational property
+        public int CourseId { get; set; }          
 
-        public virtual Course Course { get; set; }  //connection to course                
+        public virtual Course Course { get; set; }               
     }
 }

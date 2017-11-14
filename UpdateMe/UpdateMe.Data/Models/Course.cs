@@ -26,7 +26,7 @@ namespace UpdateMe.Data.Models
         [StringLength(300, MinimumLength = 10)]
         public string Description { get; set; }
 
-        [Range(1, 100)] //range is double
+        [Range(1, 100)]
         public int PassScore { get; set; }
 
         public DateTime DateCreated { get; set; }

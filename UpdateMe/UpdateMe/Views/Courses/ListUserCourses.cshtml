@@ -26,18 +26,9 @@
                 <td>@course.IsMandatory</td>
                 <td>@course.AssignmentStatus</td>
                 <td>@course.CompletionDate</td>
-                
                 <td>
-                    @*<a id="@course.Id" class="view" href="#">View</a>*@
                     @Html.ActionLink("View", "ReviewCourse", new { id = course.Id })
-                    @*@using (Html.BeginForm("View", "Courses",
-                new { id = course.Id },
-                FormMethod.Post,
-                new { id = "form-" + course.Id }))
-                    {
-                    }*@
                 </td>
-
             </tr>
         }
     </tbody>
@@ -46,7 +37,6 @@
 @section scripts
 {
     <script>
-
         $(function () {
             $("#courses").DataTable();
 

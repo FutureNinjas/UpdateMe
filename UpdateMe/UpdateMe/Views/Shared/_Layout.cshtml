@@ -4,15 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @*@if (this.Request.QueryString["theme"] == "dark")
-    {
-        @Styles.Render("~/Content/dark-css")
-
-    }
-    else
-    {
-        @Styles.Render("~/Content/light-css")   
-    }*@
+    
     @Styles.Render("~/Content/css")
 
     @Scripts.Render("~/bundles/modernizr")
@@ -40,7 +32,6 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</li>
                     @if (this.User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Admin", "Index", "Admin", new { area = "Admin" }, null)</li>
                         <li>@Html.ActionLink("Users", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
                         <li>@Html.ActionLink("Courses", "ListAllCourses", "Admin", new { area = "Admin" }, null)</li>
                         <li>@Html.ActionLink("Assign Course", "AssignCourse", "Admin", new { area = "Admin" }, null)</li>

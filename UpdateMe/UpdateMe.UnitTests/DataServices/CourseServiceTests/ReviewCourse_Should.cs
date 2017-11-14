@@ -24,11 +24,11 @@ namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
             int passScore = 99;
             
 
-            var contextMock = new Mock<UpdateMeDbContext>();
-            var course = new CourseModel() { Id = id, Name = name, Description = description, PassScore = passScore };
-            var courseViewModel = new CourseViewModel() { Id = id, Name = nameMock, Description = descriptionMock, PassScore = passScoreMock };
+            //var contextMock = new Mock<UpdateMeDbContext>();
+            //var course = new CourseModel() { Id = id, Name = name, Description = description, PassScore = passScore };
+            //var courseViewModel = new CourseViewModel() { Id = id, Name = nameMock, Description = descriptionMock, PassScore = passScoreMock };
 
-            List<Course> courses = new List<Course>() { course };
+            //List<Course> courses = new List<Course>() { course };
         }
     }
 }

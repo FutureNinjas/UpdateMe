@@ -13,9 +13,7 @@ namespace UpdateMe.Services.Contracts
         void EditCourse(int id, CourseViewModel courseViewModel);
 
         void DeleteCourse(int courseId);
-
-        IEnumerable<CourseModel> ListAllCourses();
-
+        
         void JsonHandler(HttpPostedFileBase file);
     }
 }

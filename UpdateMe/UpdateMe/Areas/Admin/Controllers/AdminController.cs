@@ -28,12 +28,7 @@ namespace UpdateMe.Areas.Admin.Controllers
             this.courseService = courseService ?? throw new ArgumentNullException("courseService");
             this.assignmentService = assignmentService ?? throw new ArgumentNullException("assignmentService");
         }
-
-        public ActionResult Index()
-        {
-            return this.View();
-        }
-
+        
         public ActionResult AllUsers()
         {
             var usersViewModel = this.dbContext
@@ -70,8 +65,6 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.RedirectToAction("AllUsers");
         }
 
-        //TODO: Default Admin Landing Page
-
         public ActionResult ListAllCourses()
         {
             var courses = dbContext
@@ -81,8 +74,7 @@ namespace UpdateMe.Areas.Admin.Controllers
 
             return this.View(courses);
         }
-
-        //TODO: Make async if needed
+        
         [HttpGet]
         public ActionResult EditCourse(int id)
         {
@@ -119,24 +111,7 @@ namespace UpdateMe.Areas.Admin.Controllers
 
             return RedirectToAction("ListAllCourses");
         }
-
-        //public ActionResult ListUsersAndCoursesForAssignment() //used to list users in nav bar/ assign course
-        //{
-        //    var usersViewModel = this.dbContext
-        //       .Users
-        //       .Select(UserViewModelTwo.Create)
-        //       .ToList();
-
-        //    var coursesViewModel = this.dbContext
-        //        .Courses
-        //        .Select(CourseViewModel.Create)
-        //        .ToList();
-
-        //    var assignmentFormViewModel = AssignmentFormViewModel.CreateAssignmentFormViewModel(coursesViewModel, usersViewModel);
-
-        //    return this.View(assignmentFormViewModel);
-        //}
-
+        
         [HttpGet]
         public ActionResult AssignCourse()
         { 
@@ -160,21 +135,7 @@ namespace UpdateMe.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AssignCourse(AssignmentFormViewModel assignmentFormViewModel)
         {
-
-            //var assignedUsers = assignmentFormViewModel[0]
-            //    .UserViewModelsTwo
-            //    .Where(u => u.IsChecked == true)
-            //    .Select(u => this.dbContext.Users.Where(au => au.Id == u.Id).ToList())
-            //    .ToList();
-
-
-            //var assignedCourses = assignmentFormViewModel
-            //    .CourseViewModels
-            //    .Where(c => c.IsChecked == true)
-            //    .Select(c => this.dbContext.Courses.Where(dbc => dbc.Id == c.Id).ToList())
-            //    .ToList();
-
-
+            
 
             //for (int i = 0; i < assignedUsers.Count(); i++)
             //{
@@ -194,8 +155,7 @@ namespace UpdateMe.Areas.Admin.Controllers
             //}
 
             List<UserViewModelTwo> CheckedUsersFromPostRequest = assignmentFormViewModel.UserViewModelsTwo.Where(c => c.IsChecked == true).ToList();
-
-            //List<ApplicationUser> allUsersFromDbContext = this.dbContext.Users.ToList();
+            
 
             var ids = CheckedUsersFromPostRequest.Select(u => u.Id).ToList();
 
@@ -203,20 +163,14 @@ namespace UpdateMe.Areas.Admin.Controllers
             for (int i = 0; i < CheckedUsersFromPostRequest.Count(); i++)
             {
                assignmentService.CreateAssignment(
-               SqlDateTime.MinValue.Value, //assignmentFormViewModel.CourseViewModels[i].InputDueDate
+               SqlDateTime.MinValue.Value,
                AssignmentStatus.Pending,
                true,
                1,
                ids[i]);
             }
             
-            //assignmentService.CreateAssignment(
-            //    SqlDateTime.MinValue.Value, //assignmentFormViewModel.CourseViewModels[i].InputDueDate
-            //    AssignmentStatus.Completed,
-            //    true,
-            //    1,
-            //    usersThatWillGetAnAssignment[1].Id);
-
+            //TODO: Redirect to view all user assignments
             return this.RedirectToAction("ListAllCourses");
         }
 

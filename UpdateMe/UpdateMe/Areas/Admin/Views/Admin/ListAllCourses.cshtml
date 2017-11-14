@@ -10,11 +10,7 @@
     {
         @Html.AntiForgeryToken()
         <label for="file">Upload Course:</label>
-        //TODO - change browse button CSS
-        @*<div class="fileinput fileinput-new" data-provides="fileinput">
-            <span class="btn btn-default btn-file"><span>Choose file</span><input type="file" name="file" id="file"/></span>
-        </div>*@
-
+        
         <input class = "btn btn-primary" type="file" name="file" id="file" /><br>
         <input class = "btn btn-primary" type="submit" value="Upload Course" />
         <br><br>
@@ -55,7 +51,6 @@
         }
     </tbody>
 </table>
-
 
 
 @section scripts

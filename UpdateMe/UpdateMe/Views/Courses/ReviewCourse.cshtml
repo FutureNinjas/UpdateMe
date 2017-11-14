@@ -5,21 +5,15 @@
     var counter = 1;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 42f265e98f8ce2223ed5f43c4dca817c8a1a18fe
 <div class="slideshow-container">
 
     @foreach (var item in @Model.Slides)
     {
-
         var imgSrc = String.Format("data:image/gif;base64,{0}", item.Base64Img);
-        
+
         <div class="mySlides">
             <div class="numbertext">@counter / @Model.Slides.Count()</div>
             <img src="@imgSrc" style="width:100%" />
-            
         </div>
 
         counter++;

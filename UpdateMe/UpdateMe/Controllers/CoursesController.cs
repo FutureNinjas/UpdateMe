@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using UpdateMe.Data;
 using UpdateMe.Models;
@@ -13,7 +9,6 @@ namespace UpdateMe.Controllers
 {
     public class CoursesController : Controller
     {
-        // GET: MyCourses
         private readonly ApplicationUserManager userManager;
         private readonly UpdateMeDbContext dbContext;
         private readonly IAssignmentService assignmentService;
@@ -49,15 +44,6 @@ namespace UpdateMe.Controllers
 
             return this.View(courseModel);
         }
-
-        //public ActionResult ImgSrc(int id)
-        //{
-
-
-        //    var courseModel = courseService.ReviewCourse(id);
-
-        //    return this.View(courseModel);
-        //}
-
+        
     }
 }

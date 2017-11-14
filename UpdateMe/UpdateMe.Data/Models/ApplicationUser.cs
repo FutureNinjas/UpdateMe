@@ -21,13 +21,13 @@ namespace UpdateMe.Data.Models
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [StringLength(20, MinimumLength =2)]
         public string LastName { get; set; }
 
-        [MaxLength(20)]
+        [StringLength(20, MinimumLength = 2)]
         public string Position { get; set; }
 
-        [MaxLength(20)]
+        [StringLength(20, MinimumLength = 2)]
         public string Department { get; set; }
 
         public bool IsAdmin { get; set; }

@@ -1,7 +1,6 @@
 ﻿using Bytes2you.Validation;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -66,22 +65,7 @@ namespace UpdateMe.Services
 
             }
         }
-
-        public IEnumerable<CourseModel> ListAllCourses()
-        {
-            return this.dbContext
-               .Courses
-               .Select(c =>
-               new CourseModel()
-               {
-                   Name = c.Name,
-                   Description = c.Description,
-                   PassScore = c.PassScore,
-                   DateCreated = c.DateCreated
-               })
-               .ToList();
-        }
-
+        
         public CourseModel ReviewCourse(int courseId)
         {
             var assignment = this.dbContext
