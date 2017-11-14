@@ -27,7 +27,7 @@
                 <td>@course.AssignmentStatus</td>
                 <td>@course.CompletionDate</td>
                 <td>
-                    @Html.ActionLink("View", "ReviewCourse", new { id = course.Id })
+                    @Html.ActionLink("View", "ReviewCourse", new { id = course.CourseId })
                 </td>
             </tr>
         }
