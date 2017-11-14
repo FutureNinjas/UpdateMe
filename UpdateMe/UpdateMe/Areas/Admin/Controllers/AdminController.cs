@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
@@ -119,42 +120,102 @@ namespace UpdateMe.Areas.Admin.Controllers
             return RedirectToAction("ListAllCourses");
         }
 
-        public ActionResult ListUsers()
-        {
-            var usersViewModel = this.dbContext
-               .Users
-               .Select(UserViewModel.Create)
-               .ToList();
+        //public ActionResult ListUsersAndCoursesForAssignment() //used to list users in nav bar/ assign course
+        //{
+        //    var usersViewModel = this.dbContext
+        //       .Users
+        //       .Select(UserViewModelTwo.Create)
+        //       .ToList();
 
-            return this.View(usersViewModel);
-        }   //used to list users in nav bar/ assign course
+        //    var coursesViewModel = this.dbContext
+        //        .Courses
+        //        .Select(CourseViewModel.Create)
+        //        .ToList();
+
+        //    var assignmentFormViewModel = AssignmentFormViewModel.CreateAssignmentFormViewModel(coursesViewModel, usersViewModel);
+
+        //    return this.View(assignmentFormViewModel);
+        //}
 
         [HttpGet]
-        public ActionResult AssignCourse(string userId)
-        {
-            //select a user for an assignment
-            var user = this.userManager.Users.FirstOrDefault(u => u.Id == userId);  // pass user object directly
-            //create an assignment
-            Assignment assignment = new Assignment();
-            assignment.ApplicationUser = user;  //model binding
+        public ActionResult AssignCourse()
+        { 
+            var usersViewModel = this.dbContext
+               .Users
+               .Select(UserViewModelTwo.Create)
+               .ToList();
 
-            //assignment.ApplicationUserId = userId; //delete this line
+            var coursesViewModel = this.dbContext
+                .Courses
+                .Select(CourseViewModel.Create)
+                .ToList();
 
-            var assignmentViewModel = AssignmentViewModel.Create.Compile()(assignment);
+            var assignmentFormViewModel = AssignmentFormViewModel.CreateAssignmentFormViewModel(coursesViewModel, usersViewModel);
 
-            this.dbContext.Assignments.Add(assignment);
+            return this.View(assignmentFormViewModel);
 
-            //this.dbContext.SaveChanges();
-
-            return this.PartialView("_AssignCourse", assignmentViewModel);
         }
 
         [HttpPost]
-        public ActionResult AssignCourse(AssignmentViewModel assignmentViewModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult AssignCourse(AssignmentFormViewModel assignmentFormViewModel)
         {
-            var user = this.dbContext.Users.FirstOrDefault(a => a.Id == assignmentViewModel.ApplicationUserId);
 
-            assignmentService.CreateAssignment(1, SqlDateTime.MinValue.Value, true, 21, assignmentViewModel.ApplicationUserId);
+            //var assignedUsers = assignmentFormViewModel[0]
+            //    .UserViewModelsTwo
+            //    .Where(u => u.IsChecked == true)
+            //    .Select(u => this.dbContext.Users.Where(au => au.Id == u.Id).ToList())
+            //    .ToList();
+
+
+            //var assignedCourses = assignmentFormViewModel
+            //    .CourseViewModels
+            //    .Where(c => c.IsChecked == true)
+            //    .Select(c => this.dbContext.Courses.Where(dbc => dbc.Id == c.Id).ToList())
+            //    .ToList();
+
+
+
+            //for (int i = 0; i < assignedUsers.Count(); i++)
+            //{
+            //    for (int j = 0; j < assignedCourses.Count(); j++)
+            //    {
+            //        assignmentService.CreateAssignment(
+            //            SqlDateTime.MinValue.Value,
+            //            AssignmentStatus.Completed,
+            //            true,
+            //            //assignedCourses[i][j].Id, CourseID
+            //            1,
+            //            assignmentFormViewModel.UserViewModelsTwo[0].Id);
+            //            //"2bf76dfa-8061-4779-af64-a09a21c16bc1");//assignedUsers[0][i].Id
+            //        //SqlDateTime.MinValue.Value
+            //    }
+
+            //}
+
+            List<UserViewModelTwo> CheckedUsersFromPostRequest = assignmentFormViewModel.UserViewModelsTwo.Where(c => c.IsChecked == true).ToList();
+
+            //List<ApplicationUser> allUsersFromDbContext = this.dbContext.Users.ToList();
+
+            var ids = CheckedUsersFromPostRequest.Select(u => u.Id).ToList();
+
+
+            for (int i = 0; i < CheckedUsersFromPostRequest.Count(); i++)
+            {
+               assignmentService.CreateAssignment(
+               SqlDateTime.MinValue.Value, //assignmentFormViewModel.CourseViewModels[i].InputDueDate
+               AssignmentStatus.Pending,
+               true,
+               1,
+               ids[i]);
+            }
+            
+            //assignmentService.CreateAssignment(
+            //    SqlDateTime.MinValue.Value, //assignmentFormViewModel.CourseViewModels[i].InputDueDate
+            //    AssignmentStatus.Completed,
+            //    true,
+            //    1,
+            //    usersThatWillGetAnAssignment[1].Id);
 
             return this.RedirectToAction("ListAllCourses");
         }

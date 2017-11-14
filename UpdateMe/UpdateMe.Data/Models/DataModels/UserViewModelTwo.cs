@@ -2,9 +2,9 @@
 using System.Linq.Expressions;
 using UpdateMe.Data.Models;
 
-namespace UpdateMe.Areas.Admin.Models
+namespace UpdateMe.Data.Models
 {
-    public class UserViewModel
+    public class UserViewModelTwo
     {
         public string Id { get; set; }
 
@@ -21,12 +21,12 @@ namespace UpdateMe.Areas.Admin.Models
         public string Position { get; set; }
 
         //static because we don't need to decouple from it - this is used for unit testing
-        public static Expression<Func<ApplicationUser, UserViewModel>> Create
+        public static Expression<Func<ApplicationUser, UserViewModelTwo>> Create
         {
             get
             {
                 //TODO: do we need to create a user view model with all properties?
-                return u => new UserViewModel()
+                return u => new UserViewModelTwo()
                 {
                     Id = u.Id,            //vzimame dve koloni ot tablicata -Id
                     Username = u.UserName, // i username

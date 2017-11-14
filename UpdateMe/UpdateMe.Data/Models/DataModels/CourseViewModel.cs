@@ -18,6 +18,10 @@ namespace UpdateMe.Data.Models
 
         public int PassScore { get; set; }
 
+        public bool IsChecked { get; set; }
+
+        public DateTime InputDueDate { get; set; }
+
         public static Expression<Func<Course, CourseViewModel>> Create
         {
             get
@@ -27,7 +31,7 @@ namespace UpdateMe.Data.Models
                     Id = c.Id, 
                     Name = c.Name, 
                     Description = c.Description,
-                    PassScore = c.PassScore
+                    PassScore = c.PassScore,
                 };
             }
         }

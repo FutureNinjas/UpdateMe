@@ -413,8 +413,7 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Areas\Admin\Views\Shared\_EditCourse.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\ListUsers.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_AssignCourse.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\AssignCourse.cshtml" />
     <Content Include="App_Data\1.EntityFramework.json" />
     <Content Include="App_Data\2.CSS Course %28new%29.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
