@@ -5,13 +5,13 @@
 
 <h2>Employees</h2>
 
-
 @using (Html.BeginForm("AssignCourse", "Admin", FormMethod.Post))
 {
-
+    
     <table id="employees" class="table table-bordered table-hover">
         <thead>
             <tr>
+                
                 <th><input name="select_all" value="1" type="checkbox"></th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -20,9 +20,11 @@
             </tr>
         </thead>
         <tbody>
+            @Html.AntiForgeryToken()
             @for (int i = 0; i < Model.UserViewModelsTwo.Count(); i++)
             {
                 <tr>
+                    @Html.HiddenFor(m => m.UserViewModelsTwo[i].Id)
                     <td>@Html.CheckBoxFor(m => Model.UserViewModelsTwo[i].IsChecked)</td>
                     <td>@Model.UserViewModelsTwo[i].FirstName</td>
                     <td>@Model.UserViewModelsTwo[i].LastName</td>

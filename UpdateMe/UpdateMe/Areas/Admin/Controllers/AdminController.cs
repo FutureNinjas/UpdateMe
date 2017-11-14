@@ -120,8 +120,26 @@ namespace UpdateMe.Areas.Admin.Controllers
             return RedirectToAction("ListAllCourses");
         }
 
-        public ActionResult ListUsersAndCoursesForAssignment()
-        {
+        //public ActionResult ListUsersAndCoursesForAssignment() //used to list users in nav bar/ assign course
+        //{
+        //    var usersViewModel = this.dbContext
+        //       .Users
+        //       .Select(UserViewModelTwo.Create)
+        //       .ToList();
+
+        //    var coursesViewModel = this.dbContext
+        //        .Courses
+        //        .Select(CourseViewModel.Create)
+        //        .ToList();
+
+        //    var assignmentFormViewModel = AssignmentFormViewModel.CreateAssignmentFormViewModel(coursesViewModel, usersViewModel);
+
+        //    return this.View(assignmentFormViewModel);
+        //}
+
+        [HttpGet]
+        public ActionResult AssignCourse()
+        { 
             var usersViewModel = this.dbContext
                .Users
                .Select(UserViewModelTwo.Create)
@@ -134,69 +152,70 @@ namespace UpdateMe.Areas.Admin.Controllers
 
             var assignmentFormViewModel = AssignmentFormViewModel.CreateAssignmentFormViewModel(coursesViewModel, usersViewModel);
 
-
-            //da vzemem kursovete
-            //da dobavim 
             return this.View(assignmentFormViewModel);
-        }   //used to list users in nav bar/ assign course
 
-        //TODO: implement get request first
-        [HttpGet]
-        public ActionResult AssignCourse(ICollection<UserViewModel> userViewModels)//predi trieneto
-        {
-            var ids = userViewModels.Select(x => x.Id).ToList();
-            var users = dbContext.Users.Where(user => ids.Contains(user.Id)).ToList();  
-
-            ICollection<ApplicationUser> applicationUsers = new List<ApplicationUser>();
-
-            foreach(var user in users)
-            {
-                applicationUsers.Add(user);
-            }
-
-            ICollection<AssignmentViewModel> assignmentViewModels = new List<AssignmentViewModel>();
-
-            //create an assignment
-            foreach (var user in applicationUsers)
-            {
-                Assignment assignment = new Assignment();
-                this.dbContext.Assignments.Add(assignment);
-
-                assignment.ApplicationUser = user;  //model binding
-                var assignmentViewModel = AssignmentViewModel.Create.Compile()(assignment);
-                assignmentViewModels.Add(assignmentViewModel);
-            }
-            
-            this.dbContext.SaveChanges();
-
-            return this.PartialView("_AssignCourse", assignmentViewModels);
         }
 
         [HttpPost]
-        public ActionResult AssignCourse(List<AssignmentFormViewModel> assignmentFormViewModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult AssignCourse(AssignmentFormViewModel assignmentFormViewModel)
         {
-            var assignedUsers = assignmentFormViewModel[0]
-                .UserViewModelsTwo
-                .Where(u => u.IsChecked == true)
-                .Select(u => this.dbContext.Users.Where(au => au.Id == u.Id).ToList())
-                .ToList();
 
-            
-            var assignedCourses = assignmentFormViewModel[0]
-                .CourseViewModels
-                .Where(c => c.IsChecked == true)
-                .Select(c => this.dbContext.Courses.Where(dbc => dbc.Id == c.Id).ToList())
-                .ToList();
+            //var assignedUsers = assignmentFormViewModel[0]
+            //    .UserViewModelsTwo
+            //    .Where(u => u.IsChecked == true)
+            //    .Select(u => this.dbContext.Users.Where(au => au.Id == u.Id).ToList())
+            //    .ToList();
 
-            for (int i = 0; i < assignedUsers.Count(); i++)
+
+            //var assignedCourses = assignmentFormViewModel
+            //    .CourseViewModels
+            //    .Where(c => c.IsChecked == true)
+            //    .Select(c => this.dbContext.Courses.Where(dbc => dbc.Id == c.Id).ToList())
+            //    .ToList();
+
+
+
+            //for (int i = 0; i < assignedUsers.Count(); i++)
+            //{
+            //    for (int j = 0; j < assignedCourses.Count(); j++)
+            //    {
+            //        assignmentService.CreateAssignment(
+            //            SqlDateTime.MinValue.Value,
+            //            AssignmentStatus.Completed,
+            //            true,
+            //            //assignedCourses[i][j].Id, CourseID
+            //            1,
+            //            assignmentFormViewModel.UserViewModelsTwo[0].Id);
+            //            //"2bf76dfa-8061-4779-af64-a09a21c16bc1");//assignedUsers[0][i].Id
+            //        //SqlDateTime.MinValue.Value
+            //    }
+
+            //}
+
+            List<UserViewModelTwo> CheckedUsersFromPostRequest = assignmentFormViewModel.UserViewModelsTwo.Where(c => c.IsChecked == true).ToList();
+
+            //List<ApplicationUser> allUsersFromDbContext = this.dbContext.Users.ToList();
+
+            var ids = CheckedUsersFromPostRequest.Select(u => u.Id).ToList();
+
+
+            for (int i = 0; i < CheckedUsersFromPostRequest.Count(); i++)
             {
-                for (int j = 0; j < assignedCourses.Count(); j++)
-                {
-                    assignmentService.CreateAssignment(SqlDateTime.MinValue.Value, true, 21, assignedUsers[i]);
-                }
-                
+               assignmentService.CreateAssignment(
+               SqlDateTime.MinValue.Value, //assignmentFormViewModel.CourseViewModels[i].InputDueDate
+               AssignmentStatus.Pending,
+               true,
+               1,
+               ids[i]);
             }
-
+            
+            //assignmentService.CreateAssignment(
+            //    SqlDateTime.MinValue.Value, //assignmentFormViewModel.CourseViewModels[i].InputDueDate
+            //    AssignmentStatus.Completed,
+            //    true,
+            //    1,
+            //    usersThatWillGetAnAssignment[1].Id);
 
             return this.RedirectToAction("ListAllCourses");
         }
