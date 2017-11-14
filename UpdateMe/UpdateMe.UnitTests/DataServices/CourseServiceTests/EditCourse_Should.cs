@@ -15,21 +15,13 @@ namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
         public void EditCourseProperties_WhenParametersAreValid()
         {
             //Arrange
-            string name = "ValidateStringTestName";
-            string description = "ValidateStringTestDescription";
             int id = 1;
-            int passScore = 99;
-
-            string nameMock = "MockValidateStringTestName";
-            string descriptionMock = "MockValidateStringTestDescription";
-            int passScoreMock = 1;
-
+            
             var contextMock = new Mock<UpdateMeDbContext>();
-            var course = new Course() { Id = id, Name = name, Description = description, PassScore = passScore };
-            var courseViewModel = new CourseViewModel() { Id = id, Name = nameMock, Description = descriptionMock, PassScore = passScoreMock };
+            var course = new Course() { Id = id };
+            var courseViewModel = new CourseViewModel() { Id = id, Name = "testName", Description = "testDescription", PassScore = 1 };
 
             List<Course> courses = new List<Course>() { course };
-            // courses.Add(course);
 
             var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
             contextMock.SetupGet(m => m.Courses).Returns(coursesSetMock.Object);

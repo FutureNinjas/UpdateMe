@@ -37,13 +37,20 @@ namespace UpdateMe.Controllers
             
             return View(assignmentViewModels);
         }
-
+        
         public ActionResult ReviewCourse(int id)
         {
-            var courseModel = courseService.ReviewCourse(id);
+            var courseModel = courseService.ReviewCourse(id, this.User.Identity.GetUserId());
 
             return this.View(courseModel);
         }
-        
+
+        public ActionResult TakeQuiz(int id)
+        {
+            var courseModel = this.dbContext.Assignments.Find(id);
+
+            return this.View(courseModel);
+        }
+
     }
 }

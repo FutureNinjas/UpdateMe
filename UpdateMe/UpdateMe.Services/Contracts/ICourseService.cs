@@ -8,7 +8,7 @@ namespace UpdateMe.Services.Contracts
     public interface ICourseService
     {
 
-        CourseModel ReviewCourse(int courseId);
+        CourseModel ReviewCourse(int courseId, string userId);
 
         void EditCourse(int id, CourseViewModel courseViewModel);
 

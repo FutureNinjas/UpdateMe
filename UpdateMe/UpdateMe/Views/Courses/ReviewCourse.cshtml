@@ -5,6 +5,11 @@
     var counter = 1;
 }
 
+@{ 
+    var courseId = Model.Id;
+}
+
+
 <div class="slideshow-container">
 
     @foreach (var item in @Model.Slides)
@@ -48,19 +53,18 @@
         }
 
         function showSlides(n) {
-            var i;
             var slides = document.getElementsByClassName("mySlides");
             var dots = document.getElementsByClassName("dot");
             if (n > slides.length) { slideIndex = slides.length }
             if (n == slides.length) {
-                $(".slideshow-container").append('<a href="/courses/listusercourses/" + "@Model.Id">Quiz </a>')
+                $(".slideshow-container").append('<a href="/courses/takequiz/@Model.Id">Quiz </a>')
             }
 
             if (n < 1) { slideIndex = 1 }
-            for (i = 0; i < slides.length; i++) {
+            for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
-            for (i = 0; i < dots.length; i++) {
+            for (let i = 0; i < dots.length; i++) {
                 dots[i].className = dots[i].className.replace(" active", "");
             }
             slides[slideIndex - 1].style.display = "block";

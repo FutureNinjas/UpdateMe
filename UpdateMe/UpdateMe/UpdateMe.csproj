@@ -538,6 +538,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Courses\ListUserCourses.cshtml" />
     <Content Include="Views\Courses\ReviewCourse.cshtml" />
+    <Content Include="Views\Courses\TakeQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

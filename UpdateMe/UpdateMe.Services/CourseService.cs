@@ -66,15 +66,19 @@ namespace UpdateMe.Services
             }
         }
         
-        public CourseModel ReviewCourse(int courseId)
+        public CourseModel ReviewCourse(int courseId, string userId)
         {
             var assignment = this.dbContext
                 .Assignments
-                .Where(c => c.Id == courseId)
-                .FirstOrDefault(c => c.Id == courseId);
+                .FirstOrDefault(c => c.CourseId == courseId && c.ApplicationUser.Id == userId);
+
+            assignment.AssignmentStatus = AssignmentStatus.Started;
+
+            this.dbContext.SaveChanges();
 
             return new CourseModel()
             {
+                Id = assignment.Course.Id,
                 Name = assignment.Course.Name,
                 Description = assignment.Course.Description,
                 PassScore = assignment.Course.PassScore,
