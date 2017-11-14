@@ -8,7 +8,7 @@ namespace UpdateMe.Models
     {
         public int Id { get; set; }
 
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
 
         public DateTime CompletionDate { get; set; }
 
@@ -31,7 +31,7 @@ namespace UpdateMe.Models
                 return a => new AssignmentViewModel()
                 {
                     Id = a.Id,
-                    //DueDate = a.DueDate,
+                    DueDate = a.DueDate,
                     //CompletionDate = a.CompletionDate,
                     AssignmentStatus = a.AssignmentStatus,
                     IsMandatory = a.IsMandatory,

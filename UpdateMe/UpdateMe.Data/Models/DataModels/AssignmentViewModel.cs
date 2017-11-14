@@ -7,9 +7,9 @@ namespace UpdateMe.Data.Models.DataModels
     {
         public int Id { get; set; }
 
-        public DateTime AssignmentDate { get; set; }
+        public DateTime? AssignmentDate { get; set; }
 
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
 
         public DateTime CompletionDate { get; set; }
 
@@ -32,8 +32,8 @@ namespace UpdateMe.Data.Models.DataModels
                 {
                     //TODO: Check it
                     Id = a.Id,
-                    //AssignmentDate = a.AssignmentDate,
-                    //DueDate = a.DueDate,
+                    AssignmentDate = a.AssignmentDate,
+                    DueDate = a.DueDate,
                     //CompletionDate = a.CompletionDate,
                     AssignmentStatus = a.AssignmentStatus,
                     ApplicationUserId = a.ApplicationUserId,
