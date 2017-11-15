@@ -1,12 +1,69 @@
 ﻿@model List<UpdateMe.Areas.Admin.Models.UserViewModel>
 
 <h2>AllUsers</h2>
-@foreach (var user in Model)   
-{                               
+
+<table id="users" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Edit</th>
+            <th>Assignments</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in @Model)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>
+                    @Ajax.ActionLink("Edit", "EditUser",
+                    new { username = user.Username },
+                    new AjaxOptions{
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "editArea"
+                    })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Assignments", "ListUserAssignments",
+                    new { currentUserId = user.Id },
+                    new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "editArea"
+                    })
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="editArea"></div>
+
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryajax")
+    <script>
+
+        $(function () {
+            $("#users").DataTable();
+        });
+    </script>
+}
+
+
+
+
+
+@*@foreach (var user in Model)
+{
     //TODO: Add Assignments next to edit button
     <div>
         @user.Username
-        
+
         @Ajax.ActionLink("Edit", "EditUser",
        new { username = user.Username },
        new AjaxOptions
@@ -15,9 +72,6 @@
            UpdateTargetId = "editArea"
        })
     </div>
-}
-<div id="editArea"></div>
+}*@
 
-@section scripts {
-    @Scripts.Render("~/bundles/jqueryajax")
-}
+

@@ -411,6 +411,7 @@
     <Content Include="Areas\Admin\Views\Admin\AssignCourse.cshtml" />
     <Content Include="App_Data\1.EntityFramework.json" />
     <Content Include="App_Data\2.CSS Course %28new%29.json" />
+    <Content Include="Areas\Admin\Views\Shared\_Assignments.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
