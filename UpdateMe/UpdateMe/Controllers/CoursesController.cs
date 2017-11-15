@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using UpdateMe.Data;
+using UpdateMe.Data.Models;
 using UpdateMe.Models;
 using UpdateMe.Services.Contracts;
 
@@ -44,12 +45,39 @@ namespace UpdateMe.Controllers
 
             return this.View(courseModel);
         }
-
+        [HttpGet]
         public ActionResult TakeQuiz(int id)
         {
-            var courseModel = this.dbContext.Assignments.Find(id);
+            //var assignment = this.dbContext.Assignments.Where(c => c.CourseId == id).ToList();
 
-            return this.View(courseModel);
+            var courseModel = this.dbContext.Courses.First(c => c.Id == id);
+
+            var questions = this.dbContext.Questions.Where(q => q.CourseId == id).ToList();
+
+
+            var model = new CourseModel();
+            model.Id = courseModel.Id;
+            model.Name = courseModel.Name;
+            model.PassScore = courseModel.PassScore;
+            model.Description= courseModel.Description;
+            model.Slides = courseModel.Slides;
+            model.Questions = questions;
+            
+
+            return this.View(model);
+        }
+        [HttpPost]
+        public ActionResult TakeQuiz(CourseModel courseModel)
+        {
+
+            if (true)//use services to calculate answers and score
+            {
+                return this.RedirectToAction("TakeQuiz");
+            }
+            else
+            {
+                return this.View("Congratulations");
+            }
         }
 
     }

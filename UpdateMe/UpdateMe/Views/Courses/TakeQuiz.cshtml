@@ -1,8 +1,128 @@
-﻿@model UpdateMe.Data.Models.CourseModel
+﻿@*@model UpdateMe.Data.Models.CourseModel
 
 @{
     ViewBag.Title = "TakeQuiz";
 }
+<h2>@Model.Name Quiz</h2>
 
-<h2>@Model.Name</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <div class="btn-group" data-toggle="buttons">
 
+            @{foreach (var question in Model.Questions)
+                {
+                    <h3>@question.QuestionText</h3>
+
+                    var answersInString = question.AnswersInternal.ToString();
+                    var answersInStringArray = answersInString.Split(';');
+
+                    for (int i = 0; i < answersInStringArray.Count(); i++)
+                    {
+                        <label class="btn btn-primary active">
+                            @Html.RadioButton("Answer", "@answersInStringArray[i]", true, new { id = "IsMale" }) @answersInStringArray[i]
+                     
+                        </label>
+
+                    }
+                }
+            }
+
+        </div>
+    </div>
+
+    
+ }*@
+
+
+@model UpdateMe.Data.Models.CourseModel
+@{
+    ViewBag.Title = "ReviewCourse";
+    var arr = new string[@Model.Questions.Count()];
+    var counter = 1;
+}
+
+@{
+    var courseId = Model.Id;
+}
+
+
+<div class="slideshow-container">
+
+    @foreach (var item in @Model.Questions)
+    {
+        using (Html.BeginForm("TakeQuiz", "Courses", FormMethod.Post))
+        {
+            <div class="mySlides"align="center">
+                <div class="numbertext" >@counter / @Model.Questions.Count()</div>
+                Select Answer: <br />
+                <h3>@item.QuestionText</h3>
+                @{ 
+                    var answersInString = item.AnswersInternal.ToString();
+                    var answersInStringArray = answersInString.Split(';');
+                }
+
+
+                @for (int i = 0; i < answersInStringArray.Count(); i++)
+                {
+                    @answersInStringArray[i];
+                    @Html.RadioButton("Answer", answersInStringArray[i])<br />
+                }
+                
+
+                
+                <input type="submit" value="Save" />
+            </div>
+            
+        }
+    }
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br>
+
+
+<div style="text-align:center">
+    @for (int i = 1; i <= Model.Questions.Count(); i++)
+    {
+        <span class="dot" onclick="currentSlide(i)"></span>
+    }
+</div>
+
+@Styles.Render("~/Slider/css")
+@section scripts {
+
+    <script>
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = slides.length }
+            if (n == slides.length) {
+                $(".slideshow-container").append('<a class="btn btn-info" href="/courses/takequiz/@courseId">Quiz </a>')//has to be courseId, NOT Model.Id
+            }
+
+            if (n < 1) { slideIndex = 1 }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
+
+}

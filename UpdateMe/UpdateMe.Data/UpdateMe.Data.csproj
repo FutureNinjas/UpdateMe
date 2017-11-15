@@ -109,11 +109,24 @@
     <Compile Include="Migrations\201711121653404_Slides.Designer.cs">
       <DependentUpon>201711121653404_Slides.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711151313306_Quiz.cs" />
+    <Compile Include="Migrations\201711151313306_Quiz.Designer.cs">
+      <DependentUpon>201711151313306_Quiz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711151408054_Questions properties.cs" />
+    <Compile Include="Migrations\201711151408054_Questions properties.Designer.cs">
+      <DependentUpon>201711151408054_Questions properties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711151458172_Assignment to current quiz state.cs" />
+    <Compile Include="Migrations\201711151458172_Assignment to current quiz state.Designer.cs">
+      <DependentUpon>201711151458172_Assignment to current quiz state.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\AssignmentStatus.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CurrentQuizState.cs" />
     <Compile Include="Models\DataModels\AssignmentFormViewModel.cs" />
     <Compile Include="Models\DataModels\AssignmentViewModel.cs" />
     <Compile Include="Models\DataModels\CourseModel.cs" />
@@ -158,6 +171,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711121653404_Slides.resx">
       <DependentUpon>201711121653404_Slides.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711151313306_Quiz.resx">
+      <DependentUpon>201711151313306_Quiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711151408054_Questions properties.resx">
+      <DependentUpon>201711151408054_Questions properties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711151458172_Assignment to current quiz state.resx">
+      <DependentUpon>201711151458172_Assignment to current quiz state.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

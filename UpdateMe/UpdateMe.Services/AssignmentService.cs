@@ -19,22 +19,23 @@ namespace UpdateMe.Services
 
         public void CreateAssignment(DateTime dueDate, AssignmentStatus assignmentStatus, bool isMandatory, int courseId, string applicationUserId)
         {
-            //foreach(var user in applicationUsers)
-            //{
-                Assignment assignment = new Assignment()
-                {
-                    DueDate = dueDate,
-                    AssignmentStatus = assignmentStatus,
-                    IsMandatory = isMandatory,
-                    CourseId = courseId,
-                    ApplicationUserId = applicationUserId,
-                };
+            Assignment assignment = new Assignment()
+            {
+                //TODO: Date time convertion to sql date time is broken, so DueDate is null
+                DueDate = null,
+                AssignmentStatus = assignmentStatus,
+                IsMandatory = isMandatory,
+                CourseId = courseId,
+                ApplicationUserId = applicationUserId,
+            };
 
-                dbContext.Assignments.Add(assignment);
-                dbContext.SaveChanges();
-            //}
-            
-            
+            dbContext.Assignments.Add(assignment);
+
+            dbContext.QuizesCurrentState.Add(new CurrentQuizState() { AssignmentId = assignment.Id });
+
+            dbContext.SaveChanges();
+
+
         }
 
         public void DeleteAssignment(Assignment assignment)
@@ -42,14 +43,6 @@ namespace UpdateMe.Services
             dbContext.Assignments.Remove(assignment);
             dbContext.SaveChanges();
         }
-
-        //public IEnumerable<Assignment> FindAssignment(string courseName, string userName)
-        //{
-        //    return dbContext
-        //        .Assignments
-        //        .Where(a => a.Course.Name == courseName && a.ApplicationUser.UserName == userName)
-        //        .ToList();
-        //}
 
         public IEnumerable<Assignment> ListAllAssignmentsFromUser(string userId)
         {

@@ -10,9 +10,11 @@ using UpdateMe.Data.Models;
 
 namespace UpdateMe.UnitTests.Areas.Admin.Controllers
 {
+    [Ignore]
     [TestClass]
     class ListAllCourses_Should
     {
+        [Ignore]
         [TestMethod]
         public void ListAllCourses_WhenParametersAreValid()
         {

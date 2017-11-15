@@ -57,7 +57,7 @@
             var dots = document.getElementsByClassName("dot");
             if (n > slides.length) { slideIndex = slides.length }
             if (n == slides.length) {
-                $(".slideshow-container").append('<a href="/courses/takequiz/@Model.Id">Quiz </a>')
+                $(".slideshow-container").append('<a class="btn btn-info" href="/courses/takequiz/@courseId">Quiz </a>')//has to be courseId, NOT Model.Id
             }
 
             if (n < 1) { slideIndex = 1 }

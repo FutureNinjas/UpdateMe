@@ -29,7 +29,9 @@ namespace UpdateMe.Data.Models
         }
 
 
-        public int CorrectAnswerIndex { get; set; }
+        public string CorrectAnswer { get; set; }
+
+        public bool IsAnsweredCorrectly { get; set; }
 
         public int CourseId { get; set; }          
 

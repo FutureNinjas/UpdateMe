@@ -20,6 +20,7 @@
         @foreach (var course in @Model)
         {
             <tr>
+                @Html.HiddenFor(c => course.CourseId)
                 <td>@course.CourseName</td>
                 <td>@course.PassScore</td>
                 <td>@course.DueDate</td>

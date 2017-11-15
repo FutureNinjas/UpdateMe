@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UpdateMe.Data.Models
 {
@@ -23,5 +24,7 @@ namespace UpdateMe.Data.Models
         public string ApplicationUserId { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public virtual CurrentQuizState CurrentQuizState { get; set; }
     }
 }

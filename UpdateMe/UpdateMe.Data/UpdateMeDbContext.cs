@@ -18,6 +18,10 @@ namespace UpdateMe.Data
 
         public virtual IDbSet<Slide> Slides { get; set; }
 
+        public virtual IDbSet<Question> Questions { get; set; }
+
+        public virtual IDbSet<CurrentQuizState> QuizesCurrentState { get; set; }
+
         public static UpdateMeDbContext Create()
         {
             return new UpdateMeDbContext();
