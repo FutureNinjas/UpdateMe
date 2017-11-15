@@ -1,5 +1,41 @@
-﻿@model UpdateMe.Data.Models.DataModels.AssignmentViewModel
+﻿@model ICollection<UpdateMe.Data.Models.DataModels.AssignmentViewModel>
 
 <h3>User assignments</h3>
 
-@Model.CourseId
+
+
+    <table id="assignments" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Course Id</th>
+                <th>Due Date</th>
+                <th>Mandatory</th>
+                <th>Assignment Status</th>
+                <th>Completion Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in @Model)
+            {
+                <tr>
+                    @Html.HiddenFor(c => course.CourseId)
+                    <td>@course.CourseId</td>
+                    <td>@course.DueDate</td>
+                    <td>@course.IsMandatory</td>
+                    <td>@course.AssignmentStatus</td>
+                    <td>@course.CompletionDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    @section scripts
+{
+        <script>
+            $(function () {
+                $("#assignments").DataTable();
+
+            });
+        </script>
+    }

@@ -1,19 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
+using UpdateMe.Data;
+using UpdateMe.Data.Models;
 
 namespace UpdateMe.Controllers
 {
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        
+        private readonly UpdateMeDbContext dbContext;
+
+        public HomeController(UpdateMeDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var courses = dbContext
+               .Courses
+               .Select(CourseViewModel.Create)
+               .ToList();
+
+            return this.View(courses);
         }
 
         public ActionResult About()

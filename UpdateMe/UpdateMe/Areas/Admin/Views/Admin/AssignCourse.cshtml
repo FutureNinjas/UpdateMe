@@ -25,6 +25,10 @@
             {
                 <tr>
                     @Html.HiddenFor(m => m.UserViewModelsTwo[i].Id)
+                    @Html.HiddenFor(m => @Model.UserViewModelsTwo[i].FirstName)
+                    @Html.HiddenFor(m => @Model.UserViewModelsTwo[i].LastName)
+                    @Html.HiddenFor(m => @Model.UserViewModelsTwo[i].Username)
+                    @Html.HiddenFor(m => @Model.UserViewModelsTwo[i].Position)
                     <td>@Html.CheckBoxFor(m => Model.UserViewModelsTwo[i].IsChecked)</td>
                     <td>@Model.UserViewModelsTwo[i].FirstName</td>
                     <td>@Model.UserViewModelsTwo[i].LastName</td>
@@ -52,11 +56,16 @@
             {
                 <tr>
                     @Html.HiddenFor(m => m.CourseViewModels[i].Id)
+                    @Html.HiddenFor(m => @Model.CourseViewModels[i].Name)
+                    @Html.HiddenFor(m => @Model.CourseViewModels[i].PassScore)
                     <td>@Html.CheckBoxFor(m => Model.CourseViewModels[i].IsChecked)</td>
                     <td>@Model.CourseViewModels[i].Name</td>
                     <td>@Model.CourseViewModels[i].PassScore</td>
-                    <td>@Html.EditorFor(m => m.DueDate[i], "Date")</td>
-                    <td>@Html.EditorFor(m => m.IsMandatory[i])</td>
+                    <td>
+                        @Html.EditorFor(m => m.Assignments[i].DueDate, "Date")
+                        @Html.ValidationMessageFor(m => m.Assignments[i].DueDate)
+                    </td>
+                    <td>@Html.EditorFor(m => m.Assignments[i].IsMandatory)</td>
                 </tr>
             }
         </tbody>

@@ -22,7 +22,7 @@ namespace UpdateMe.Services
             Assignment assignment = new Assignment()
             {
                 //TODO: Date time convertion to sql date time is broken, so DueDate is null
-                DueDate = null,
+                DueDate = dueDate,
                 AssignmentStatus = assignmentStatus,
                 IsMandatory = isMandatory,
                 CourseId = courseId,

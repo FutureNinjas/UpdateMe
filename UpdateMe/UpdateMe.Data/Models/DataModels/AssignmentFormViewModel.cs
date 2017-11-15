@@ -9,9 +9,11 @@ namespace UpdateMe.Data.Models.DataModels
 
         public List<UserViewModelTwo> UserViewModelsTwo { get; set; }
 
-        public List<bool> IsMandatory { get; set; }
+        //public List<bool> IsMandatory { get; set; }
 
-        public List<DateTime> DueDate { get; set; }
+        public List<AssignmentViewModel> Assignments { get; set; }
+
+        //public List<DateTime> DueDate { get; set; }
 
         public static AssignmentFormViewModel CreateAssignmentFormViewModel(List<CourseViewModel> listCourses, List<UserViewModelTwo> listUsers)
         {

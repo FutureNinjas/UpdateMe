@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 
 namespace UpdateMe.Data.Models.DataModels
@@ -9,6 +10,8 @@ namespace UpdateMe.Data.Models.DataModels
 
         public DateTime? AssignmentDate { get; set; }
 
+        [Required(ErrorMessage = "Date is not selected!")]
+        [Date(ErrorMessage = "Invalid date!")]
         public DateTime? DueDate { get; set; }
 
         public DateTime CompletionDate { get; set; }
@@ -41,6 +44,14 @@ namespace UpdateMe.Data.Models.DataModels
                     CourseId = a.CourseId
                 };
             }
+        }
+    }
+
+    public class DateAttribute : ValidationAttribute
+    {
+        public override bool IsValid(object value)
+        {
+            return value != null ? (DateTime)value >= DateTime.Now.AddDays(-1) : false;
         }
     }
 }

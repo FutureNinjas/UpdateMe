@@ -60,24 +60,28 @@ namespace UpdateMe.Controllers
             model.Name = courseModel.Name;
             model.PassScore = courseModel.PassScore;
             model.Description= courseModel.Description;
-            model.Slides = courseModel.Slides;
-            model.Questions = questions;
+            model.Slides = courseModel.Slides.ToList();
+            model.Questions = questions
+                .Select(q => new QuestionModel()
+                {
+                    Id = q.Id,
+                    Answers = q.AnswersExternal,
+                    QuestionText = q.QuestionText
+                })
+                .ToList();
             
 
             return this.View(model);
         }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult TakeQuiz(CourseModel courseModel)
         {
 
-            if (true)//use services to calculate answers and score
-            {
+           
                 return this.RedirectToAction("TakeQuiz");
-            }
-            else
-            {
-                return this.View("Congratulations");
-            }
+            
         }
 
     }

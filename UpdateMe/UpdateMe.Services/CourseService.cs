@@ -83,7 +83,7 @@ namespace UpdateMe.Services
                 Description = assignment.Course.Description,
                 PassScore = assignment.Course.PassScore,
                 DateCreated = assignment.Course.DateCreated,
-                Slides = assignment.Course.Slides
+                Slides = assignment.Course.Slides.ToList()
             };
         }
     }

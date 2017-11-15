@@ -9,7 +9,7 @@
     @using (Html.BeginForm("UploadFile", "Admin", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
         @Html.AntiForgeryToken()
-        <label for="file">Upload Course:</label>
+        <label for="file">Select Course File:</label>
         
         <input class = "btn btn-primary" type="file" name="file" id="file" /><br>
         <input class = "btn btn-primary" type="submit" value="Upload Course" />

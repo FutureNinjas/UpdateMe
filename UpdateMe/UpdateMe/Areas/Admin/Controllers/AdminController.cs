@@ -134,39 +134,44 @@ namespace UpdateMe.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AssignCourse(AssignmentFormViewModel assignmentFormViewModel)
-        {            
-            List<UserViewModelTwo> checkedUsersFromPostRequest = assignmentFormViewModel
-                .UserViewModelsTwo
-                .Where(u => u.IsChecked == true)
-                .ToList();
-
-            List<CourseViewModel> checkedCoursesFromPostRequest = assignmentFormViewModel
-                .CourseViewModels
-                .Where(c => c.IsChecked == true)
-                .ToList();
-
-
-            var userIds = checkedUsersFromPostRequest.Select(u => u.Id).ToList();
-            var courseIds = checkedCoursesFromPostRequest.Select(u => u.Id).ToList();
-            var areMandatory = assignmentFormViewModel.IsMandatory.ToList();
-            var dueDates = assignmentFormViewModel.DueDate.ToList();
-
-            for (int i = 0; i < checkedUsersFromPostRequest.Count(); i++)
+        {
+            if (this.ModelState.IsValid)
             {
-                for (int j = 0; j < checkedCoursesFromPostRequest.Count(); j++)
+                List<UserViewModelTwo> checkedUsersFromPostRequest = assignmentFormViewModel
+                    .UserViewModelsTwo
+                    .Where(u => u.IsChecked == true)
+                    .ToList();
+
+                List<CourseViewModel> checkedCoursesFromPostRequest = assignmentFormViewModel
+                    .CourseViewModels
+                    .Where(c => c.IsChecked == true)
+                    .ToList();
+
+
+                var userIds = checkedUsersFromPostRequest.Select(u => u.Id).ToList();
+                var courseIds = checkedCoursesFromPostRequest.Select(u => u.Id).ToList();
+                var areMandatory = assignmentFormViewModel.Assignments.Select(a => a.IsMandatory).ToList();
+                var dueDates = assignmentFormViewModel.Assignments.Select(a => a.DueDate.Value).ToList();
+
+                for (int i = 0; i < checkedUsersFromPostRequest.Count(); i++)
                 {
-                    assignmentService.CreateAssignment(
-                    dueDates[j],
-                    AssignmentStatus.Pending,
-                    areMandatory[j],
-                    courseIds[j],
-                    userIds[i]);
+                    for (int j = 0; j < checkedCoursesFromPostRequest.Count(); j++)
+                    {
+                        assignmentService.CreateAssignment(
+                        dueDates[j],
+                        AssignmentStatus.Pending,
+                        areMandatory[j],
+                        courseIds[j],
+                        userIds[i]);
+                    }
+
                 }
-               
+
+                //TODO: Redirect to view all user assignments
+                return this.RedirectToAction("ListAllCourses");
             }
-            
-            //TODO: Redirect to view all user assignments
-            return this.RedirectToAction("ListAllCourses");
+
+            return this.View(assignmentFormViewModel);
         }
 
 

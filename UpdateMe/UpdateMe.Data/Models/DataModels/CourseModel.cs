@@ -16,8 +16,19 @@ namespace UpdateMe.Data.Models
         
         public DateTime DateCreated { get; set; }
 
-        public ICollection<Slide> Slides { get; set; }
+        public List<Slide> Slides { get; set; }
 
-        public ICollection<Question> Questions { get; set; }
+        public List<QuestionModel> Questions { get; set; }
+    }
+
+    public class QuestionModel
+    {
+        public int Id { get; set; }
+
+        public string QuestionText { get; set; }
+
+        public string[] Answers { get; set; }
+
+        public string SelectedAnwser { get; set; }
     }
 }
