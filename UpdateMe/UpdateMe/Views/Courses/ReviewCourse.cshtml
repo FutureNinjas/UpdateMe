@@ -37,6 +37,8 @@
     }
 </div>
 
+<button class="btn btn-info" id ="quizButton" style="visibility:hidden">@Html.ActionLink("Quiz", "TakeQuiz", new { id = courseId })</button>
+
 @Styles.Render("~/Slider/css")
 @section scripts {
 
@@ -57,7 +59,7 @@
             var dots = document.getElementsByClassName("dot");
             if (n > slides.length) { slideIndex = slides.length }
             if (n == slides.length) {
-                $(".slideshow-container").append('<a class="btn btn-info" href="/courses/takequiz/@courseId">Quiz </a>')//has to be courseId, NOT Model.Id
+                $("#quizButton").css('visibility', 'visible');
             }
 
             if (n < 1) { slideIndex = 1 }
