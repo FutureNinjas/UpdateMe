@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\AllUsers_Should.cs" />
+    <Compile Include="Controllers\HomeControllerTests\HomeControllerTest.cs" />
     <Compile Include="DataServices\AssignmentService.Tests\CreateAssignment_Should.cs" />
     <Compile Include="DataServices\AssignmentService.Tests\DeleteAssignment_Should.cs" />
     <Compile Include="DataServices\CourseServiceTests\DeleteCourseShould.cs" />
