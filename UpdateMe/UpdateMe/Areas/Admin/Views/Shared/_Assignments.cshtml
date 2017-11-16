@@ -7,6 +7,7 @@
     <table id="assignments" class="table table-bordered table-hover">
         <thead>
             <tr>
+                <th>User</th>
                 <th>Course Id</th>
                 <th>Due Date</th>
                 <th>Mandatory</th>
@@ -15,15 +16,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var course in @Model)
+            @foreach (var assignment in @Model)
             {
                 <tr>
-                    @Html.HiddenFor(c => course.CourseId)
-                    <td>@course.CourseId</td>
-                    <td>@course.DueDate</td>
-                    <td>@course.IsMandatory</td>
-                    <td>@course.AssignmentStatus</td>
-                    <td>@course.CompletionDate</td>
+                    <td>@assignment.ApplicationUser.UserName</td>
+                    @Html.HiddenFor(c => assignment.CourseId)
+                    <td>@assignment.CourseId</td>
+                    <td>@assignment.DueDate</td>
+                    <td>@assignment.IsMandatory</td>
+                    <td>@assignment.AssignmentStatus</td>
+                    <td>@assignment.CompletionDate</td>
                 </tr>
             }
         </tbody>

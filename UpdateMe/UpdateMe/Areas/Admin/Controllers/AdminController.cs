@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -46,7 +45,6 @@ namespace UpdateMe.Areas.Admin.Controllers
             userViewModel.IsAdmin = await this.userManager.IsInRoleAsync(user.Id, "Admin");
 
             return this.PartialView("_EditUser", userViewModel);
-            //best practice - use underscore            
         }
 
         [HttpPost]
@@ -177,12 +175,21 @@ namespace UpdateMe.Areas.Admin.Controllers
 
         public ActionResult ListUserAssignments(string currentUserId)
         {
-            var allAssignments = assignmentService.ListAllAssignmentsFromUser(currentUserId);
+            //var allAssignments = assignmentService.ListAllAssignmentsFromUser(currentUserId);
 
-            var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
+            //var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
+
+            var result = this.assignmentService.ListAllAssignmentsFromUser(currentUserId); //newly added
 
 
-            return this.PartialView("_Assignments", assignmentViewModels);
+            return this.PartialView("_Assignments", result);
+        }
+
+        public ActionResult DeleteAssignment(int assignmentId)
+        {
+            this.assignmentService.DeleteAssignment(assignmentId);
+
+            return this.RedirectToAction("ListUserAssignments");
         }
 
     }

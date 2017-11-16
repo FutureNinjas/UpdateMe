@@ -8,9 +8,9 @@ namespace UpdateMe.Services.Contracts
     public interface IAssignmentService
     {
         void CreateAssignment(DateTime dueDate, AssignmentStatus assignmentStatus, bool isMandatory, int courseId, string applicationUserId);
-        
-        IEnumerable<Assignment> ListAllAssignmentsFromUser(string userId);
 
-        void DeleteAssignment(Assignment assignment);
+        IEnumerable<AssignmentViewModel> ListAllAssignmentsFromUser(string userId);
+
+        void DeleteAssignment(int assignmentId);
     }
 }

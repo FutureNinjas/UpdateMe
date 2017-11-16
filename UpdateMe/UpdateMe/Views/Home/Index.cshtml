@@ -11,22 +11,13 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>@Model[0].Name</h2>
-        <p>
-            @Model[0].Description
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Model[1].Name</h2>
-        <p>
-            @Model[1].Description
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Model[2].Name</h2>
-        <p>
-            @Model[2].Description
-        </p>
-    </div>
+    @for (int i = 0; i < Model.Count() && i < 3; i++)
+    {
+        <div class="col-md-4">
+            <h2>@Model[i].Name</h2>
+            <p>
+                @Model[i].Description
+            </p>
+        </div>
+    }
 </div>

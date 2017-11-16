@@ -21,7 +21,6 @@ namespace UpdateMe.Services
         {
             Assignment assignment = new Assignment()
             {
-                //TODO: Date time convertion to sql date time is broken, so DueDate is null
                 DueDate = dueDate,
                 AssignmentStatus = assignmentStatus,
                 IsMandatory = isMandatory,
@@ -31,43 +30,31 @@ namespace UpdateMe.Services
 
             dbContext.Assignments.Add(assignment);
 
-            dbContext.QuizesCurrentState.Add(new CurrentQuizState() { AssignmentId = assignment.Id });
+            //dbContext.QuizesCurrentState.Add(new CurrentQuizState() { AssignmentId = assignment.Id });
 
             dbContext.SaveChanges();
 
 
         }
 
-        public void DeleteAssignment(Assignment assignment)
+        public void DeleteAssignment(int assignmentId)
         {
+            var assignment = this.dbContext.Assignments.Where(a => a.Id == assignmentId).FirstOrDefault();
+                
             dbContext.Assignments.Remove(assignment);
             dbContext.SaveChanges();
         }
 
-        public IEnumerable<Assignment> ListAllAssignmentsFromUser(string userId)
+        public IEnumerable<AssignmentViewModel> ListAllAssignmentsFromUser(string userId)
         {
-            return dbContext
+            var allAssignments = this.dbContext
                 .Assignments
                 .Where(a => a.ApplicationUser.Id == userId)
                 .ToList();
-        }
 
-        public AssignmentViewModel UpdateAssignment(Assignment assignment)
-        {
-            var updatedAssignment = this.dbContext.Assignments.FirstOrDefault(a => a.Id == assignment.Id);
+            var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
 
-            return new AssignmentViewModel()
-            {
-                Id = updatedAssignment.Id,
-                CourseId = updatedAssignment.CourseId,
-                ApplicationUser = updatedAssignment.ApplicationUser,
-                ApplicationUserId = updatedAssignment.ApplicationUserId,
-                IsMandatory = updatedAssignment.IsMandatory,
-                AssignmentStatus = updatedAssignment.AssignmentStatus,
-                //AssignmentDate = updatedAssignment.AssignmentDate,
-                //DueDate = updatedAssignment.DueDate,
-                //CompletionDate = updatedAssignment.CompletionDate                
-            };
+            return assignmentViewModels;
         }
     }
 }

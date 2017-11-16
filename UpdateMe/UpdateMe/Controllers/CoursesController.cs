@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using UpdateMe.Data;
@@ -28,15 +29,14 @@ namespace UpdateMe.Controllers
         }
         
         public  ActionResult ListUserCourses()
-        {        
-            
+        {
             var currentUserId = this.User.Identity.GetUserId();
 
             var allAssignments = assignmentService.ListAllAssignmentsFromUser(currentUserId);
 
-            var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
-            
-            return View(assignmentViewModels);
+            //var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
+
+            return View(allAssignments);
         }
         
         public ActionResult ReviewCourse(int id)

@@ -118,13 +118,19 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="TestStack.FluentMVCTesting, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TestStack.FluentMVCTesting.3.0.0\lib\NET45\TestStack.FluentMVCTesting.dll</HintPath>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-
+    <Compile Include="Areas\Admin\Controllers\AdminControllerTests\AllUsers_Should.cs" />
     <Compile Include="Controllers\CoursesControllerTests\ListUserCourses_Should.cs" />
+    <Compile Include="DataServices\AssignmentService.Tests\CreateAssignment_Should.cs" />
+    <Compile Include="DataServices\AssignmentService.Tests\DeleteAssignment_Should.cs" />
+    <Compile Include="DataServices\AssignmentService.Tests\ListAllAssignmentsFromUser_Should.cs" />
     <Compile Include="DataServices\CourseServiceTests\ListAllCourses_Should.cs" />
     <Compile Include="DataServices\CourseServiceTests\DeleteCourseShould.cs" />
     <Compile Include="DataServices\CourseServiceTests\EditCourse_Should.cs" />
@@ -152,6 +158,7 @@
       <Name>UpdateMe</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
