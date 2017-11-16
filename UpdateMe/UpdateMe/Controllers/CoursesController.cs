@@ -78,9 +78,10 @@ namespace UpdateMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult TakeQuiz(CourseModel courseModel)
         {
+            var QuizResults = courseModel;
 
-           
-                return this.RedirectToAction("TakeQuiz");
+
+                return this.View(QuizResults);
             
         }
 

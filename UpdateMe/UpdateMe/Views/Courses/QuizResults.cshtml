@@ -1,0 +1,15 @@
+﻿@model List<UpdateMe.Data.Models.CourseModel>
+@{
+    ViewBag.Title = "QuizResults";
+}
+
+<h2>QuizResults</h2>
+@{ 
+    foreach(var course in Model)
+    {
+        foreach(var question in course.Questions)
+        {
+        <div>@question.SelectedAnwser</div>
+        }
+    }
+}
