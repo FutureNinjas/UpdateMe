@@ -1,0 +1,35 @@
+{
+    "Name": "",
+    "Description": "",
+    "PassScore": "",
+    "Slides": [
+        {
+            "Base64Img": ""
+        },
+        {
+            "Base64Img": ""
+        },
+        {
+            "Base64Img": ""
+        },
+        {
+            "Base64Img": ""
+        },
+        {
+            "Base64Img": ""
+        },
+        {
+            "Base64Img": ""
+        },
+        {
+            "Base64Img": ""
+        }
+    ],
+    "Questions": [
+        {
+            "QuestionText": "",
+            "AnswersInternal": ""
+        }
+    ],
+    "CorrectAnswer": ""
+}
