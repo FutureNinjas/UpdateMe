@@ -175,9 +175,6 @@ namespace UpdateMe.Areas.Admin.Controllers
 
         public ActionResult ListUserAssignments(string currentUserId)
         {
-            //var allAssignments = assignmentService.ListAllAssignmentsFromUser(currentUserId);
-
-            //var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
 
             var result = this.assignmentService.ListAllAssignmentsFromUser(currentUserId); //newly added
 
