@@ -543,6 +543,7 @@
     <Content Include="Views\Courses\ReviewCourse.cshtml" />
     <Content Include="Views\Courses\TakeQuiz.cshtml" />
     <Content Include="Views\Courses\QuizResults.cshtml" />
+    <Content Include="Views\Courses\OverdoneAssignments.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

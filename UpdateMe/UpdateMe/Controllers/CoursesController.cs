@@ -17,8 +17,8 @@ namespace UpdateMe.Controllers
         private readonly ICourseService courseService;
 
         public CoursesController(
-            ApplicationUserManager userManager, 
-            UpdateMeDbContext dbContext, 
+            ApplicationUserManager userManager,
+            UpdateMeDbContext dbContext,
             IAssignmentService assignmentService,
             ICourseService courseService)
         {
@@ -27,8 +27,8 @@ namespace UpdateMe.Controllers
             this.assignmentService = assignmentService;
             this.courseService = courseService;
         }
-        
-        public  ActionResult ListUserCourses()
+
+        public ActionResult ListUserCourses()
         {
             var currentUserId = this.User.Identity.GetUserId();
 
@@ -38,7 +38,7 @@ namespace UpdateMe.Controllers
 
             return View(allAssignments);
         }
-        
+
         public ActionResult ReviewCourse(int id)
         {
             var courseModel = courseService.ReviewCourse(id, this.User.Identity.GetUserId());
@@ -59,7 +59,7 @@ namespace UpdateMe.Controllers
             model.Id = courseModel.Id;
             model.Name = courseModel.Name;
             model.PassScore = courseModel.PassScore;
-            model.Description= courseModel.Description;
+            model.Description = courseModel.Description;
             model.Slides = courseModel.Slides.ToList();
             model.Questions = questions
                 .Select(q => new QuestionModel()
@@ -69,7 +69,7 @@ namespace UpdateMe.Controllers
                     QuestionText = q.QuestionText
                 })
                 .ToList();
-            
+
 
             return this.View(model);
         }
@@ -81,9 +81,18 @@ namespace UpdateMe.Controllers
             var QuizResults = courseModel;
 
 
-                return this.View(QuizResults);
-            
+            return this.View(QuizResults);
+
         }
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult OverdoneAssignments()
+        {
+            var overdoneAssignements = assignmentService.ListOverdoneAssignments();
+
+            var viewModels = overdoneAssignements.Select(a => OverdoneAssignmentsModel.Create.Compile()(a)).ToList();
+
+            return this.View(viewModels);
+        }
     }
 }

@@ -44,4 +44,35 @@ namespace UpdateMe.Models
             }
         }
     }
+
+    public class OverdoneAssignmentsModel
+    {
+        public string CourseName { get; set; }
+
+        public DateTime? AssignmentDate { get; set; }
+
+        public DateTime? DueDate { get; set; }
+
+        public bool IsMandatory { get; set; }
+
+        public AssignmentStatus AssignmentStatus { get; set; }
+
+        public string ApplicationUserName { get; set; }
+
+        public static Expression<Func<Assignment, OverdoneAssignmentsModel>> Create
+        {
+            get
+            {
+                return a => new OverdoneAssignmentsModel()
+                {
+                    CourseName = a.Course.Name,
+                    AssignmentDate = a.AssignmentDate,
+                    DueDate = a.DueDate,
+                    IsMandatory = a.IsMandatory,
+                    AssignmentStatus = a.AssignmentStatus,
+                    ApplicationUserName = a.ApplicationUser.UserName
+                };
+            }
+        }
+    }
 }

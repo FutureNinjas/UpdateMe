@@ -1,10 +1,14 @@
 ﻿@model  List<UpdateMe.Data.Models.DataModels.AssignmentViewModel>
 @{
     ViewBag.Title = "Assigned Courses";
+    var pending = Model.Where(a => a.AssignmentStatus == UpdateMe.Data.Models.AssignmentStatus.Pending).ToList();
+    var started = Model.Where(a => a.AssignmentStatus == UpdateMe.Data.Models.AssignmentStatus.Started).ToList();
+    var completed = Model.Where(a => a.AssignmentStatus == UpdateMe.Data.Models.AssignmentStatus.Completed).ToList();
 }
+<h2>@ViewBag.Title.</h2>
 
-
-<table id="courses" class="table table-bordered table-hover">
+<h3>Pending Courses</h3>
+<table id="pending" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Course Id</th>
@@ -16,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var course in @Model)
+        @foreach (var course in pending)
         {
             <tr>
                 @Html.HiddenFor(c => course.CourseId)
@@ -33,11 +37,75 @@
     </tbody>
 </table>
 
+<h3>Started Courses</h3>
+<table id="started" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Course Id</th>
+            <th>DueDate</th>
+            <th>Is Mandatory</th>
+            <th>Assignment Status</th>
+            <th>Completion Date</th>
+            <th>View</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in started)
+        {
+            <tr>
+                @Html.HiddenFor(c => course.CourseId)
+                <td>@course.CourseId</td>
+                <td>@course.DueDate</td>
+                <td>@course.IsMandatory</td>
+                <td>@course.AssignmentStatus</td>
+                <td>@course.CompletionDate</td>
+                <td>
+                    <button class="btn btn-info">@Html.ActionLink("Start Course", "ReviewCourse", new { id = course.CourseId })</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Completed Courses</h3>
+<table id="completed" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Course Id</th>
+            <th>DueDate</th>
+            <th>Is Mandatory</th>
+            <th>Assignment Status</th>
+            <th>Completion Date</th>
+            <th>View</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in completed)
+        {
+            <tr>
+                @Html.HiddenFor(c => course.CourseId)
+                <td>@course.CourseId</td>
+                <td>@course.DueDate</td>
+                <td>@course.IsMandatory</td>
+                <td>@course.AssignmentStatus</td>
+                <td>@course.CompletionDate</td>
+                <td>
+                    <button class="btn btn-info">@Html.ActionLink("Start Course", "ReviewCourse", new { id = course.CourseId })</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
 @section scripts
 {
     <script>
         $(function () {
-            $("#courses").DataTable();
+            $("#pending").DataTable();
+            $("#started").DataTable();
+            $("#completed").DataTable();
 
         });
     </script>

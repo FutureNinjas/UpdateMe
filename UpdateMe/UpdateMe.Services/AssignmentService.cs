@@ -40,7 +40,7 @@ namespace UpdateMe.Services
         public void DeleteAssignment(int assignmentId)
         {
             var assignment = this.dbContext.Assignments.Where(a => a.Id == assignmentId).FirstOrDefault();
-                
+
             dbContext.Assignments.Remove(assignment);
             dbContext.SaveChanges();
         }
@@ -55,6 +55,13 @@ namespace UpdateMe.Services
             var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
 
             return assignmentViewModels;
+        }
+
+        public IEnumerable<Assignment> ListOverdoneAssignments()
+        {
+            var assignments = this.dbContext.Assignments.Where(a => a.DueDate < DateTime.Now).ToList();
+
+            return assignments;
         }
     }
 }

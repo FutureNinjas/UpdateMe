@@ -1,0 +1,43 @@
+﻿@model List<UpdateMe.Models.OverdoneAssignmentsModel>
+@{
+    ViewBag.Title = "Overdone Assignments";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table id="assignments" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Assignment Date</th>
+            <th>Due Date</th>
+            <th>Is Mandatory</th>
+            <th>Assignment Status</th>
+            <th>User</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var assignments in Model)
+        {
+            <tr>
+                <td>@assignments.CourseName</td>
+                <td>@assignments.AssignmentDate</td>
+                <td>@assignments.DueDate</td>
+                <td>@assignments.IsMandatory</td>
+                <td>@assignments.AssignmentStatus</td>
+                <td>@assignments.ApplicationUserName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(function () {
+            $("#assignments").DataTable();
+
+        });
+    </script>
+}
+
