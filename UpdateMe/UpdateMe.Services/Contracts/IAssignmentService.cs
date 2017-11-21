@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UpdateMe.Data.Models;
-using UpdateMe.Data.Models.DataModels;
 
 namespace UpdateMe.Services.Contracts
 {
@@ -10,9 +9,13 @@ namespace UpdateMe.Services.Contracts
     {
         void CreateAssignment(DateTime dueDate, AssignmentStatus assignmentStatus, bool isMandatory, int courseId, string applicationUserId);
 
-        IEnumerable<AssignmentViewModel> ListAllAssignmentsFromUser(string userId);
+        Assignment FindAssignment(int assignmentId);
 
-        void DeleteAssignment(int assignmentId);
+        IEnumerable<Assignment> ListUserAssignments(string userId);
+
+        //IEnumerable<AssignmentViewModel> ListUserAssignments(string userId);
+
+        void DeleteAssignment(Assignment assignment);
 
         IEnumerable<Assignment> ListOverdoneAssignments();
     }

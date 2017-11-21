@@ -4,7 +4,6 @@ using UpdateMe.Data;
 using UpdateMe.Data.Models;
 using UpdateMe.Services.Contracts;
 using System.Linq;
-using UpdateMe.Data.Models.DataModels;
 
 namespace UpdateMe.Services
 {
@@ -29,34 +28,35 @@ namespace UpdateMe.Services
             };
 
             dbContext.Assignments.Add(assignment);
-
-            //dbContext.QuizesCurrentState.Add(new CurrentQuizState() { AssignmentId = assignment.Id });
-
             dbContext.SaveChanges();
-
-
         }
 
-        public void DeleteAssignment(int assignmentId)
+        public Assignment FindAssignment(int assignmentId)
         {
-            var assignment = this.dbContext.Assignments.Where(a => a.Id == assignmentId).FirstOrDefault();
+            var assignment = this.dbContext
+                .Assignments
+                .FirstOrDefault(a => a.Id == assignmentId);
 
+            return assignment;
+        }
+
+        public void DeleteAssignment(Assignment assignment)
+        {
             dbContext.Assignments.Remove(assignment);
             dbContext.SaveChanges();
         }
 
-        public IEnumerable<AssignmentViewModel> ListAllAssignmentsFromUser(string userId)
+
+        public IEnumerable<Assignment> ListUserAssignments(string userId)
         {
-            var allAssignments = this.dbContext
+            var userAssignments = this.dbContext
                 .Assignments
                 .Where(a => a.ApplicationUser.Id == userId)
                 .ToList();
 
-            var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
-
-            return assignmentViewModels;
+            return userAssignments;
         }
-
+        
         public IEnumerable<Assignment> ListOverdoneAssignments()
         {
             var assignments = this.dbContext.Assignments.Where(a => a.DueDate < DateTime.Now).ToList();

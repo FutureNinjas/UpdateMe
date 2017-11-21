@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
+using UpdateMe.Data.Models;
 
-namespace UpdateMe.Data.Models
+namespace UpdateMe.Models
 {
     public class CourseViewModel
     {

@@ -1,4 +1,4 @@
-﻿@model  List<UpdateMe.Data.Models.DataModels.AssignmentViewModel>
+﻿@model  List<UpdateMe.Models.AssignmentViewModel>
 @{
     ViewBag.Title = "Assigned Courses";
     var pending = Model.Where(a => a.AssignmentStatus == UpdateMe.Data.Models.AssignmentStatus.Pending).ToList();

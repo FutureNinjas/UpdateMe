@@ -32,7 +32,7 @@ namespace UpdateMe.Controllers
         {
             var currentUserId = this.User.Identity.GetUserId();
 
-            var allAssignments = assignmentService.ListAllAssignmentsFromUser(currentUserId);
+            var allAssignments = assignmentService.ListUserAssignments(currentUserId).Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
 
             //var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
 
@@ -80,9 +80,7 @@ namespace UpdateMe.Controllers
         {
             var QuizResults = courseModel;
 
-
             return this.View(QuizResults);
-
         }
 
         [Authorize(Roles = "Admin")]

@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using UpdateMe.Data.Models;
 
 namespace UpdateMe.Services.Contracts
@@ -8,6 +9,8 @@ namespace UpdateMe.Services.Contracts
         void AddCourse(Course course);
 
         Course FindCourse(int courseId);
+
+        IEnumerable<Course> ListAllCourses();
 
         void EditCourse(Course course, string name, string description, int passScore);
 

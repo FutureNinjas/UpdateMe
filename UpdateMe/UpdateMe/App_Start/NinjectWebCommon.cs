@@ -79,6 +79,7 @@ namespace UpdateMe.App_Start
                 .GetUserManager<UpdateMeDbContext>());
 
             //Services
+            kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<ICourseService>().To<CourseService>();
             kernel.Bind<IAssignmentService>().To<AssignmentService>();
             kernel.Bind<IReader>().To<JSONReader>();

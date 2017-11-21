@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using UpdateMe.Areas.Admin.Models;
-using UpdateMe.Data;
 using UpdateMe.Data.Models;
-using UpdateMe.Data.Models.DataModels;
+using UpdateMe.Models;
 using UpdateMe.Services.Contracts;
+
 
 namespace UpdateMe.Areas.Admin.Controllers
 {
@@ -16,26 +16,29 @@ namespace UpdateMe.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         private readonly ApplicationUserManager userManager;
-        private readonly UpdateMeDbContext dbContext;
+        private readonly IUserService userService;
         private readonly ICourseService courseService;
         private readonly IAssignmentService assignmentService;
         private readonly IReader reader;
 
 
-        public AdminController(ApplicationUserManager userManager, UpdateMeDbContext dbContext, ICourseService courseService, IAssignmentService assignmentService, IReader reader)
+        public AdminController(ApplicationUserManager userManager, IUserService userService, ICourseService courseService, IAssignmentService assignmentService, IReader reader)
         {
             this.userManager = userManager ?? throw new ArgumentNullException("userManager");
-            this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext");
+            this.userService = userService ?? throw new ArgumentNullException("userService");
             this.courseService = courseService ?? throw new ArgumentNullException("courseService");
             this.assignmentService = assignmentService ?? throw new ArgumentNullException("assignmentService");
             this.reader = reader ?? throw new ArgumentNullException("reader");
         }
 
+        #region User Actions 
+        // Edited ============================================================================
         public ActionResult AllUsers()
         {
-            var usersViewModel = this.dbContext
-                .Users
-                .Select(UserViewModel.Create).ToList();
+            var usersViewModel = this.userService
+                .ListAllUsers()
+                .Select(u => UserViewModel.Create.Compile()(u))
+                .ToList();
 
             return this.View(usersViewModel);
         }
@@ -66,11 +69,15 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.RedirectToAction("AllUsers");
         }
 
+        #endregion
+
+        #region Course Actions
+        // Edited ============================================================================
         public ActionResult ListAllCourses()
         {
-            var courses = dbContext
-               .Courses
-               .Select(CourseViewModel.Create)
+            var courses = this.courseService
+               .ListAllCourses()
+               .Select(c => CourseViewModel.Create.Compile()(c))
                .ToList();
 
             return this.View(courses);
@@ -109,6 +116,7 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.RedirectToAction("ListAllCourses");
         }
 
+        // Edited ============================================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult UploadCourse(HttpPostedFileBase file)
@@ -120,17 +128,19 @@ namespace UpdateMe.Areas.Admin.Controllers
             return RedirectToAction("ListAllCourses");
         }
 
+        #endregion
+
         [HttpGet]
         public ActionResult AssignCourse()
         {
-            var usersViewModel = this.dbContext
-               .Users
-               .Select(UserViewModelTwo.Create)
-               .ToList();
+            var usersViewModel = this.userService
+                .ListAllUsers()
+                .Select(u => UserViewModel.Create.Compile()(u))
+                .ToList();
 
-            var coursesViewModel = this.dbContext
-                .Courses
-                .Select(CourseViewModel.Create)
+            var coursesViewModel = this.courseService
+                .ListAllCourses()
+                .Select(c=>CourseViewModel.Create.Compile()(c))
                 .ToList();
 
             var assignmentFormViewModel = AssignmentFormViewModel.CreateAssignmentFormViewModel(coursesViewModel, usersViewModel);
@@ -145,8 +155,8 @@ namespace UpdateMe.Areas.Admin.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                List<UserViewModelTwo> checkedUsersFromPostRequest = assignmentFormViewModel
-                    .UserViewModelsTwo
+                List<UserViewModel> checkedUsersFromPostRequest = assignmentFormViewModel
+                    .UserViewModels
                     .Where(u => u.IsChecked == true)
                     .ToList();
 
@@ -182,25 +192,24 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.View(assignmentFormViewModel);
         }
 
-
+        // Edited ============================================================================
         public ActionResult ListUserAssignments(string currentUserId)
         {
-            //var allAssignments = assignmentService.ListAllAssignmentsFromUser(currentUserId);
+            var userAssignments = this.assignmentService
+                .ListUserAssignments(currentUserId)
+                .Select(a => AssignmentViewModel.Create.Compile()(a))
+                .ToList();
 
-            //var assignmentViewModels = allAssignments.Select(a => AssignmentViewModel.Create.Compile()(a)).ToList();
-
-            var result = this.assignmentService.ListAllAssignmentsFromUser(currentUserId); //newly added
-
-
-            return this.PartialView("_Assignments", result);
+            return this.PartialView("_Assignments", userAssignments);
         }
 
+        // Edited ============================================================================
         public ActionResult DeleteAssignment(int assignmentId)
         {
-            this.assignmentService.DeleteAssignment(assignmentId);
+            var assignment = this.assignmentService.FindAssignment(assignmentId);
+            this.assignmentService.DeleteAssignment(assignment);
 
             return this.RedirectToAction("ListUserAssignments");
         }
-
     }
 }

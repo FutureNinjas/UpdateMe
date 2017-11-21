@@ -9,10 +9,6 @@ namespace UpdateMe.Services.Contracts
 {
     public interface IUserService
     {
-        IEnumerable<ApplicationUser> FindUserByUserName(string userName);
-
-        IEnumerable<ApplicationUser> FindUsersByPositionAndDepartment(string position, string department);
-
-
+        IEnumerable<ApplicationUser> ListAllUsers();
     }
 }

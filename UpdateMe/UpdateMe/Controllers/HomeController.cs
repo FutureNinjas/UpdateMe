@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using UpdateMe.Data;
 using UpdateMe.Data.Models;
+using UpdateMe.Models;
 
 namespace UpdateMe.Controllers
 {

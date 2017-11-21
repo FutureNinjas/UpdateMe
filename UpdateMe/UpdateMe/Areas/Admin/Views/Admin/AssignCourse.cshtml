@@ -1,4 +1,4 @@
-﻿@model  UpdateMe.Data.Models.DataModels.AssignmentFormViewModel
+﻿@model  UpdateMe.Areas.Admin.Models.AssignmentFormViewModel
 @{
     ViewBag.Title = "AssignCourse";
 }
@@ -21,19 +21,19 @@
         </thead>
         <tbody>
             @Html.AntiForgeryToken()
-            @for (int i = 0; i < Model.UserViewModelsTwo.Count(); i++)
+            @for (int i = 0; i < Model.UserViewModels.Count(); i++)
             {
                 <tr>
-                    @Html.HiddenFor(m => m.UserViewModelsTwo[i].Id)
-                    @Html.HiddenFor(m => @Model.UserViewModelsTwo[i].FirstName)
-                    @Html.HiddenFor(m => @Model.UserViewModelsTwo[i].LastName)
-                    @Html.HiddenFor(m => @Model.UserViewModelsTwo[i].Username)
-                    @Html.HiddenFor(m => @Model.UserViewModelsTwo[i].Position)
-                    <td>@Html.CheckBoxFor(m => Model.UserViewModelsTwo[i].IsChecked)</td>
-                    <td>@Model.UserViewModelsTwo[i].FirstName</td>
-                    <td>@Model.UserViewModelsTwo[i].LastName</td>
-                    <td>@Model.UserViewModelsTwo[i].Username</td>
-                    <td>@Model.UserViewModelsTwo[i].Position</td>
+                    @Html.HiddenFor(m => m.UserViewModels[i].Id)
+                    @Html.HiddenFor(m => @Model.UserViewModels[i].FirstName)
+                    @Html.HiddenFor(m => @Model.UserViewModels[i].LastName)
+                    @Html.HiddenFor(m => @Model.UserViewModels[i].Username)
+                    @Html.HiddenFor(m => @Model.UserViewModels[i].Position)
+                    <td>@Html.CheckBoxFor(m => Model.UserViewModels[i].IsChecked)</td>
+                    <td>@Model.UserViewModels[i].FirstName</td>
+                    <td>@Model.UserViewModels[i].LastName</td>
+                    <td>@Model.UserViewModels[i].Username</td>
+                    <td>@Model.UserViewModels[i].Position</td>
                 </tr>
             }
         </tbody>
