@@ -14,6 +14,7 @@ namespace UpdateMe.App_Start
     using UpdateMe.Data;
     using Services;
     using Services.Contracts;
+    using UpdateMe.Services.Providers;
 
     public static class NinjectWebCommon
     {
@@ -80,6 +81,7 @@ namespace UpdateMe.App_Start
             //Services
             kernel.Bind<ICourseService>().To<CourseService>();
             kernel.Bind<IAssignmentService>().To<AssignmentService>();
+            kernel.Bind<IReader>().To<JSONReader>();
         }
     }
 }

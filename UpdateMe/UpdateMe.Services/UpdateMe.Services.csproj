@@ -63,10 +63,12 @@
     <Compile Include="AssignmentService.cs" />
     <Compile Include="Contracts\IAssignmentService.cs" />
     <Compile Include="Contracts\ICourseService.cs" />
+    <Compile Include="Contracts\IReader.cs" />
     <Compile Include="Contracts\IQuizService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="CourseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\JSONReader.cs" />
     <Compile Include="QuizService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>

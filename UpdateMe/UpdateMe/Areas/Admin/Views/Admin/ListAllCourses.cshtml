@@ -6,7 +6,7 @@
 
 <h2>Courses</h2>
 <p>
-    @using (Html.BeginForm("UploadFile", "Admin", FormMethod.Post, new { enctype = "multipart/form-data"}))
+    @using (Html.BeginForm("UploadCourse", "Admin", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
         @Html.AntiForgeryToken()
         <label for="file">Select Course File:</label>

@@ -21,51 +21,39 @@ namespace UpdateMe.Services
             this.dbContext = dbContext;
         }
 
+        public void AddCourse(Course course)
+        {
+            Guard.WhenArgument(course, "course").IsNull().Throw();
 
-        public void DeleteCourse(int courseId)
+            this.dbContext.Courses.Add(course);
+            this.dbContext.SaveChanges();
+        }
+
+        public Course FindCourse(int courseId)
         {
             var course = dbContext.Courses.FirstOrDefault(c => c.Id == courseId);
 
+            return course;
+        }
+
+        public void EditCourse(Course course, string name, string description, int passScore)
+        {
+            course.Name = name;
+            course.Description = description;
+            course.PassScore = passScore;
+
+            this.dbContext.SaveChanges();
+        }
+
+        public void DeleteCourse(Course course)
+        {            
             Guard.WhenArgument(course, "course").IsNull().Throw();
 
             this.dbContext.Courses.Remove(course);
             this.dbContext.SaveChanges();
         }
-     
-        public void EditCourse(int courseId, CourseViewModel courseViewModel)
-        {
-            var course = dbContext.Courses.FirstOrDefault(c => c.Id == courseId);
-
-            course.Name = courseViewModel.Name;
-            course.Description = courseViewModel.Description;
-            course.PassScore = courseViewModel.PassScore;
-
-            this.dbContext.SaveChanges();
-        }
-
-        public void JsonHandler(HttpPostedFileBase file)
-        {
-            try
-            {
-                using (StreamReader reader = new StreamReader(file.InputStream))//research
-                {
-                    string readFile = reader.ReadToEnd();
-
-                    Course course = JsonConvert.DeserializeObject<Course>(readFile);
-
-                    course.DateCreated = DateTime.Now;
-
-                    this.dbContext.Courses.Add(course);
-
-                    this.dbContext.SaveChanges();
-                }
-            }
-            catch (FileNotFoundException)
-            {
-
-            }
-        }
         
+
         public CourseModel ReviewCourse(int courseId, string userId)
         {
             var assignment = this.dbContext

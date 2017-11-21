@@ -19,15 +19,18 @@ namespace UpdateMe.Areas.Admin.Controllers
         private readonly UpdateMeDbContext dbContext;
         private readonly ICourseService courseService;
         private readonly IAssignmentService assignmentService;
+        private readonly IReader reader;
 
-        public AdminController(ApplicationUserManager userManager, UpdateMeDbContext dbContext, ICourseService courseService, IAssignmentService assignmentService)
+
+        public AdminController(ApplicationUserManager userManager, UpdateMeDbContext dbContext, ICourseService courseService, IAssignmentService assignmentService, IReader reader)
         {
             this.userManager = userManager ?? throw new ArgumentNullException("userManager");
             this.dbContext = dbContext ?? throw new ArgumentNullException("dbContext");
             this.courseService = courseService ?? throw new ArgumentNullException("courseService");
             this.assignmentService = assignmentService ?? throw new ArgumentNullException("assignmentService");
+            this.reader = reader ?? throw new ArgumentNullException("reader");
         }
-        
+
         public ActionResult AllUsers()
         {
             var usersViewModel = this.dbContext
@@ -72,47 +75,54 @@ namespace UpdateMe.Areas.Admin.Controllers
 
             return this.View(courses);
         }
-        
+
+        // Edited ============================================================================
         [HttpGet]
         public ActionResult EditCourse(int id)
         {
-            var course = this.dbContext.Courses.Find(id);
+            var course = this.courseService.FindCourse(id);
 
             var courseViewModel = CourseViewModel.Create.Compile()(course);
 
             return this.PartialView("_EditCourse", courseViewModel);
         }
 
+        // Edited ============================================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditCourse(CourseViewModel courseViewModel)
         {
-            var course = this.dbContext.Courses.Find(courseViewModel.Id);
+            var course = this.courseService.FindCourse(courseViewModel.Id);
 
-            courseService.EditCourse(course.Id, courseViewModel);
+            courseService.EditCourse(course, courseViewModel.Name, courseViewModel.Description, courseViewModel.PassScore);
 
             return this.RedirectToAction("ListAllCourses");
         }
 
+        // Edited ============================================================================
         public ActionResult DeleteCourse(int id)
         {
-            this.courseService.DeleteCourse(id);
+            var course = this.courseService.FindCourse(id);
+
+            this.courseService.DeleteCourse(course);
 
             return this.RedirectToAction("ListAllCourses");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadFile(HttpPostedFileBase file)
+        public ActionResult UploadCourse(HttpPostedFileBase file)
         {
-            courseService.JsonHandler(file);
+            var course = this.reader.ReadFile(file);
+
+            this.courseService.AddCourse(course);
 
             return RedirectToAction("ListAllCourses");
         }
-        
+
         [HttpGet]
         public ActionResult AssignCourse()
-        { 
+        {
             var usersViewModel = this.dbContext
                .Users
                .Select(UserViewModelTwo.Create)
