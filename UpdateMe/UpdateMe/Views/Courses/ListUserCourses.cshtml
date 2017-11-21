@@ -7,7 +7,7 @@
 }
 <h2>@ViewBag.Title.</h2>
 
-<h3>Pending Courses</h3>
+<h4>Pending Courses</h4>
 <table id="pending" class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -37,7 +37,7 @@
     </tbody>
 </table>
 
-<h3>Started Courses</h3>
+<h4>Started Courses</h4>
 <table id="started" class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -67,7 +67,7 @@
     </tbody>
 </table>
 
-<h3>Completed Courses</h3>
+<h4>Completed Courses</h4>
 <table id="completed" class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -99,8 +99,7 @@
 
 
 
-@section scripts
-{
+@section scripts{
     <script>
         $(function () {
             $("#pending").DataTable();

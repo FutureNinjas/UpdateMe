@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UpdateMe.Data.Models;
 
 namespace UpdateMe.Services.Contracts
 {
@@ -10,6 +6,8 @@ namespace UpdateMe.Services.Contracts
     {
         void CheckAnswer(string answer, int courseId, int questionId, string userId);
 
+        void ResultCheck(int result, int courseId, Assignment assignment);
+        
         void UpdateState();
     }
 }

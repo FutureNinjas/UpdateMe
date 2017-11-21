@@ -45,7 +45,7 @@ namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
             CourseService service = new CourseService(dbContextMock.Object);
 
             //Act
-            service.DeleteCourse(id);
+            service.DeleteCourse(courses.Single());
 
             //Assert
             Assert.IsTrue(dbContextMock.Object.Courses.Count() == 0);

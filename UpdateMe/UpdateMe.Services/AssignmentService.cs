@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UpdateMe.Data;
 using UpdateMe.Data.Models;
 using UpdateMe.Services.Contracts;
-using System.Linq;
 
 namespace UpdateMe.Services
 {
@@ -16,12 +16,12 @@ namespace UpdateMe.Services
             this.dbContext = dbContext;
         }
 
-        public void CreateAssignment(DateTime dueDate, AssignmentStatus assignmentStatus, bool isMandatory, int courseId, string applicationUserId)
+        public void CreateAssignment(DateTime dueDate, bool isMandatory, int courseId, string applicationUserId)
         {
             Assignment assignment = new Assignment()
             {
                 DueDate = dueDate,
-                AssignmentStatus = assignmentStatus,
+                AssignmentStatus = AssignmentStatus.Pending,
                 IsMandatory = isMandatory,
                 CourseId = courseId,
                 ApplicationUserId = applicationUserId,
@@ -40,12 +40,30 @@ namespace UpdateMe.Services
             return assignment;
         }
 
+        public Assignment FindAssignment(int courseId, string userId)
+        {
+            var assignment = this.dbContext
+                .Assignments
+                .FirstOrDefault(a => a.CourseId == courseId && a.ApplicationUserId == userId);
+
+            return assignment;
+        }
+
         public void DeleteAssignment(Assignment assignment)
         {
             dbContext.Assignments.Remove(assignment);
             dbContext.SaveChanges();
         }
 
+        public void StartAssignedCourse(int courseId, string userId)
+        {
+            this.dbContext
+                .Assignments
+                .FirstOrDefault(a => a.CourseId == courseId && a.ApplicationUserId == userId)
+                .AssignmentStatus = AssignmentStatus.Started;
+
+            dbContext.SaveChanges();
+        }
 
         public IEnumerable<Assignment> ListUserAssignments(string userId)
         {
@@ -56,7 +74,7 @@ namespace UpdateMe.Services
 
             return userAssignments;
         }
-        
+
         public IEnumerable<Assignment> ListOverdoneAssignments()
         {
             var assignments = this.dbContext.Assignments.Where(a => a.DueDate < DateTime.Now).ToList();

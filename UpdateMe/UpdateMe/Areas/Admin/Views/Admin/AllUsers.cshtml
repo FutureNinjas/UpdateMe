@@ -18,7 +18,8 @@
                 <td>
                     @Ajax.ActionLink("Edit", "EditUser",
                     new { username = user.Username },
-                    new AjaxOptions{
+                    new AjaxOptions
+                    {
                         InsertionMode = InsertionMode.Replace,
                         UpdateTargetId = "editArea"
                     })
@@ -32,7 +33,6 @@
                         UpdateTargetId = "editArea"
                     })
                 </td>
-
             </tr>
         }
     </tbody>
@@ -53,25 +53,3 @@
         });
     </script>
 }
-
-
-
-
-
-@*@foreach (var user in Model)
-{
-    //TODO: Add Assignments next to edit button
-    <div>
-        @user.Username
-
-        @Ajax.ActionLink("Edit", "EditUser",
-       new { username = user.Username },
-       new AjaxOptions
-       {
-           InsertionMode = InsertionMode.Replace,
-           UpdateTargetId = "editArea"
-       })
-    </div>
-}*@
-
-

@@ -60,14 +60,13 @@ namespace UpdateMe.UnitTests.DataServices.AssignmentService.Tests
 
             string applicationUserId = user.Id;
             DateTime dueDate = DateTime.Now.AddDays(3);
-            AssignmentStatus status = AssignmentStatus.Pending;
             bool isMandatory = true;
             int courseId = course.Id;
 
             UpdateMe.Services.AssignmentService service = new UpdateMe.Services.AssignmentService(dbContextMock.Object);
 
             //Act
-            service.CreateAssignment(dueDate, status, isMandatory, courseId, applicationUserId);
+            service.CreateAssignment(dueDate, isMandatory, courseId, applicationUserId);
 
             //Assert
             Assert.IsNotNull(dbContextMock.Object.Assignments);

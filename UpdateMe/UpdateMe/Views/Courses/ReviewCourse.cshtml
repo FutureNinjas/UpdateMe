@@ -1,4 +1,4 @@
-﻿@model UpdateMe.Data.Models.CourseModel
+﻿@model UpdateMe.Models.CourseReviewViewModel
 @{
     ViewBag.Title = "ReviewCourse";
     var arr = new string[@Model.Slides.Count()];
@@ -41,7 +41,6 @@
 
 @Styles.Render("~/Slider/css")
 @section scripts {
-
     <script>
         var slideIndex = 1;
         showSlides(slideIndex);
@@ -73,5 +72,4 @@
             dots[slideIndex - 1].className += " active";
         }
     </script>
-
 }

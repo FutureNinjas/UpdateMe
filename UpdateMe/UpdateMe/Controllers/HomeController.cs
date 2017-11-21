@@ -1,28 +1,26 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
-using UpdateMe.Data;
-using UpdateMe.Data.Models;
 using UpdateMe.Models;
+using UpdateMe.Services.Contracts;
 
 namespace UpdateMe.Controllers
 {
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        private readonly UpdateMeDbContext dbContext;
+        private readonly ICourseService courseService;
 
-        public HomeController(UpdateMeDbContext dbContext)
+        public HomeController(ICourseService courseService)
         {
-            this.dbContext = dbContext;
+            this.courseService = courseService;
         }
 
         public ActionResult Index()
         {
-            var courses = dbContext
-               .Courses
-               .Select(CourseViewModel.Create)
-               .ToList();
+            var courses = courseService
+                .ListAllCourses()
+                .Select(c => CourseViewModel.Create.Compile()(c))
+                .ToList();
 
             return this.View(courses);
         }

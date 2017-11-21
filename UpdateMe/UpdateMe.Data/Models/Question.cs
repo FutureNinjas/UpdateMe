@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace UpdateMe.Data.Models
 {
@@ -13,7 +12,7 @@ namespace UpdateMe.Data.Models
         public string QuestionText { get; set; }
 
         [Required]
-        public string AnswersInternal { get; set; }     //string in the database
+        public string AnswersInternal { get; set; }
 
         [NotMapped]
         public string[] AnswersExternal
@@ -24,10 +23,9 @@ namespace UpdateMe.Data.Models
             }
             set
             {
-                AnswersInternal = string.Join(";", value);  //directly send to db
+                AnswersInternal = string.Join(";", value);
             }
         }
-
 
         public string CorrectAnswer { get; set; }
 

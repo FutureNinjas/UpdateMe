@@ -9,7 +9,7 @@ using UpdateMe.Areas.Admin.Controllers;
 using UpdateMe.Areas.Admin.Models;
 using UpdateMe.Data;
 using UpdateMe.Data.Models;
-using UpdateMe.Services;
+using UpdateMe.Services.Contracts;
 
 namespace UpdateMe.UnitTests.Areas.Admin.Controllers.AdminControllerTests
 {
@@ -23,8 +23,10 @@ namespace UpdateMe.UnitTests.Areas.Admin.Controllers.AdminControllerTests
             var storeMock = new Mock<IUserStore<ApplicationUser>>();
             var userManagerMock = new Mock<ApplicationUserManager>(storeMock.Object);
             var dbContextMock = new Mock<UpdateMeDbContext>();
-            var courseServiceMock = new Mock<CourseService>(dbContextMock.Object);
-            var assignmentServiceMock = new Mock<AssignmentService>(dbContextMock.Object);
+            var userServiceMock = new Mock<IUserService>(dbContextMock.Object);
+            var courseServiceMock = new Mock<ICourseService>(dbContextMock.Object);
+            var assignmentServiceMock = new Mock<IAssignmentService>(dbContextMock.Object);
+            var readerMock = new Mock<IReader>(dbContextMock.Object);
 
 
             List<ApplicationUser> users = new List<ApplicationUser>()
@@ -39,9 +41,7 @@ namespace UpdateMe.UnitTests.Areas.Admin.Controllers.AdminControllerTests
 
             dbContextMock.SetupGet(m => m.Users).Returns(usersSetMock.Object);
 
-            
-
-            AdminController controller = new AdminController(userManagerMock.Object, dbContextMock.Object, courseServiceMock.Object, assignmentServiceMock.Object);
+            AdminController controller = new AdminController(userManagerMock.Object, userServiceMock.Object, courseServiceMock.Object, assignmentServiceMock.Object, readerMock.Object);
 
             //Act & Assert  //стандартен UnitTest за един контролер. 
             //така е заради API-то FluentMVCTesting - извиква нещо и директно assert-ва върху него

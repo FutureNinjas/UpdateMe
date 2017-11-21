@@ -5,11 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using TestStack.FluentMVCTesting;
-using UpdateMe.Areas.Admin.Models;
 using UpdateMe.Data;
 using UpdateMe.Data.Models;
-using UpdateMe.Services;
 
 namespace UpdateMe.UnitTests.DataServices.AssignmentService.Tests
 {
@@ -79,7 +76,7 @@ namespace UpdateMe.UnitTests.DataServices.AssignmentService.Tests
             UpdateMe.Services.AssignmentService service = new UpdateMe.Services.AssignmentService(dbContextMock.Object);
 
             //Act
-            service.DeleteAssignment(assignment.Id);
+            service.DeleteAssignment(assignment);
 
             //Assert
             Assert.IsTrue(dbContextMock.Object.Assignments.Count() == 0);

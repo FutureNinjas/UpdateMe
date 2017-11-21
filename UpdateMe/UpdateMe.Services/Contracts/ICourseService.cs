@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web;
 using UpdateMe.Data.Models;
 
 namespace UpdateMe.Services.Contracts
@@ -15,7 +14,5 @@ namespace UpdateMe.Services.Contracts
         void EditCourse(Course course, string name, string description, int passScore);
 
         void DeleteCourse(Course course);
-
-        CourseModel ReviewCourse(int courseId, string userId);
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using UpdateMe.Data;
 using UpdateMe.Data.Models;
+using UpdateMe.Models;
 using UpdateMe.Services;
 
 namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
@@ -19,8 +20,11 @@ namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
             
             var contextMock = new Mock<UpdateMeDbContext>();
             var course = new Course() { Id = id };
-            var courseViewModel = new CourseViewModel() { Id = id, Name = "testName", Description = "testDescription", PassScore = 1 };
 
+            string name = "testName";
+            string description = "testDescription";
+            int passScore = 1;
+            
             List<Course> courses = new List<Course>() { course };
 
             var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
@@ -28,12 +32,12 @@ namespace UpdateMe.UnitTests.DataServices.CourseServiceTests
             var courseService = new CourseService(contextMock.Object);
 
             //Act            
-            courseService.EditCourse(course.Id, courseViewModel);
+            courseService.EditCourse(course, name, description, passScore);
 
             //Assert
-            Assert.AreEqual(courseViewModel.Name, course.Name);
-            Assert.AreEqual(courseViewModel.Description, course.Description);
-            Assert.AreEqual(courseViewModel.PassScore, course.PassScore);
+            Assert.AreEqual(course.Name, name);
+            Assert.AreEqual(course.Description, description);
+            Assert.AreEqual(course.PassScore, passScore);
             contextMock.Verify(c => c.SaveChanges(), Times.Once);
         }
     }

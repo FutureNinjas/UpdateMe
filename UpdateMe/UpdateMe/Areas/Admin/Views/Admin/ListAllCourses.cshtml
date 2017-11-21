@@ -1,4 +1,4 @@
-﻿@model IEnumerable <UpdateMe.Models.CourseViewModel>
+﻿@model IEnumerable<UpdateMe.Models.CourseViewModel>
 
 @{
     ViewBag.Title = "Courses";
@@ -6,13 +6,13 @@
 
 <h2>Courses</h2>
 <p>
-    @using (Html.BeginForm("UploadCourse", "Admin", FormMethod.Post, new { enctype = "multipart/form-data"}))
+    @using (Html.BeginForm("UploadCourse", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <label for="file">Select Course File:</label>
-        
-        <input class = "btn btn-primary" type="file" name="file" id="file" /><br>
-        <input class = "btn btn-primary" type="submit" value="Upload Course" />
+
+        <input class="btn btn-primary" type="file" name="file" id="file" /><br>
+        <input class="btn btn-primary" type="submit" value="Upload Course" />
         <br><br>
         @ViewBag.Message
     }
@@ -40,13 +40,12 @@
                 <td>
                     <a id="@course.Id" class="delete" href="#">Delete</a>
                     @using (Html.BeginForm("DeleteCourse", "Admin",
-                    new { id = course.Id },
-                    FormMethod.Post,
-                    new { id = "form-" + course.Id }))
+                new { id = course.Id },
+                FormMethod.Post,
+                new { id = "form-" + course.Id }))
                     {
                     }
                 </td>
-
             </tr>
         }
     </tbody>
@@ -56,7 +55,6 @@
 @section scripts
 {
     <script>
-
         $(function () {
             $("#courses").DataTable();
 

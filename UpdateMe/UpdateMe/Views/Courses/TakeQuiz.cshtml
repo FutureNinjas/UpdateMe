@@ -1,48 +1,31 @@
-﻿@model UpdateMe.Data.Models.CourseModel
+﻿@model UpdateMe.Models.CourseReviewViewModel
 @{
     ViewBag.Title = "ReviewCourse";
     var arr = new string[@Model.Questions.Count()];
-    var counter = 1;
-}
-
-@{
     var courseId = Model.Id;
 }
 
-
 <div>
-
     @using (Html.BeginForm("TakeQuiz", "Courses", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
         for (int i = 0; i < Model.Questions.Count; i++)
         {
-
             @Html.HiddenFor(m => Model.Questions[i].Id)
-            <div align="center">
-                <h3>@Model.Questions[i].QuestionText</h3>
+            <div>
+                <h4>@Model.Questions[i].QuestionText</h4>
 
-                    Select Answer: <br />
-                    
-
-
-                    @for (int j = 0; j < Model.Questions[i].Answers.Length; j++)
+                @for (int j = 0; j < Model.Questions[i].Answers.Length; j++)
                     {
-                        <label>
-                            @Model.Questions[i].Answers[j];
-                            @Html.RadioButtonFor(m => Model.Questions[i].SelectedAnwser, Model.Questions[i].Answers[j])<br />
-                        </label>
-                    }
-
-
-
-                </div>
+                    <label>
+                        @Html.RadioButtonFor(m => Model.Questions[i].SelectedAnwser, Model.Questions[i].Answers[j])
+                        @Model.Questions[i].Answers[j];
+                    </label><br />
+                }
+            </div><br />
         }
-
-        <div align="center"><input type="submit" value="Save" /></div>
+        <div><input type="submit" value="Save" /></div>
     }
-
-    
 </div>
 <br>

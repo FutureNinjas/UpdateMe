@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
-using UpdateMe.Data.Migrations;
 using UpdateMe.Data.Models;
 
 namespace UpdateMe.Data
@@ -14,11 +13,11 @@ namespace UpdateMe.Data
 
         public virtual IDbSet<Course> Courses { get; set; }
 
-        public virtual IDbSet<Assignment> Assignments { get; set; }
-
         public virtual IDbSet<Slide> Slides { get; set; }
 
         public virtual IDbSet<Question> Questions { get; set; }
+
+        public virtual IDbSet<Assignment> Assignments { get; set; }
 
         public virtual IDbSet<CurrentQuizState> QuizesCurrentState { get; set; }
 

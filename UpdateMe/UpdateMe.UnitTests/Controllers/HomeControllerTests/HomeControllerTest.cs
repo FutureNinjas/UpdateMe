@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UpdateMe;
-using UpdateMe.Controllers;
-using UpdateMe.Data;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Web.Mvc;
+using UpdateMe.Controllers;
+using UpdateMe.Services.Contracts;
 
 namespace UpdateMe.UnitTests.Controllers
 {
@@ -17,9 +12,9 @@ namespace UpdateMe.UnitTests.Controllers
         [TestMethod]
         public void About()
         {
-            var dbContextMock = new Mock<UpdateMeDbContext>();
+            var courseServiceMock = new Mock<ICourseService>();
             // Arrange
-            HomeController controller = new HomeController(dbContextMock.Object);
+            HomeController controller = new HomeController(courseServiceMock.Object);
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -31,9 +26,9 @@ namespace UpdateMe.UnitTests.Controllers
         [TestMethod]
         public void Contact()
         {
-            var dbContextMock = new Mock<UpdateMeDbContext>();
+            var courseServiceMock = new Mock<ICourseService>();
             // Arrange
-            HomeController controller = new HomeController(dbContextMock.Object);
+            HomeController controller = new HomeController(courseServiceMock.Object);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

@@ -1,11 +1,6 @@
 ﻿using Bytes2you.Validation;
-using Newtonsoft.Json;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Web;
 using UpdateMe.Data;
 using UpdateMe.Data.Models;
 using UpdateMe.Services.Contracts;
@@ -62,30 +57,6 @@ namespace UpdateMe.Services
 
             this.dbContext.Courses.Remove(course);
             this.dbContext.SaveChanges();
-        }
-        
-
-
-        [Obsolete("This is assignment service")]
-        public CourseModel ReviewCourse(int courseId, string userId)
-        {
-            var assignment = this.dbContext
-                .Assignments
-                .FirstOrDefault(c => c.CourseId == courseId && c.ApplicationUser.Id == userId);
-
-            assignment.AssignmentStatus = AssignmentStatus.Started;
-
-            this.dbContext.SaveChanges();
-
-            return new CourseModel()
-            {
-                Id = assignment.Course.Id,
-                Name = assignment.Course.Name,
-                Description = assignment.Course.Description,
-                PassScore = assignment.Course.PassScore,
-                DateCreated = assignment.Course.DateCreated,
-                Slides = assignment.Course.Slides.ToList()
-            };
         }
     }
 }

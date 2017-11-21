@@ -127,7 +127,6 @@
     <Compile Include="Models\AssignmentStatus.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CurrentQuizState.cs" />
-    <Compile Include="Models\DataModels\CourseModel.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Slide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

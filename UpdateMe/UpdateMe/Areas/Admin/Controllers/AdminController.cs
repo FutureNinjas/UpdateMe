@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using UpdateMe.Areas.Admin.Models;
-using UpdateMe.Data.Models;
 using UpdateMe.Models;
 using UpdateMe.Services.Contracts;
 
@@ -32,7 +31,6 @@ namespace UpdateMe.Areas.Admin.Controllers
         }
 
         #region User Actions 
-        // Edited ============================================================================
         public ActionResult AllUsers()
         {
             var usersViewModel = this.userService
@@ -72,7 +70,6 @@ namespace UpdateMe.Areas.Admin.Controllers
         #endregion
 
         #region Course Actions
-        // Edited ============================================================================
         public ActionResult ListAllCourses()
         {
             var courses = this.courseService
@@ -83,7 +80,6 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.View(courses);
         }
 
-        // Edited ============================================================================
         [HttpGet]
         public ActionResult EditCourse(int id)
         {
@@ -94,7 +90,6 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.PartialView("_EditCourse", courseViewModel);
         }
 
-        // Edited ============================================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditCourse(CourseViewModel courseViewModel)
@@ -106,7 +101,6 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.RedirectToAction("ListAllCourses");
         }
 
-        // Edited ============================================================================
         public ActionResult DeleteCourse(int id)
         {
             var course = this.courseService.FindCourse(id);
@@ -116,7 +110,6 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.RedirectToAction("ListAllCourses");
         }
 
-        // Edited ============================================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult UploadCourse(HttpPostedFileBase file)
@@ -127,7 +120,6 @@ namespace UpdateMe.Areas.Admin.Controllers
 
             return RedirectToAction("ListAllCourses");
         }
-
         #endregion
 
         [HttpGet]
@@ -140,7 +132,7 @@ namespace UpdateMe.Areas.Admin.Controllers
 
             var coursesViewModel = this.courseService
                 .ListAllCourses()
-                .Select(c=>CourseViewModel.Create.Compile()(c))
+                .Select(c => CourseViewModel.Create.Compile()(c))
                 .ToList();
 
             var assignmentFormViewModel = AssignmentFormViewModel.CreateAssignmentFormViewModel(coursesViewModel, usersViewModel);
@@ -177,7 +169,6 @@ namespace UpdateMe.Areas.Admin.Controllers
                     {
                         assignmentService.CreateAssignment(
                         dueDates[j],
-                        AssignmentStatus.Pending,
                         areMandatory[j],
                         courseIds[j],
                         userIds[i]);
@@ -185,14 +176,12 @@ namespace UpdateMe.Areas.Admin.Controllers
 
                 }
 
-                //TODO: Redirect to view all user assignments
                 return this.RedirectToAction("ListAllCourses");
             }
 
             return this.View(assignmentFormViewModel);
         }
 
-        // Edited ============================================================================
         public ActionResult ListUserAssignments(string currentUserId)
         {
             var userAssignments = this.assignmentService
@@ -203,10 +192,9 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.PartialView("_Assignments", userAssignments);
         }
 
-        // Edited ============================================================================
-        public ActionResult DeleteAssignment(int assignmentId)
+        public ActionResult DeleteAssignment(int id)
         {
-            var assignment = this.assignmentService.FindAssignment(assignmentId);
+            var assignment = this.assignmentService.FindAssignment(id);
             this.assignmentService.DeleteAssignment(assignment);
 
             return this.RedirectToAction("ListUserAssignments");

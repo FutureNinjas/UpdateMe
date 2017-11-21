@@ -1,43 +1,41 @@
-﻿@model ICollection<UpdateMe.Data.Models.DataModels.AssignmentViewModel>
+﻿@model ICollection<UpdateMe.Models.AssignmentViewModel>
 
 <h3>User assignments</h3>
 
-
-
-    <table id="assignments" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>User</th>
-                <th>Course Id</th>
-                <th>Due Date</th>
-                <th>Mandatory</th>
-                <th>Assignment Status</th>
-                <th>Completion Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var assignment in @Model)
+<table id="assignments" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Course Id</th>
+            <th>Due Date</th>
+            <th>Mandatory</th>
+            <th>Assignment Status</th>
+            <th>Completion Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var assignment in @Model)
             {
-                <tr>
-                    <td>@assignment.ApplicationUser.UserName</td>
-                    @Html.HiddenFor(c => assignment.CourseId)
-                    <td>@assignment.CourseId</td>
-                    <td>@assignment.DueDate</td>
-                    <td>@assignment.IsMandatory</td>
-                    <td>@assignment.AssignmentStatus</td>
-                    <td>@assignment.CompletionDate</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            <tr>
+                <td>@assignment.ApplicationUser.UserName</td>
+                @Html.HiddenFor(c => assignment.CourseId)
+                <td>@assignment.CourseId</td>
+                <td>@assignment.DueDate</td>
+                <td>@assignment.IsMandatory</td>
+                <td>@assignment.AssignmentStatus</td>
+                <td>@assignment.CompletionDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 
-    @section scripts
+@section scripts
 {
-        <script>
-            $(function () {
-                $("#assignments").DataTable();
+    <script>
+        $(function () {
+            $("#assignments").DataTable();
 
-            });
-        </script>
-    }
+        });
+    </script>
+}
