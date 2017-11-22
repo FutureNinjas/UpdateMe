@@ -11,11 +11,11 @@
 <table id="pending" class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>Course Id</th>
-            <th>DueDate</th>
-            <th>Is Mandatory</th>
+            <th>Course</th>
+            <th>Due Date</th>
+            <th>Mandatory</th>
             <th>Assignment Status</th>
-            <th>Completion Date</th>
+            <th>Assignment Date</th>
             <th>View</th>
         </tr>
     </thead>
@@ -24,13 +24,13 @@
         {
             <tr>
                 @Html.HiddenFor(c => course.CourseId)
-                <td>@course.CourseId</td>
-                <td>@course.DueDate</td>
+                <td>@course.CourseName</td>
+                <td>@course.DueDate.Value.ToShortDateString()</td>
                 <td>@course.IsMandatory</td>
                 <td>@course.AssignmentStatus</td>
-                <td>@course.CompletionDate</td>
+                <td>@course.AssignmentDate.Value.ToShortDateString()</td>
                 <td>
-                    <button class="btn btn-info">@Html.ActionLink("Start Course", "ReviewCourse", new { id = course.CourseId })</button>
+                    <button class="btn btn-info">@Html.ActionLink("Start", "ReviewCourse", new { id = course.CourseId })</button>
                 </td>
             </tr>
         }
@@ -41,11 +41,11 @@
 <table id="started" class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>Course Id</th>
-            <th>DueDate</th>
-            <th>Is Mandatory</th>
+            <th>Course</th>
+            <th>Due Date</th>
+            <th>Mandatory</th>
             <th>Assignment Status</th>
-            <th>Completion Date</th>
+            <th>Assignment Date</th>
             <th>View</th>
         </tr>
     </thead>
@@ -54,13 +54,13 @@
         {
             <tr>
                 @Html.HiddenFor(c => course.CourseId)
-                <td>@course.CourseId</td>
-                <td>@course.DueDate</td>
+                <td>@course.CourseName</td>
+                <td>@course.DueDate.Value.ToShortDateString()</td>
                 <td>@course.IsMandatory</td>
                 <td>@course.AssignmentStatus</td>
-                <td>@course.CompletionDate</td>
+                <td>@course.AssignmentDate.Value.ToShortDateString()</td>
                 <td>
-                    <button class="btn btn-info">@Html.ActionLink("Start Course", "ReviewCourse", new { id = course.CourseId })</button>
+                    <button class="btn btn-info">@Html.ActionLink("Continue", "ReviewCourse", new { id = course.CourseId })</button>
                 </td>
             </tr>
         }
@@ -71,9 +71,9 @@
 <table id="completed" class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>Course Id</th>
-            <th>DueDate</th>
-            <th>Is Mandatory</th>
+            <th>Course</th>
+            <th>Due Date</th>
+            <th>Mandatory</th>
             <th>Assignment Status</th>
             <th>Completion Date</th>
             <th>View</th>
@@ -84,13 +84,13 @@
         {
             <tr>
                 @Html.HiddenFor(c => course.CourseId)
-                <td>@course.CourseId</td>
-                <td>@course.DueDate</td>
+                <td>@course.CourseName</td>
+                <td>@course.DueDate.Value.ToShortDateString()</td>
                 <td>@course.IsMandatory</td>
                 <td>@course.AssignmentStatus</td>
-                <td>@course.CompletionDate</td>
+                <td>@course.CompletionDate.Value.ToShortDateString()</td>
                 <td>
-                    <button class="btn btn-info">@Html.ActionLink("Start Course", "ReviewCourse", new { id = course.CourseId })</button>
+                    <button class="btn btn-info">@Html.ActionLink("Review", "ReviewCourse", new { id = course.CourseId })</button>
                 </td>
             </tr>
         }

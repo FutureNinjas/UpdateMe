@@ -5,6 +5,11 @@ namespace UpdateMe.Data.Models
 {
     public class Assignment
     {
+        public Assignment()
+        {
+            this.AssignmentDate = DateTime.Now;
+        }
+
         public int Id { get; set; }
 
         public DateTime? AssignmentDate { get; set; }

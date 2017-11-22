@@ -192,12 +192,22 @@ namespace UpdateMe.Areas.Admin.Controllers
             return this.PartialView("_Assignments", userAssignments);
         }
 
-        public ActionResult DeleteAssignment(int id)
+        public ActionResult DeleteAssignment(int id, string currentUserId)
         {
             var assignment = this.assignmentService.FindAssignment(id);
             this.assignmentService.DeleteAssignment(assignment);
 
-            return this.RedirectToAction("ListUserAssignments");
+            var userAssignments = this.assignmentService
+                .ListUserAssignments(currentUserId)
+                .Select(a => AssignmentViewModel.Create.Compile()(a))
+                .ToList();
+
+            if (userAssignments.Count == 0)
+            {
+                return new EmptyResult();
+            }
+
+            return this.PartialView("_Assignments", userAssignments);
         }
     }
 }

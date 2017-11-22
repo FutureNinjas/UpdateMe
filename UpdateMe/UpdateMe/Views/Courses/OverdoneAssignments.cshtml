@@ -11,7 +11,7 @@
             <th>Course</th>
             <th>Assignment Date</th>
             <th>Due Date</th>
-            <th>Is Mandatory</th>
+            <th>Mandatory</th>
             <th>Assignment Status</th>
             <th>User</th>
         </tr>
@@ -21,8 +21,8 @@
         {
             <tr>
                 <td>@assignments.CourseName</td>
-                <td>@assignments.AssignmentDate</td>
-                <td>@assignments.DueDate</td>
+                <td>@assignments.AssignmentDate.Value.ToShortDateString()</td>
+                <td>@assignments.DueDate.Value.ToShortDateString()</td>
                 <td>@assignments.IsMandatory</td>
                 <td>@assignments.AssignmentStatus</td>
                 <td>@assignments.ApplicationUserName</td>
