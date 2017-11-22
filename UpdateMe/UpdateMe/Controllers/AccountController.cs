@@ -156,7 +156,9 @@ namespace UpdateMe.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
-                    LastName = model.LastName
+                    LastName = model.LastName,
+                    Position = model.Position,
+                    Department = model.Department
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

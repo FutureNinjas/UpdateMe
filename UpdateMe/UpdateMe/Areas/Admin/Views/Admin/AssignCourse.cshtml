@@ -4,18 +4,17 @@
 }
 
 <h2>Employees</h2>
-
 @using (Html.BeginForm("AssignCourse", "Admin", FormMethod.Post))
 {
     <table id="employees" class="table table-bordered table-hover">
         <thead>
             <tr>
-
-                <th><input name="select_all" value="1" type="checkbox"></th>
+                <th><input id="all_employees" name="select_all" value="1" type="checkbox"></th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>User Name</th>
-                <th>Department Role</th>
+                <th>Position</th>
+                <th>Department</th>
             </tr>
         </thead>
         <tbody>
@@ -28,22 +27,23 @@
                     @Html.HiddenFor(m => @Model.UserViewModels[i].LastName)
                     @Html.HiddenFor(m => @Model.UserViewModels[i].Username)
                     @Html.HiddenFor(m => @Model.UserViewModels[i].Position)
+                    @Html.HiddenFor(m => @Model.UserViewModels[i].Department)
                     <td>@Html.CheckBoxFor(m => Model.UserViewModels[i].IsChecked)</td>
                     <td>@Model.UserViewModels[i].FirstName</td>
                     <td>@Model.UserViewModels[i].LastName</td>
                     <td>@Model.UserViewModels[i].Username</td>
                     <td>@Model.UserViewModels[i].Position</td>
+                    <td>@Model.UserViewModels[i].Department</td>
                 </tr>
             }
         </tbody>
     </table>
 
     <h2>Courses</h2>
-
     <table id="courses" class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th><input name="select_all" value="1" type="checkbox"></th>
+                <th><input id="all_courses" name="select_all" value="1" type="checkbox"></th>
                 <th>Courses</th>
                 <th>Pass Score</th>
                 <th>Due Date</th>
@@ -57,7 +57,7 @@
                     @Html.HiddenFor(m => m.CourseViewModels[i].Id)
                     @Html.HiddenFor(m => @Model.CourseViewModels[i].Name)
                     @Html.HiddenFor(m => @Model.CourseViewModels[i].PassScore)
-                    <td>@Html.CheckBoxFor(m => Model.CourseViewModels[i].IsChecked)</td>
+                    <td class="courses">@Html.CheckBoxFor(m => Model.CourseViewModels[i].IsChecked)</td>
                     <td>@Model.CourseViewModels[i].Name</td>
                     <td>@Model.CourseViewModels[i].PassScore</td>
                     <td>
@@ -83,6 +83,12 @@
 {
     <script>
         $(document).ready(function () {
+            $("#all_employees").click(function () {
+                $('#employees input:checkbox').not(this).prop('checked', this.checked);
+            })
+            $("#all_courses").click(function () {
+                $('.courses input:checkbox').not(this).prop('checked', this.checked);
+            })
             $('#employees').DataTable()
             $('#courses').DataTable()
         });

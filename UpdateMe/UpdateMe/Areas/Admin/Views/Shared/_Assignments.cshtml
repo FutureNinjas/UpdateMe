@@ -1,7 +1,6 @@
 ﻿@model ICollection<UpdateMe.Models.AssignmentViewModel>
 
 <h3>Assignments of <strong>@Model.FirstOrDefault().ApplicationUser.UserName</strong></h3>
-
 <table id="assignments" class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -38,9 +37,7 @@
                         InsertionMode = InsertionMode.Replace,
                         UpdateTargetId = "editArea"
                     })
-                </td>
-            
-            
+                </td>            
             </tr>
         }
     </tbody>

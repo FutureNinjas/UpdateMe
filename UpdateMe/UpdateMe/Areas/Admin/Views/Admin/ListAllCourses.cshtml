@@ -36,7 +36,17 @@
                 <td>@course.Name</td>
                 <td>@course.Description</td>
                 <td>@course.PassScore</td>
-                <td>@Html.ActionLink("Edit", "EditCourse", new { id = course.Id }) </td>
+
+
+                <td>
+                    @Ajax.ActionLink("Edit", "EditCourse",
+                    new { id = course.Id },
+                    new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "editArea"
+                    })
+                </td>
                 <td>
                     <a id="@course.Id" class="delete" href="#">Delete</a>
                     @using (Html.BeginForm("DeleteCourse", "Admin",
@@ -51,9 +61,11 @@
     </tbody>
 </table>
 
+<div id="editArea"></div>
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryajax")
     <script>
         $(function () {
             $("#courses").DataTable();

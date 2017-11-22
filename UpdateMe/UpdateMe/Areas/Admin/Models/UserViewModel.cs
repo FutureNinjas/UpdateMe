@@ -19,7 +19,9 @@ namespace UpdateMe.Areas.Admin.Models
         public string LastName { get; set; }
 
         public string Position { get; set; }
-        
+
+        public string Department { get; set; }
+
         public static Expression<Func<ApplicationUser, UserViewModel>> Create
         {
             get
@@ -31,6 +33,7 @@ namespace UpdateMe.Areas.Admin.Models
                     FirstName = u.FirstName,
                     LastName = u.LastName,
                     Position = u.Position,
+                    Department = u.Department
                 };
             }
         }
