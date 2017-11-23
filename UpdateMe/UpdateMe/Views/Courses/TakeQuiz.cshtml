@@ -1,26 +1,27 @@
-﻿@model UpdateMe.Models.CourseReviewViewModel
+﻿@model List<UpdateMe.Models.QestionViewModel>
 @{
-    ViewBag.Title = "ReviewCourse";
-    var arr = new string[@Model.Questions.Count()];
-    var courseId = Model.Id;
+    ViewBag.Title = "Quiz";
 }
 
+<h2>@ViewBag.Title.</h2>
 <div>
     @using (Html.BeginForm("TakeQuiz", "Courses", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
-        for (int i = 0; i < Model.Questions.Count; i++)
+        for (int i = 0; i < Model.Count; i++)
         {
-            @Html.HiddenFor(m => Model.Questions[i].Id)
+            @Html.HiddenFor(m => Model[i].Id)
+            @Html.HiddenFor(m => Model[i].CorrectAnswer)
+            @Html.HiddenFor(m => Model[i].CourseId)
             <div>
-                <h4>@Model.Questions[i].QuestionText</h4>
+                <h4>@Model[i].QuestionText</h4>
 
-                @for (int j = 0; j < Model.Questions[i].Answers.Length; j++)
+                @for (int j = 0; j < Model[i].Answers.Length; j++)
                     {
                     <label>
-                        @Html.RadioButtonFor(m => Model.Questions[i].SelectedAnwser, Model.Questions[i].Answers[j])
-                        @Model.Questions[i].Answers[j];
+                        @Html.RadioButtonFor(m => Model[i].SelectedAnwser, Model[i].Answers[j])
+                        @Model[i].Answers[j];
                     </label><br />
                 }
             </div><br />

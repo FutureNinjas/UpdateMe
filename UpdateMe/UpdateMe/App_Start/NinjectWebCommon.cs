@@ -82,6 +82,7 @@ namespace UpdateMe.App_Start
             kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<ICourseService>().To<CourseService>();
             kernel.Bind<IAssignmentService>().To<AssignmentService>();
+            kernel.Bind<IQuizService>().To<QuizService>();
             kernel.Bind<IReader>().To<JSONReader>();
         }
     }

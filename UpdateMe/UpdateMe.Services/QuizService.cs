@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UpdateMe.Data;
 using UpdateMe.Data.Models;
@@ -13,6 +14,13 @@ namespace UpdateMe.Services
         public QuizService(UpdateMeDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public IEnumerable<Question> GetCourseQuestions(int courseId)
+        {
+            var questions = dbContext.Questions.Where(q => q.CourseId == courseId).ToList();
+
+            return questions;
         }
 
         public void CheckAnswer(string answer, int courseId, int questionId, string userId)
@@ -42,7 +50,7 @@ namespace UpdateMe.Services
         {
             var coursePassScore = this.dbContext.Courses.Find(courseId).PassScore;
 
-            if(result >= coursePassScore)
+            if (result >= coursePassScore)
             {
                 assignment.AssignmentStatus = AssignmentStatus.Completed;
                 assignment.CompletionDate = DateTime.Now;

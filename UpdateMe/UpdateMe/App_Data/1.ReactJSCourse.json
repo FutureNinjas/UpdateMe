@@ -28,43 +28,43 @@
     "Questions": [
         {
             "QuestionText": "ReactJS is developed by _____?",
-            "AnswersInternal": "Google Engineers; Facebook Engineers",
+            "AnswersInternal": "Google Engineers;Facebook Engineers",
             "CorrectAnswer": "Facebook Engineers"
         },{
             "QuestionText": "ReactJS is an MVC based framework?",
-            "AnswersInternal": "True; False",
+            "AnswersInternal": "True;False",
             "CorrectAnswer": "False"
         },{
             "QuestionText": " Which of the following concepts is/are key to ReactJS?",
-            "AnswersInternal": "Component-oriented design; Event delegation model; Both of the above",
+            "AnswersInternal": "Component-oriented design;Event delegation model;Both of the above",
             "CorrectAnswer": "Both of the above"
         },{
             "QuestionText": "ReactJS focuses on which of the following part when considering MVC?",
-            "AnswersInternal": "M (Model); V (View); C (Controller)",
+            "AnswersInternal": "M (Model);V (View);C (Controller)",
             "CorrectAnswer": "V (View)"
         },{
             "QuestionText": "Which of the following needs to be updated to achieve dynamic UI updates?",
-            "AnswersInternal": "props; state",
+            "AnswersInternal": "props;state",
             "CorrectAnswer": "state"
         },{
             "QuestionText": "Which of the following API is a MUST for every ReactJS component?",
-            "AnswersInternal": "getInitialState; render; renderComponent",
+            "AnswersInternal": "getInitialState;render;renderComponent",
             "CorrectAnswer": "render"
         },{
             "QuestionText": "'div' defined within render method is an actual DOM div element",
-            "AnswersInternal": "True; False",
+            "AnswersInternal": "True;False",
             "CorrectAnswer": "False"
         },{
             "QuestionText": "Which of the following is used to pass the data from parent to child",
-            "AnswersInternal": "props; state",
+            "AnswersInternal": "props;state",
             "CorrectAnswer": "props"
         },{
             "QuestionText": "A component in ReactJS could be composed of one or more inner components",
-            "AnswersInternal": "True; False",
+            "AnswersInternal": "True;False",
             "CorrectAnswer": "True"
         },{
             "QuestionText": "JSX transformer is a MUST to work with ReactJS",
-            "AnswersInternal": "True; False",
+            "AnswersInternal": "True;False",
             "CorrectAnswer": "False"
         }
     ]

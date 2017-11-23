@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using UpdateMe.Data;
 using UpdateMe.Models;
 using UpdateMe.Services.Contracts;
 
@@ -10,20 +10,20 @@ namespace UpdateMe.Controllers
     public class CoursesController : Controller
     {
         private readonly ApplicationUserManager userManager;
-        private readonly UpdateMeDbContext dbContext;
         private readonly IAssignmentService assignmentService;
         private readonly ICourseService courseService;
+        private readonly IQuizService quizService;
 
         public CoursesController(
             ApplicationUserManager userManager,
-            UpdateMeDbContext dbContext,
             IAssignmentService assignmentService,
-            ICourseService courseService)
+            ICourseService courseService,
+            IQuizService quizService)
         {
             this.userManager = userManager;
-            this.dbContext = dbContext;
             this.assignmentService = assignmentService;
             this.courseService = courseService;
+            this.quizService = quizService;
         }
 
         public ActionResult ListUserCourses()
@@ -47,39 +47,31 @@ namespace UpdateMe.Controllers
         [HttpGet]
         public ActionResult TakeQuiz(int id)
         {
-            //var assignment = this.dbContext.Assignments.Where(c => c.CourseId == id).ToList();
-
-            var courseModel = this.dbContext.Courses.First(c => c.Id == id);
-
-            var questions = this.dbContext.Questions.Where(q => q.CourseId == id).ToList();
-
-
-            var model = new CourseReviewViewModel();
-            model.Id = courseModel.Id;
-            model.Name = courseModel.Name;
-            model.PassScore = courseModel.PassScore;
-            model.Description = courseModel.Description;
-            model.Slides = courseModel.Slides.ToList();
-            model.Questions = questions
-                .Select(q => new QuestionModel()
-                {
-                    Id = q.Id,
-                    Answers = q.AnswersExternal,
-                    QuestionText = q.QuestionText
-                })
+            var courseModel = this.courseService.FindCourse(id);
+            var questions = this.quizService
+                .GetCourseQuestions(id)
+                .Select(q => QestionViewModel.Create.Compile()(q))
                 .ToList();
 
-
-            return this.View(model);
+            return this.View(questions);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TakeQuiz(CourseReviewViewModel courseModel)
+        public ActionResult TakeQuiz(List<QestionViewModel> questionsWithAnswers)
         {
-            var QuizResults = courseModel;
 
-            return this.View(QuizResults);
+            var passScore = this.courseService
+                .FindCourse(questionsWithAnswers.FirstOrDefault().CourseId)
+                .PassScore;
+            var questionsCount = questionsWithAnswers.Count();
+            var correctAnswersCount = questionsWithAnswers
+                .Where(q => q.SelectedAnwser.Equals(q.CorrectAnswer))
+                .Count();
+            var score = (int)(correctAnswersCount / (double)questionsCount * 100);
+            var result = score > passScore ? "You have passed!" : "Try again.";
+
+            return this.Content($"You have answered {correctAnswersCount}/{questionsCount}. Your Score is {score}. {result}");
         }
 
         [Authorize(Roles = "Admin")]

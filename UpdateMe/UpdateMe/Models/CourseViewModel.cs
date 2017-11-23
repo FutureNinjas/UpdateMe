@@ -49,8 +49,6 @@ namespace UpdateMe.Models
 
         public List<Slide> Slides { get; set; }
 
-        public List<QuestionModel> Questions { get; set; }
-
         public static Expression<Func<Course, CourseReviewViewModel>> Create
         {
             get
@@ -62,21 +60,13 @@ namespace UpdateMe.Models
                     Description = c.Description,
                     PassScore = c.PassScore,
                     DateCreated = c.DateCreated,
-                    Slides = c.Slides.ToList(),
-                    Questions = c.Questions
-                    .ToList()
-                    .Select(q => new QuestionModel()
-                    {
-                        Id = q.Id,
-                        QuestionText = q.QuestionText,
-                        Answers = q.AnswersExternal
-                    }).ToList()
+                    Slides = c.Slides.ToList()
                 };
             }
         }
     }
 
-    public class QuestionModel
+    public class QestionViewModel
     {
         public int Id { get; set; }
 
@@ -85,5 +75,27 @@ namespace UpdateMe.Models
         public string[] Answers { get; set; }
 
         public string SelectedAnwser { get; set; }
+
+        public string CorrectAnswer { get; set; }
+
+        public int CourseId { get; set; }
+
+        public string ApplicationUserId { get; set; }
+
+        public static Expression<Func<Question, QestionViewModel>> Create
+        {
+            get
+            {
+                return q => new QestionViewModel()
+                {
+                    Id = q.Id,
+                    QuestionText = q.QuestionText,
+                    Answers = q.AnswersExternal,
+                    CorrectAnswer = q.CorrectAnswer,
+                    CourseId = q.CourseId
+                };
+            }
+        }
+
     }
 }
