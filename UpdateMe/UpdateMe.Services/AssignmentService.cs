@@ -57,12 +57,14 @@ namespace UpdateMe.Services
 
         public void StartAssignedCourse(int courseId, string userId)
         {
-            this.dbContext
+            var assignment = this.dbContext
                 .Assignments
-                .FirstOrDefault(a => a.CourseId == courseId && a.ApplicationUserId == userId)
-                .AssignmentStatus = AssignmentStatus.Started;
-
-            dbContext.SaveChanges();
+                .FirstOrDefault(a => a.CourseId == courseId && a.ApplicationUserId == userId);
+            if (assignment.AssignmentStatus == AssignmentStatus.Pending)
+            {
+                assignment.AssignmentStatus = AssignmentStatus.Started;
+                dbContext.SaveChanges();
+            }
         }
 
         public IEnumerable<Assignment> ListUserAssignments(string userId)
