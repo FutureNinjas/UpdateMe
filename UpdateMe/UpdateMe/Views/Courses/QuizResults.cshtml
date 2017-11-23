@@ -1,15 +1,21 @@
-﻿@model List<UpdateMe.Data.Models.CourseModel>
+﻿@model UpdateMe.Models.QuizResultViewModel
 @{
-    ViewBag.Title = "QuizResults";
+    ViewBag.Title = "Quiz Results";
 }
 
-<h2>QuizResults</h2>
-@{ 
-    foreach(var course in Model)
+<h2>@ViewBag.Title</h2>
+
+@{
+    <h4>You have answered @Model.CorrectAnswersCount/@Model.QuestionsCount questions.</h4>
+    <h4>Your score is @Model.Score.</h4>
+    if (Model.Passed)
     {
-        foreach(var question in course.Questions)
-        {
-        <div>@question.SelectedAnwser</div>
-        }
+        <h3>You have passed the course!</h3>
+        <button>@Html.ActionLink("Finish", "ListUserCourses", "Courses", new { area = "" }, null)</button>
+    }
+    else
+    {
+        <h3>Try again.</h3>
+        <button>@Html.ActionLink("Back", "ListUserCourses", "Courses", new { area = "" }, null)</button>
     }
 }

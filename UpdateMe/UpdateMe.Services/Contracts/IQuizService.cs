@@ -7,10 +7,6 @@ namespace UpdateMe.Services.Contracts
     {
         IEnumerable<Question> GetCourseQuestions(int courseId);
 
-        void CheckAnswer(string answer, int courseId, int questionId, string userId);
-
-        void ResultCheck(int result, int courseId, Assignment assignment);
-        
-        void UpdateState();
+        bool ResultCheck(int courseId, string userId, int questionsCount, int correctAnswersCount);
     }
 }

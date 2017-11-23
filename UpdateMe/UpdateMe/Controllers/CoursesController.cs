@@ -60,18 +60,24 @@ namespace UpdateMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult TakeQuiz(List<QestionViewModel> questionsWithAnswers)
         {
-
-            var passScore = this.courseService
-                .FindCourse(questionsWithAnswers.FirstOrDefault().CourseId)
-                .PassScore;
+            var currentUserId = this.User.Identity.GetUserId();
+            var courseId = questionsWithAnswers.FirstOrDefault().CourseId;
             var questionsCount = questionsWithAnswers.Count();
             var correctAnswersCount = questionsWithAnswers
                 .Where(q => q.SelectedAnwser.Equals(q.CorrectAnswer))
                 .Count();
             var score = (int)(correctAnswersCount / (double)questionsCount * 100);
-            var result = score > passScore ? "You have passed!" : "Try again.";
+            var passed = this.quizService.ResultCheck(courseId, currentUserId, questionsCount, correctAnswersCount);
 
-            return this.Content($"You have answered {correctAnswersCount}/{questionsCount}. Your Score is {score}. {result}");
+            var quizResult = new QuizResultViewModel
+            {
+                QuestionsCount = questionsCount,
+                CorrectAnswersCount = correctAnswersCount,
+                Score = score,
+                Passed = passed
+            };
+            
+            return this.View("QuizResults", quizResult);
         }
 
         [Authorize(Roles = "Admin")]

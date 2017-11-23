@@ -98,4 +98,15 @@ namespace UpdateMe.Models
         }
 
     }
+
+    public class QuizResultViewModel
+    {
+        public int QuestionsCount { get; set; }
+
+        public int CorrectAnswersCount { get; set; }
+
+        public int Score { get; set; }
+
+        public bool Passed { get; set; }
+    }
 }
